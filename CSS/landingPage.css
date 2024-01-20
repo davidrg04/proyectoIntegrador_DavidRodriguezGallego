@@ -1,0 +1,601 @@
+    @font-face {
+        font-family: 'Arial Rounded MT Bold';
+        src: url('../FONTS/arial-rounded-mt-bold/ARLRDBD.ttf') format('truetype');
+        font-weight: bold;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    html{
+        font-size: 12px;
+    }
+    header{
+        padding: 3vh 0px;
+        background-color: #606C38;
+        display: flex;
+        width: 100%;
+        height: 12vh;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #logo{
+        position: relative;
+        top: 4vh;
+        left: 2vw;
+        /* height: 30vh; */
+        width: 40%;
+        z-index: 2;
+    }
+
+    #formaCabecera {
+        position: absolute;
+        top: 7vh;
+        left: -10vw;
+        z-index: 1;
+    }
+    header nav{
+        z-index: 3;
+        font-size: 1.3rem;
+        width: 27%;
+        display: flex;
+        margin-right: 5vw;
+        justify-content: space-around;
+    }
+
+    header nav a{
+        font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+        color: white;
+        font-weight: bold;
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        text-decoration: none;
+        padding: 5px;
+    }
+
+    a:link,
+    a:visited,
+    a:hover,
+    a:active{
+        text-decoration: none;
+    }
+
+
+    header a::after {
+        content: "";
+        position: absolute;
+        top: 24px;
+        left: -100%;
+        width: 100%;
+        height: 3px;
+        background: #BC6C25;
+        transition: left .5s;
+    }
+    header a:hover:after {
+        left: 0;
+    }
+
+    main{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        max-width: 2000px;
+        margin: 0 auto;
+    }
+
+    main section:first-of-type{
+        width: 100%;
+        background-image: url('../IMGS/ladingSection1.jpg');
+        height: 88vh;
+        max-height: 1024px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-y: -100px;
+        display: flex;
+        justify-content: space-between;
+    }
+    main section:first-of-type article:first-child{
+        position: relative;
+        top: -33%;
+        left: 5%;
+    }
+    #mensajePrincipal{
+        position: relative;
+        top: 350px;
+        left: 16%;
+        width: 280px;
+    }
+    #mensajePrincipal div:first-child div{
+        width: 45%;
+        height: 5px;
+        background-color: #BC6C25;
+    }
+    #mensajePrincipal h1{
+        color: white;
+        font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+        font-size: 2.5rem;
+    }
+
+    #mensajePrincipal div.divAbajo{
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        font-size: 1.4rem;
+        position: relative;
+        top: 30px;
+    }
+    #mensajePrincipal div.divAbajo p:first-of-type{
+        margin-bottom: 15px;
+    }
+    main section:first-of-type article:last-of-type{
+        background-color: rgb(255, 255, 255, 0.75);
+        min-height: 100vh;
+        max-height: 1024px;
+        width: 27%;
+        display: flex;
+        flex-direction: column;
+        padding: 35px;
+        align-items: center;
+        
+    }
+    main section:first-of-type article:last-of-type form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        position: relative;
+        top: 5%;
+    }
+    main section:first-of-type article:last-of-type form p:first-of-type{
+        font-size: 2.5rem;
+        font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+        color: #283618;
+        margin-bottom: 30px;
+    }
+    main section:first-of-type article:last-of-type form p{
+        font-size: 2.5rem;
+        font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+        color: #283618;
+    }
+    #makeAccount{
+        position: relative;
+        top: 35%;
+        display: flex;
+        flex-direction: column;
+    }
+    #makeAccount p{
+        margin: 0;
+        color: #283618;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.7rem;
+    }
+    #makeAccount a{
+        color: #BC6C25;
+    }
+    main section:first-of-type form{
+            position: relative;
+            top: 5%;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 10px; 
+        border: none;
+        border-bottom: 2px solid #283618;
+        background-color: rgba(217, 217, 217,0.6);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        font-size: 1.4rem; 
+        font-family: 'Inter', sans-serif;
+        width: 70%;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        outline: none; 
+        box-shadow: 0px 2px 2px rgba(40, 54, 24, 0.3); 
+    }
+
+   input.boton{
+        width: 70%;
+        padding: 8px;
+        font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+        font-size: 2.2rem;
+        font-weight: 400;
+        color: white;
+        border: none; 
+        outline: none;
+        border-radius: 10px;
+        background-color: #283618;
+        /* padding-top: 6px;
+        padding-bottom: 8px; */
+        box-shadow: none; 
+        -webkit-appearance: none; 
+        -moz-appearance: none; 
+        appearance: none; 
+        cursor: pointer; 
+        transform: scale(1); /* Escala normal */
+        transition: transform 0.1s ease; /* Transición de 0.5 segundos */
+   }
+
+  
+
+    main section:nth-of-type(2){
+        /* height: 100vh; */
+        width: 100%;
+        background-image: url(../IMGS/landingPageSection2.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #283618;
+        height: 100vh;
+        max-height: 1024px;
+        display: flex;
+        align-items: center;
+    }
+    main section:nth-of-type(3){
+        /* height: 100vh; */
+        background-image: url(../IMGS/landingPageSection3.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #283618;
+        height: 100vh;
+        max-height: 1024px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .divSecciones{
+        border-radius: 2px;
+        width: 50%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 40px 70px;
+        display: flex;
+        flex-direction: column;
+    }
+    #divSecciones1{
+        margin-left: 100px;
+    }
+    #divSecciones2{
+        margin-right: 100px;
+    }
+    #divSecciones2 h2{
+        font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+        color: #606C38;
+        font-size: 2.7rem;
+    }
+
+    #divSecciones1 h2{
+        font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+        color: #BC6C25;
+        font-size: 2.7rem;
+    }
+    #divSecciones2 div{
+        margin-top: 2px;
+        height: 5px;
+        width: 30%;
+        background-color: #BC6C25;
+        margin-bottom: 50px;
+    }
+    #divSecciones1 div{
+        margin-top: 2px;
+        height: 5px;
+        width: 30%;
+        background-color: #606C38;
+        margin-bottom: 50px;
+    }
+    #divSecciones2 p:first-of-type{
+       margin-bottom: 50px;
+    }
+    #divSecciones1 p:first-of-type{
+        margin-bottom: 50px;
+    }
+    #divSecciones2 p{
+        text-align: justify;
+        color: #606C38;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 2rem;
+    }
+    #divSecciones1 p{
+        text-align: justify;
+        color: #BC6C25;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 2rem;
+    }
+
+
+    /* @media screen and (max-width:64.8rem) {
+        header a::after {
+        display: none;  
+        }
+    }
+
+    @media screen and (max-width:59rem) {
+        html{
+            font-size: 10px;
+        }
+        
+        header nav, header #formaCabecera {
+            display: none;
+        }
+
+        header{
+            background-color: transparent;
+        }
+        #logo{
+            top: 4vh;
+            left: 1vw;
+            height: 22vh;
+            width: 22vh;
+        }
+        main section:first-of-type{
+            position: relative;
+            top: -15vh;
+            height: 100vh;
+        }
+    } */
+
+    /* ANIMACIONES CLASES */
+    .hidden {
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+    }
+    
+    .visible {
+        opacity: 1;
+        
+    }
+    @keyframes floatAnimation {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-13px);
+        }
+    }
+    
+
+
+    /* Pequeño (smartphones): 480px o menos */
+    @media screen and (max-width: 530px) {
+        main section:first-of-type article:first-child{
+            left: 0;
+        }
+        header{
+            display: none;
+        }
+        main section:first-of-type{
+            background-position-y: 0px;
+        }
+        main section:first-child svg{
+            display: none;
+        }
+        main section:first-of-type{
+            /* background-image: none; */
+            flex-direction: row;
+            flex-wrap: wrap;
+            height: 100vh;
+           
+        }
+        #startNow{
+            font-size: 2.6rem;
+            animation: floatAnimation 3s ease-in-out infinite;
+        }
+        #mensajePrincipal{
+            margin-top: 10px;
+            position: static;
+        }
+        main section:first-of-type article:first-child{
+            background-color: #606C38;
+            position: static;
+            width: 100%;
+            height: 10vh;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+        #mensajePrincipal div:first-child div{
+            display: none;
+        }
+        #mensajePrincipal div.divAbajo p:first-of-type{
+            text-align: center;
+        }
+        #mensajePrincipal div:first-child{
+            text-align: center;
+        }
+        #mensajePrincipal div.divAbajo{
+            position: static;
+        }
+
+        main section:first-of-type article:last-of-type{
+            width: 100%;
+            background-color: rgb(255, 255, 255, 0.6);
+        }
+        input[type="text"],
+        input[type="password"]{
+            background-color: rgba(217, 217, 217,0.9);
+        }
+        #makeAccount p{
+            font-size: 1.9rem;
+        }
+        main section:nth-of-type(2),main section:nth-of-type(3){
+            height: 70vh;
+            justify-content: center;
+            align-items: center;
+        }
+        .divSecciones{
+            width: 80%;
+            padding: 20px 35px;
+        }
+        #divSecciones1,#divSecciones2{
+            margin: 0px;
+        }
+        #divSecciones2 h2,#divSecciones1 h2{
+            font-size: 2rem;
+        }
+        #divSecciones2 p,#divSecciones1 p{
+            font-size: 1.5rem;
+        }
+       
+    }
+
+    /* Medio (tabletas): 481px a 768px */
+    @media screen and (min-width: 531px) and (max-width: 730px) {
+        main section:first-of-type article:first-child{
+            left: 0;
+        }
+        header{
+            display: none;
+        }
+        main section:first-of-type{
+            background-position-y: 0px;
+        }
+        main section:first-child svg{
+            display: none;
+        }
+        #mensajePrincipal div.divAbajo{
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        #mensajePrincipal h1{
+            font-size: 1.9rem;
+        }
+        #mensajePrincipal div:first-child{
+            animation: floatAnimation 3s ease-in-out infinite;
+        }
+        main section:first-of-type article:last-of-type{
+            width: 37%;
+        }
+        main section:first-of-type article:last-of-type form p:first-of-type{
+            font-size: 1.4rem;
+        }
+        main section:first-of-type article:last-of-type form p{
+            font-size: 1.4rem;
+        }
+        input[type="text"],
+        input[type="password"]{
+            font-size: 1rem;
+            width: 120%;
+            background-color: rgba(217, 217, 217,0.9);
+        }
+        #makeAccount p{
+            font-size: 1.1rem;
+        }
+        input.boton{
+            font-size: 1.3rem;
+            width: 100%;
+        }
+
+        main section:nth-of-type(2),main section:nth-of-type(3){
+            justify-content: center;
+            align-items: center;
+        }
+
+        .divSecciones{
+            width: 60%;
+            padding: 20px 35px;
+        }
+        #divSecciones1,#divSecciones2{
+            margin: 0px;
+        }
+        #divSecciones2 h2,#divSecciones1 h2{
+            font-size: 1.5rem;
+        }
+        #divSecciones2 p,#divSecciones1 p{
+            font-size: 1.3rem;
+        }
+
+
+
+
+     
+    }
+
+   
+    @media screen and (min-width: 731px) and (max-width: 1230px) {
+        header{
+            display: none;
+        }
+        main section:first-of-type{
+            background-position-y: 0px;
+        }
+        main section:first-child svg{
+            display: none;
+        }
+        #mensajePrincipal div.divAbajo{
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        #mensajePrincipal div:first-child{
+            animation: floatAnimation 3s ease-in-out infinite;
+        }
+        main section:first-of-type article:last-of-type{
+            width: 35%;
+        }
+        main section:first-of-type article:last-of-type form p:first-of-type{
+            font-size: 2rem;
+        }
+        main section:first-of-type article:last-of-type form p{
+            font-size: 2rem;
+        }
+        #makeAccount{
+            top: 20%;
+        }
+        #makeAccount p{
+            font-size: 1.3rem;
+        }
+        input.boton{
+            font-size: 1.6rem;
+        }
+        main section:nth-of-type(2),main section:nth-of-type(3){
+            justify-content: center;
+            align-items: center;
+        }
+
+        .divSecciones{
+            width: 70%;
+        }
+        #divSecciones1,#divSecciones2{
+            margin: 0px;
+        }
+        #divSecciones2 h2,#divSecciones1 h2{
+            font-size: 2.3rem;
+        }
+        #divSecciones2 p,#divSecciones1 p{
+            font-size: 1.8rem;
+        }
+
+
+
+    }
+
+    /* Extra grande (desktops grandes): 1025px y más */
+    @media screen and (min-width: 1600px) {
+        main section:first-of-type article:first-child{
+            top: -20%;
+        }
+        #mensajePrincipal{
+            top: 360px;
+        }
+        main section:first-of-type article:last-of-type{
+            width: 24%;
+        }
+        main section:first-of-type article:first-child{
+            left: 10%;
+        }
+        .divSecciones{
+            width: 40%;
+        }
+
+        #makeAccount{
+            top: 55%;
+        }
+        
+    }
+
+    

@@ -1,0 +1,246 @@
+@font-face {
+    font-family: 'Arial Rounded MT Bold';
+    src: url('../FONTS/arial-rounded-mt-bold/ARLRDBD.ttf') format('truetype');
+    font-weight: bold;
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+/* ::-webkit-scrollbar {
+    display: none;
+} */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+body{
+    font-size: 12px;
+    min-height: 100%;
+    max-height: 100vh;
+}
+img{
+    width: 26%;
+    position: relative;
+    top: -6%;
+    left: -4%;
+}
+#contenedor{
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    display: flex;
+    /* border: 1px solid black; */
+}
+
+#fondo{
+    height: 100vh;
+    width: 100%;
+    background-image: url(../IMGS/registerBackground.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 30%;
+}
+
+#divFormulario{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #FEFAE0;
+    width: 80%;
+    overflow-y: scroll;
+    
+    
+}
+
+h2{
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    color: #283618;
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+form{
+    width: 60%;
+}
+label{
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    color: #283618;
+    width: 90%; 
+    text-align: left; 
+    margin-bottom: 6px; 
+}
+#teclear{
+    margin-top: 30px;
+}
+#teclear input{
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+}
+
+#teclear div {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+    margin-bottom: 6px; 
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px; 
+    border: none;
+    border-bottom: 2px solid #283618;
+    background-color: #D9D9D9;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 1rem; 
+    font-family: 'Inter', sans-serif;
+}
+input.correcto{
+    border-bottom: 2px solid #606C38;
+    background-color: #d3fdda; 
+    /* #b8d6bd */
+
+}
+input.incorrecto{
+    border-bottom: 2px solid #a94442;
+    background-color: #f2dede;
+}
+
+.spanAlert{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 30px;
+    font-size: 0.9rem;
+    display: none;
+    position: absolute;
+    top: 10px;
+    background-color: #f2dede;
+    color: #a94442;
+    border: 2px solid #a94442;
+    border-radius: 10px;
+    width: 80%;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none; 
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5); 
+}
+
+#seleccionar{
+    margin-top: 30px;
+    width: 130%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+}
+#seleccionar input[type="file"] {
+    display: none;
+}
+#seleccionar button {
+    background-color: white;
+    border: 2px solid #283618;
+    border-radius: 100%;
+    position: relative;
+    bottom: 2px;
+    width: 5%;
+    height: 3vh;
+    
+    margin-left: 10px;
+}
+
+label[for="si"],
+label[for="no"],
+input[type=radio]{
+    margin-left: 10px;
+}
+
+#divEnviar{
+    margin-top: 20px;
+    width: 60%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    margin: 20px auto;
+}
+#divEnviar p{
+    font-size: 1.3rem;
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    color: #283618;
+
+}
+
+#boton {
+    width: 100%;
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: white;
+    border: none; 
+    outline: none;
+    border-radius: 10px;
+    background-color: #283618;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    box-shadow: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none; 
+    cursor: pointer; 
+    transform: scale(1); /* Escala normal */
+    transition: transform 0.1s ease; /* Transición de 0.5 segundos */
+}
+
+#boton:hover{
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+    filter: contrast(100%);
+}
+#boton:active{
+    transform: scale(1.0);
+    
+
+}
+
+@media screen and (min-width: 1825px) {
+    h2{
+        font-size: 2.8rem;
+    }
+    #divEnviar{
+        margin-top: 40px;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    body{
+        font-size: 10px;
+    }
+    #fondo{
+       display: none;
+    }
+    #divFormulario{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 400px) {
+    body{
+        font-size: 6px;
+    }
+    /* #divFormulario{
+        background-color: red;
+    } */
+    
+}
+
+
+
+
