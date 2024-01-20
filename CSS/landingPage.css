@@ -420,8 +420,11 @@
         input[type="password"]{
             background-color: rgba(217, 217, 217,0.9);
         }
+        #makeAccount{
+            top: 30%;
+        }
         #makeAccount p{
-            font-size: 1.9rem;
+            font-size: 1.6rem;
         }
         main section:nth-of-type(2),main section:nth-of-type(3){
             height: 70vh;
@@ -436,12 +439,15 @@
             margin: 0px;
         }
         #divSecciones2 h2,#divSecciones1 h2{
-            font-size: 2rem;
+            font-size: 1.4rem;
         }
         #divSecciones2 p,#divSecciones1 p{
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
        
+        #divSecciones1 div,#divSecciones2 div,#divSecciones1 p:first-of-type, #divSecciones2 p:first-of-type{
+            margin-bottom: 20px;
+        }
     }
 
     /* Medio (tabletas): 481px a 768px */
