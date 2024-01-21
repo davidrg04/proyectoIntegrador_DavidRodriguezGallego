@@ -4,7 +4,7 @@ document.getElementById('mensajePrincipal').addEventListener('click',iniciarSesi
 function iniciarSesion(e) {
     console.log('Holaaaaa');
     let user={
-        "name" : document.getElementById('user').value,
+        "username" : document.getElementById('user').value,
         "pass" : document.getElementById('pass').value
     };
 

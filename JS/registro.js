@@ -1,3 +1,11 @@
+let validCompleteName = false;
+let validUserName= false;
+let validMail = false;
+let validPass= false;
+let validPassComprobation = false;
+let validPhone = false;
+let validOrgName= false;
+
 document.getElementById('nombreCompleto').addEventListener('blur',checkCompleteName);
 document.getElementById('username').addEventListener('blur',checkUsername);
 document.getElementById('mail').addEventListener('blur', checkMail)
@@ -24,7 +32,8 @@ function cargarLocalidades(e) {
         selectLocalidades.setAttribute('disabled','');
     }else{
         selectLocalidades.options[selectLocalidades.options.length] = new Option('', '');
-        let poblacionesPorProvincia = poblaciones.filter(objeto => objeto.parent_code === "49");
+        let provinciaSelected = provincias.find(provincia => provincia.label === document.getElementById('provincia').value);
+        let poblacionesPorProvincia = poblaciones.filter(objeto => objeto.parent_code === provinciaSelected.code);
         for (let localidad of poblacionesPorProvincia) {
             selectLocalidades.options[selectLocalidades.options.length] = new Option(localidad.label, localidad.label);
         }
@@ -45,13 +54,16 @@ function checkCompleteName(e) {
         e.target.classList.add("correcto");
         spanAlerta.style.display = 'none';
         spanAlerta = "";
-        
+        validCompleteName= true;
+        formComplete();
     } else {
         e.target.classList.remove("correcto");
         e.target.classList.add("incorrecto");
         spanAlerta.innerHTML = "Por favor, escriba un nombre completo válido.";
         
         spanAlerta.style.display = 'block';
+        validCompleteName= false;
+        formComplete();
     }
 }
 
@@ -66,14 +78,16 @@ function checkUsername(e) {
         e.target.classList.add("correcto");
         spanAlerta.style.display='none';
         spanAlerta="";
-        
+        validUserName = true;
+        formComplete();
     } else {
         e.target.classList.remove("correcto");
         e.target.classList.add("incorrecto");
         spanAlerta.innerHTML="Por favor, escriba un nombre de usuario que contenga entre 4 y 16 caracteres. Solo permitimos números y letras."
         
         spanAlerta.style.display='block';
-        
+        validUserName = false;
+        formComplete();
     }
 }
 
@@ -86,14 +100,16 @@ function checkMail(e) {
         e.target.classList.add("correcto");
         spanAlerta.style.display='none';
         spanAlerta="";
-        
+        validMail = true;
+        formComplete();
     } else {
         e.target.classList.remove("correcto");
         e.target.classList.add("incorrecto");
         spanAlerta.innerHTML="Por favor, escriba un correo electrónico válido."
         
         spanAlerta.style.display='block';
-        
+        validMail = false;
+        formComplete();
     }
 }
 
@@ -110,13 +126,16 @@ function checkPassword(e) {
         e.target.classList.add("correcto");
         spanAlerta.style.display = 'none';
         spanAlerta = "";
-        
+        validPass = true;
+        formComplete();
     } else {
         e.target.classList.remove("correcto");
         e.target.classList.add("incorrecto");
         spanAlerta.innerHTML = "Por favor, la contraseña debe contener, al menos una letra minúscula, una letra mayúscula, un número y ser superior a ocho caracteres.";
         
         spanAlerta.style.display = 'block';  
+        validPass = false;
+        formComplete();
     }
 }
 
@@ -128,13 +147,16 @@ function checkSamePassword(e) {
         e.target.classList.add("correcto");
         spanAlerta.style.display='none';
         spanAlerta="";
-        
+        validPassComprobation = true;
+        formComplete();
     } else {
         e.target.classList.remove("correcto");
         e.target.classList.add("incorrecto");
         spanAlerta.innerHTML="Las contraseñas no coinciden"
         
         spanAlerta.style.display='block';
+        validPassComprobation = false;
+        formComplete();
     }
 }
 function checkPhone(e) {
@@ -146,14 +168,16 @@ function checkPhone(e) {
         e.target.classList.add("correcto");
         spanAlerta.style.display='none';
         spanAlerta="";
-        
+        validPhone = true;
+        formComplete();
     } else {
         e.target.classList.remove("correcto");
         e.target.classList.add("incorrecto");
         spanAlerta.innerHTML="Por favor, escriba un teléfono válido."
         
         spanAlerta.style.display='block';
-        
+        validPhone = false;
+        formComplete();
     }
 
 }
@@ -165,14 +189,16 @@ function checkOrganizacion(e) {
         e.target.classList.add("correcto");
         spanAlerta.style.display='none';
         spanAlerta="";
-        
+        validOrgName = true;
+        formComplete();
     } else {
         e.target.classList.remove("correcto");
         e.target.classList.add("incorrecto");
         spanAlerta.innerHTML="Por favor, escriba un nombre de Organización."
         
         spanAlerta.style.display='block';
-        
+        validOrgName = false;
+        formComplete();
     }
 }
 
@@ -180,9 +206,9 @@ function checkOrganizacion(e) {
 document.getElementById("si").addEventListener('change',isOrganizer);
 
 function isOrganizer(e){
-    console.log("hola");
     if (e.target.value == 'si') {
         insertDatos();
+        formComplete();
     }
 }
 function insertDatos(){
@@ -210,6 +236,24 @@ document.getElementById("no").addEventListener('change', noIsOrganizer);
 function noIsOrganizer(e) {
     if (e.target.value=='no') {
         document.getElementById('datosOrganizador').innerHTML="";
+        formComplete();
     }
     
+}
+
+
+function formComplete() {
+    if (document.getElementById('si').checked) {
+        if (validCompleteName && validUserName && validMail && validPass && validPassComprobation && validPhone && validOrgName && document.getElementById('poblacion').value != '' ) {
+            document.getElementById('boton').removeAttribute('disabled');
+        } else {
+            document.getElementById('boton').setAttribute('disabled','');
+        }
+    } else {
+        if (validCompleteName && validUserName && validMail && validPass && validPassComprobation && document.getElementById('poblacion').value != '') {
+            document.getElementById('boton').removeAttribute('disabled');
+        }else{
+            document.getElementById('boton').setAttribute('disabled','');
+        }
+    }
 }

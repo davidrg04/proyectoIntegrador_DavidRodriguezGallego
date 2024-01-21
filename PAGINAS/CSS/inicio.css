@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'Arial Rounded MT Bold';
+    src: url('../FONTS/arial-rounded-mt-bold/ARLRDBD.ttf') format('truetype');
+    font-weight: bold;
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-size: 12px;
+}
+header{
+    padding: 3vh 0px;
+    background-color: #606C38;
+    display: flex;
+    width: 100%;
+    height: 12vh;
+    justify-content: space-between;
+    align-items: center;
+}
+#logo{
+    position: relative;
+    top: 4vh;
+    left: 2vw;
+    /* height: 30vh; */
+    width: 40%;
+    z-index: 2;
+}
+
+#formaCabecera {
+    position: absolute;
+    top: 7vh;
+    left: -10vw;
+    z-index: 1;
+}
+header nav{
+    z-index: 3;
+    font-size: 1rem;
+    width: 27%;
+    display: flex;
+    margin-right: 5vw;
+    justify-content: space-around;
+}
+
+header nav a{
+    font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active{
+    text-decoration: none;
+}
+
+
+header a::after {
+    content: "";
+    position: absolute;
+    top: 24px;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: #BC6C25;
+    transition: left .5s;
+}
+header a:hover:after {
+    left: 0;
+}
+#portada{
+    min-height: 35vh;
+    width: 100%;
+    background-image: url(../IMGS/portadaInicio.jpeg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat
+}
