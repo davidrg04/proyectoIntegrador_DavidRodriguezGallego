@@ -5,15 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="./CSS/inicio.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
 </head>
 <body>
+    <main>
     <header>
         <div>
             <img id="logo" src="../IMGS/logoRunTheMountain-removebg-preview.png" alt="RunTheMountain">
         </div>
         <nav>
-            <a href="">¿Que Hacemos?</a>
-            <a href="">¿Quienes Somos?</a>
+            <a href="" class="aCabecera">¿Carreras?</a>
+            <a href="" class="aCabecera">¿Consultas?</a>
+            <div>
+                <span id="username"></span>
+                <div id="desplegable">
+                    <a href="./perfil.html">PERFIL</a>
+                    <a href="">FAVORITOS</a>
+                    <a href="">INSCRITOS</a>
+                    <a href="">CERRAR SESION</a>
+                </div>
+            </div>
         </nav>
         <div id="formaCabecera">
             <svg xmlns="http://www.w3.org/2000/svg" width="762" height="98" viewBox="0 0 762 98" fill="none">
@@ -22,15 +34,79 @@
         </div>
     </header>
     <main>
-        <div id="portada"></div>
+        <div id="divPortada"><div id="portada"></div></div>
         <div id="menu">
-            <input type="text" id="raceName" name="raceName">
-            <select name="lugarCarrera" id="lugarCarrera"></select>
-            <div><p>BUSCAR</p></div>
+            <input type="text" id="raceName" name="raceName" placeholder="Pj. San Silvestre Zamorana">
+            <select name="lugarCarrera" id="lugarCarrera">
+                <option value="">PROVINICIA</option>
+            </select>
+            <div id="buscar"><button>BUSCAR</button></div>
         </div>
         <section>
-            
+            <h1>¡Comienza la aventura 
+                con las siguientes
+                <span>CARRERAS</span>!</h1>
+            <p id="filter">Ordenar<i class="bi bi-funnel-fill"></i></p>
+            <div id="carreras">
+                <div class="tarjetaCarrera">
+                    <div class="fotoPortada">
+
+                    </div>
+                    <div class="datosCarrera">
+                        <span class="fecha"><i class="bi bi-calendar-fill"></i>27/07/2008</span>
+                        <span class="localidad"><i class="bi bi-geo-alt-fill"></i>BENAVENTE</span>
+                        <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>89KM</span>
+                        <a href="./masInformacion.html"><div class="detallesCarrera">MAS INFORMACIÓN</div></a>
+                    </div>
+                </div>
+                <div class="tarjetaCarrera">
+                    <div class="fotoPortada">
+
+                    </div>
+                    <div class="datosCarrera">
+                        <span class="fecha"><i class="bi bi-calendar-fill"></i>27/07/2008</span>
+                        <span class="localidad"><i class="bi bi-geo-alt-fill"></i>BENAVENTE</span>
+                        <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>89KM</span>
+                        <div class="detallesCarrera">MAS INFORMACIÓN</div>
+                    </div>
+                </div>
+                <div class="tarjetaCarrera">
+                    <div class="fotoPortada">
+
+                    </div>
+                    <div class="datosCarrera">
+                        <span class="fecha"><i class="bi bi-calendar-fill"></i>27/07/2008</span>
+                        <span class="localidad"><i class="bi bi-geo-alt-fill"></i>BENAVENTE</span>
+                        <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>89KM</span>
+                        <div class="detallesCarrera">MAS INFORMACIÓN</div>
+                    </div>
+                </div>
+                <div class="tarjetaCarrera">
+                    <div class="fotoPortada">
+
+                    </div>
+                    <div class="datosCarrera">
+                        <span class="fecha"><i class="bi bi-calendar-fill"></i>27/07/2008</span>
+                        <span class="localidad"><i class="bi bi-geo-alt-fill"></i>BENAVENTE</span>
+                        <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>89KM</span>
+                        <div class="detallesCarrera">MAS INFORMACIÓN</div>
+                    </div>
+                </div>
+                <div class="tarjetaCarrera">
+                    <div class="fotoPortada">
+
+                    </div>
+                    <div class="datosCarrera">
+                        <span class="fecha"><i class="bi bi-calendar-fill"></i>27/07/2008</span>
+                        <span class="localidad"><i class="bi bi-geo-alt-fill"></i>BENAVENTE</span>
+                        <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>89KM</span>
+                        <div class="detallesCarrera">MAS INFORMACIÓN</div>
+                    </div>
+                </div>
+               
+            </div>
         </section>
     </main>
 </body>
+<script src="./JS/inicio.js"></script>
 </html>

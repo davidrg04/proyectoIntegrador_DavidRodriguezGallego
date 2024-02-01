@@ -1,14 +1,15 @@
-document.getElementById('mensajePrincipal').addEventListener('click',iniciarSesion);
+localStorage.clear();
+document.getElementById('entrar').addEventListener('click',iniciarSesion);
 
 
 function iniciarSesion(e) {
-    console.log('Holaaaaa');
+    e.preventDefault();
     let user={
         "username" : document.getElementById('user').value,
-        "pass" : document.getElementById('pass').value
+        "password" : document.getElementById('pass').value
     };
 
-    fetch("http://localhost:3000/api/auth/login", {
+    fetch("http://localhost/proyectoIntegrador_DavidRodriguezGallego/API/iniciarSesion.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8"
@@ -16,11 +17,16 @@ function iniciarSesion(e) {
         body: JSON.stringify(user)
     }).then( response => {
         console.log(response);
-        if (response.status === 200) location.href = '../PAGINAS/inicio.html'
+        if (response.status === 200) return response.json()
             else if (response.status === 404) console.log(response.text); 
             else console.log("Todo mal");
     }).then( data => {
-        console.log(data);
+        if (data && data.token) {
+            localStorage.setItem('jwt', data.token);
+            localStorage.setItem('username', data.username);
+            localStorage.setItem('rol', data.rol)
+            location.href = "../PAGINAS/inicio.html";
+        }
     }).catch ( error => {
         console.log(error);
     })

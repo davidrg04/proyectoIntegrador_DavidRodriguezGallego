@@ -1,36 +1,33 @@
-document.querySelector('h2').addEventListener('click',registrarUsuario);
+document.getElementById('boton').addEventListener('click',registrarUsuario);
 
 
 function registrarUsuario(e) {
+    e.preventDefault();
     let user={};
     if (document.getElementById('si').checked) {
         
         user = {
-            "name": document.getElementById('nombreCompleto').value,
+            "nombreCompleto": document.getElementById('nombreCompleto').value,
             "username": document.getElementById('username').value,
             "mail": document.getElementById('mail').value,
-            "pass": document.getElementById('password').value,
-            "city": document.getElementById('poblacion').value,
-            "phone": document.getElementById('telefono').value,
-            "club": document.getElementById('organizacion').value,
-            "rol": "organizer"
+            "password": document.getElementById('password').value,
+            "poblacion": document.getElementById('poblacion').value,
+            "telefono": document.getElementById('telefono').value,
+            "nombreOrg": document.getElementById('organizacion').value
         };
     
     }else{
         user = {
-            "name": document.getElementById('nombreCompleto').value,
+            "nombreCompleto": document.getElementById('nombreCompleto').value,
             "username": document.getElementById('username').value,
             "mail": document.getElementById('mail').value,
-            "pass": document.getElementById('password').value,
-            "city": document.getElementById('poblacion').value,
-            "phone": "",
-            "club": "",
-            "rol": "user"
+            "password": document.getElementById('password').value,
+            "poblacion": document.getElementById('poblacion').value,
         };
     }
 
 
-    fetch("http://localhost:3000/api/user/register", {
+    fetch("http://localhost/proyectoIntegrador_DavidRodriguezGallego/API/registro.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8"
@@ -38,17 +35,17 @@ function registrarUsuario(e) {
         body: JSON.stringify(user)
     }).then( response => {
         console.log(response);
-        if (response.status === 200) location.href = '../landingPage.html'
+        if (response.status === 200) return response.json();
             else if (response.status === 404) console.log(response.text); 
             else console.log("Todo mal");
     }).then( data => {
         console.log(data);
+        location.href = "../landingPage.html";
     }).catch ( error => {
         console.log(error);
     })
 
 }
-
 
 
 

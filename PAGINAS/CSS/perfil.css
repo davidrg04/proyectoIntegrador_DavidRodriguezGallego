@@ -1,0 +1,880 @@
+@font-face {
+    font-family: 'Arial Rounded MT Bold';
+    src: url('../../FONTS/arial-rounded-mt-bold/ARLRDBD.ttf') format('truetype');
+    font-weight: bold;
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-size: 12px;
+    scroll-behavior: smooth;
+}
+body{
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+p{
+    width: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #283618;
+    font-size: 2rem;
+}
+
+/* main{
+    display: flex;
+    flex-direction: column;
+} */
+#username{
+  color: #BC6C25;
+}
+.sidebar {
+    width: 4vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #606C38;
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition: width 0.3s;
+  }
+  .sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+    display: flex;
+    transition: background-color 200ms ease;
+  }
+  .sidebar a:hover{
+    background-color: white;
+  }
+  
+  .sidebar span{
+    color: white;
+  }
+  .sidebar a:hover span{
+    color: #283618;
+  }
+  .sidebar span{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 1vw;
+    font-size: 1.1rem;
+    font-weight: lighter;
+    position: relative;
+    top: 0.9vh;
+    transition: color 0.3s;
+  }
+  .sidebar span:hover{
+    color: #BC6C25;
+    cursor: pointer;
+  }
+  .sidebar:hover{
+    width: 200px;
+  }
+  .sidebar:hover i{
+    color: #283618;
+  }
+  
+  
+section{
+    width: calc(100% - 4vw);
+    height: 100vh;
+    margin-left: 4vw;
+    overflow: hidden;
+}
+section h2{
+    font-size: 4rem;
+    color: #283618;
+    font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+}
+section > div{
+    margin-left: 10vw;
+    position: relative;
+    top: 5vh;
+}
+
+section:first-of-type{
+    display: flex;
+    justify-content: space-between;
+    background-image: url(../IMGS/perfilSection1.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -100px;
+}
+section:first-of-type img{
+    width: 200px;
+}
+
+section:first-of-type div:first-of-type{
+    margin-left: 10vw;
+    position: relative;
+    top: 10vh;
+    height: 30vh;
+    animation: slideInFromLeft 1.5s ease-out forwards;
+}
+
+section:first-of-type h1{
+    font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 4rem;
+    color: #283618;
+    
+    
+}
+section:first-of-type div:first-of-type p{
+    margin-top: 3vh;
+}
+
+
+section:nth-of-type(2) > div div:first-of-type{
+    display: flex;
+}
+section:nth-of-type(2) > div div:first-of-type svg{
+    position: relative;
+    top: -2vh;
+}
+#carreras{
+    position: relative;
+    top: 10vh;
+    margin-left: 10vw;
+    width: 80%;
+    height: 60vh;
+    border: 2px solid #283618;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#textoEditarPerfil{
+    margin-top: 3vh;
+}
+#datosUsuario{
+    width: 40vw;
+    height: auto;
+    border: 2px solid #283618;
+    border-radius: 10px;
+    box-shadow: 1px 5px 12px rgba(0, 0, 0, 0.3);
+    margin: 5vh auto;
+}
+
+#datosUsuario div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 11vh;
+    border-bottom: 1px solid gray;
+    padding: 20px;
+    justify-content: space-between;
+}
+#datosUsuario div p{
+  width: auto;
+  font-size: 1.9rem;
+}
+#datosUsuario div span{
+  color: #606C38;
+  font-size: 1.9rem;
+}
+#password{
+  position: relative;
+  top: 1vh;
+}
+
+.bi-caret-right-fill{
+    font-size: 3rem;
+    transition: transform 200ms ease;
+}
+.bi-caret-right-fill:hover{
+    cursor: pointer;
+    transform: scale(1.1); 
+}
+.bi-caret-right-fill:active{
+    transform: scale(0.95);
+    color: #a05d21;
+}
+#deleteAccount{
+    height: 40vh;
+}
+#deleteAccount h2{
+    color: #BC6C25;
+}
+/* #deleteAccount p{
+   
+} */
+#borrarCuenta {
+    font-size: 1.4rem;
+    margin-top: 5vh;
+    background-color: #BC6C25; 
+    color: white; 
+    padding: 10px 20px; 
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-weight: bold; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    transition: transform 200ms ease; 
+    user-select: none; 
+    width: 13vw;
+    text-align: center;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); 
+  }
+
+  #borrarCuenta:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+
+  #borrarCuenta:active {
+    transform: scale(0.95); 
+    background-color: #a05d21; 
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  #racesEditor{
+    display: none;
+    height: 100vh;
+  }
+  #racesEditor div:first-of-type span{
+    color: #BC6C25;
+  }
+  #racesEditor p{
+    margin-top: 3vh;
+  }
+  #selection {
+    margin-top: 20vh;
+    display: flex;
+    width: 80%;
+    gap: 5vw;
+  }
+  #selection div:first-child{
+    border-right: 2px solid #283618;
+  }
+
+  .botonesSelection{
+    font-size: 1.4rem;
+    margin-top: 3vh;
+    background-color: #283618; 
+    color: white; 
+    padding: 10px 20px; 
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-weight: bold; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    transition: transform 200ms ease; 
+    user-select: none; 
+    width: 13vw;
+    text-align: center;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); 
+  }
+  .botonesSelection:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+
+  .botonesSelection:active {
+    transform: scale(0.95); 
+    background-color: #243015; 
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  }
+
+
+
+  #miModal{
+    display: none;
+  }
+  #miModal label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    
+  }
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden; 
+    background-color: rgba(0,0,0,0.5); 
+    align-items: center; 
+    justify-content: center; 
+    display: flex;
+  }
+  .modal-contenido {
+    background-color: #ffffff;
+    margin: 15% auto; 
+    padding: 20px;
+    border-radius: 30px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    width: 30%; 
+    min-width: 300px;
+    border: 5px solid #606C38;
+    
+  }
+  .cerrar {
+    color: #000000;
+    float: right;
+    /* margin-right: 0.5vw;
+    margin-top: 0.5vh; */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 200ms ease;
+    
+  }
+  .cerrar:hover {
+    transform: scale(1.05); 
+  }
+  .cerrar:active{
+    transform: scale(0.95); 
+  }
+  
+  .modal-contenido h2 {
+    color: #566132;
+    font-size: 24px; 
+    margin-top: 0;
+    /* text-align: center;  */
+    /* margin-left: 1vw; */
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  }
+  
+  
+  .modal-cuerpo {
+    margin-top: 20px;
+    color: #333;
+    font-size: 16px; 
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  
+  .modal-pie {
+    margin-top: 20px;
+    text-align: right; 
+  }
+  
+  
+  .modal-pie button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.2s; 
+  }
+  
+  #guardar {
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    background-color: #606C38; 
+    color: white; 
+    transition: transform 200ms ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+  }
+  
+  #guardar:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+  #guardar:active{
+    background-color: #566132;
+    transform: scale(0.95); 
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  #cancelar {
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    background-color: #BC6C25; 
+    color: white; 
+    transition: transform 200ms ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+  }
+  
+  #cancelar:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+  #cancelar:active{
+    background-color: #a05d21;
+    transform: scale(0.95); 
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+    
+  
+  input[type="text"]{
+    width: 100%; 
+    padding: 10px;
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;                                                  
+  }
+  input[type = "number"]{
+    width: 12%;
+    min-width: 10px; 
+    /* padding: 5px; */
+    height: 4vh;
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;    
+    font-size: 1.3rem;      
+  }
+
+  #miModalBorrarCuenta{
+    display: none;
+  }
+  #cancelarCuenta{
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    background-color: #283618; 
+    color: white; 
+    transition: transform 200ms ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+  }
+  #guardar:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+  #guardar:active{
+    background-color: #566132;
+    transform: scale(0.95); 
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+  #guardar:disabled {
+    background-color: #ccc; 
+    color: #666; 
+    cursor: not-allowed; 
+    border: 1px solid #999; 
+    transition: none;
+    transform: none;
+  }
+  #guardar:disabled:hover{
+      transform: none;
+      transition: none;
+      filter: none;
+  }
+  #guardar:disabled:active{
+      transform: none;
+  }
+  #borrarCuentaModal{
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    background-color: #BC6C25; 
+    color: white; 
+    transition: transform 200ms ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+  }
+  #borrarCuentaModal:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+  #borrarCuentaModal:active{
+    background-color: #a05d21;
+    transform: scale(0.95); 
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+  #cancelarCuenta{
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    background-color: #283618; 
+    color: white; 
+    transition: transform 200ms ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+  }
+  #cancelarCuenta:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+  #cancelarCuenta:active{
+    background-color: #243015;
+    transform: scale(0.95); 
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+  #miModalBorrarCuenta .modal-cuerpo p{
+    font-size: 1.6rem;
+  }
+  #miModalBorrarCuenta .modal-contenido{
+    width: 40%;
+  }
+
+  /* MENSAJES DE ALERTA */
+  .spanAlert{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 30px;
+    font-size: 1.3rem;
+    display: none;
+    position: absolute;
+    background-color: #f8f0e9;
+    color: #BC6C25;
+    border: 2px solid #a05d21;
+    border-radius: 10px;
+    width: 30%;
+    z-index: 99999999;
+    top: 5vh; 
+    left: 34.6vw;
+}
+input.correcto{
+  border-bottom: 2px solid #606C38;
+  background-color: #d3fdda; 
+  /* #b8d6bd */
+
+}
+input.incorrecto{
+  border-bottom: 2px solid #a94442;
+  background-color: #f2dede;
+}
+
+/* MODAL NUEVA CARRERA */
+#miModalNuevaCarrera{
+  display: none;
+}
+#miModalNuevaCarrera .modal-contenido{
+  width: 51vw;
+  border-color: #283618;
+  height: auto;
+  margin: 10% auto;
+}
+#miModalNuevaCarrera .modal-contenido input[type="text"]{
+  font-size: 1.3rem;
+  padding: 5px;
+}
+#miModalNuevaCarrera .modal-cuerpo{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+#miModalNuevaCarrera .modal-contenido label{
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  color: #283618;
+  font-size: 1.5rem;
+}
+#miModalNuevaCarrera label, #miModalNuevaCarrera input{
+  margin-right: 5px;
+}
+#nombreCarrera{
+  width: 20vw;
+  padding-bottom: 6px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid #283618;
+}
+#nombreCarrera:focus{
+  border: none;
+  border-bottom: 1px solid #283618;
+}
+#fechaDiv{
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+#imagenesCarrea,#reglamento{
+  padding: 5px;
+}
+/* Estilo básico para el input */
+input[type="date"] {
+  background-color: white; /* Color de fondo suave */
+  border: 1px solid #243015; /* Borde sutil */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 2px; /* Padding para texto y espacio para el ícono */
+  font-size: 1.2rem; /* Tamaño de fuente legible */
+  font-weight: 600;
+  color: #243015; /* Color del texto */
+  outline: none; /* Elimina el resalte predeterminado */
+}
+
+/* Estilo para cuando el input está enfocado */
+input[type="date"]:focus {
+  box-shadow: 0 0 5px rgba(160, 160, 160, 0.5); /* Sombra sutil para resaltar */
+}
+
+#localizacion{
+  width: 15vw;
+}
+#webOrganizacion{
+  width: 20vw;
+}
+#modalidades{
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  font-size: 1.4rem; 
+  color: white; 
+  transition: box-shadow 200ms ease;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  border: 2px solid #283618;
+  height: 5vh;
+  padding: 3px 5px;
+  border-radius: 5px;
+  background-color: #283618;
+  font-weight: bolder;
+  position: relative;
+  top: 0.6vh;
+  margin-left: 5px;
+  width: 22vw;
+}
+#modalidades i{
+  margin-left: 0.5vw;
+  font-size: 1.7rem;
+}
+#modalidades:hover {
+  cursor: pointer;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+}
+button.crearCarreraBoton{
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  background-color: white; 
+  color: #283618; 
+  transition: transform 200ms ease;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  border: 2px solid #283618;
+}
+button.crearCarreraBoton:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+}
+button.crearCarreraBoton:active{
+  transform: scale(0.95); 
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+#miModalNuevaCarreraModalidades{
+  display: none;
+}
+#miModalNuevaCarreraModalidades .modal-contenido{
+  width: 52vw;
+  margin: 10% auto;
+  height: auto;
+  border: 4px solid #283618;
+}
+#miModalNuevaCarreraModalidades .modal-cuerpo{
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+}
+#botonModalidad{
+  width: 100%;
+}
+#añadirModalidad{
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  font-size: 1.4rem; 
+  color: white; 
+  transition: box-shadow 200ms ease;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  border: 2px solid #283618;
+  height: 5vh;
+  padding: 3px 5px;
+  border-radius: 5px;
+  background-color: #283618;
+  font-weight: bolder;
+  position: relative;
+  margin-left: 5px;
+  width: 15vw;
+}
+#añadirModalidad:hover{
+  cursor: pointer;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+
+}
+#añadirModalidad:active{
+  box-shadow: none;
+}
+#añadirModalidad i{
+  margin-left: 0.5vw;
+  font-size: 1.7rem;
+}
+
+#selectModalidadCategoria{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1vh;
+  margin-left: 5px;
+  gap: 1vh;
+
+}
+
+#selectModalidadCategoria span{
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  color: #283618;
+  font-size: 1.5rem;
+  font-weight: bold; 
+}
+#selectModalidadCategoria label {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #283618;
+  font-size: 1.5rem;
+  font-weight: lighter; 
+}
+
+#selectModalidadCategoria input[type="radio"]{
+  outline: none;
+  border: 2px solid #283618;
+  height: 2.4vh;
+  width: 2.4vw;
+  vertical-align: middle;
+  
+}
+
+#selectModalidadCategoria input[type="checkbox"]{
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid #283618;
+  height: 2.4vh;
+  width: 2.4vw;
+  vertical-align: middle;
+    background-color: #f3f3f3;
+}
+#selectModalidadCategoria select {
+  /* Estilo general */
+  width: 7vw;
+  /* height: 35px; */
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  appearance: none; /* Elimina el estilo predeterminado */
+  background-color: #f3f3f3;
+  /* Estilo de la fuente */
+  font-size: 1.2rem;
+  color: #333;
+  outline: none;
+  /* border: 2px solid #283618; */
+  /* Estilo del icono de despliegue */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right .7em top 50%, 0 0; /* Posición del icono */
+  background-size: .65em auto, 100%; /* Tamaño del icono */
+}
+#sexo{
+  margin-top: 1vh;
+  margin-bottom: 0.5vh;
+}
+#guardarModalidad{
+  width: 10vw;
+  padding: 5px 15px;
+  font-size: 1.4rem;
+  border-radius: 5px;
+  transition: transform 200ms ease;
+}
+#guardarModalidad:hover{
+  transform: scale(1.05); 
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+}
+#guardarModalidad:active{
+  transform: scale(0.95); 
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+#selectModalidadCategoria.desdeArriba{
+  animation: deslizarDesdeArriba 0.2s ease-out forwards;
+}
+#modalidadesSeleccionadas{
+ display: none;
+}
+#modalidadesSeleccionadas>p{
+  margin-top: 2vh;
+  font-size: 1.5rem;
+  margin-left: 5px;
+}
+
+#premios{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2vh;
+}
+#premios .premioCategoria{
+  display: flex;
+  flex-direction: column;
+  width: 13vw;
+  margin-top: 1vh;
+  justify-content: center;
+  border: 2px solid #283618;
+  border-radius: 5px;
+}
+#premios .premiosNombreCategoria{
+  width: 100%;
+  text-align: center;
+  font-size: 1.3rem;
+}
+#premios .premioCategoria div{
+  display: flex;
+  gap: 4px;
+  border-top: 1px solid #333;
+  padding: 5px;
+}
+#premios input[type="text"]{
+  height: initial;
+  padding: 1px;
+  margin: initial;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+/* Animaciones */
+
+@keyframes deslizarDesdeArriba {
+  0% { transform: translateY(-5%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(5%);
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(-2%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 1600px){
+    .sidebar{
+        width: 3vw;
+    }
+
+    section{
+        width: calc(100% - 3vw);
+        margin-left: 3vw;
+    }
+    #miModalNuevaCarreraModalidades .modal-contenido{
+      margin: 13% auto;
+    }
+}
+
+
+
+
+ 
+  

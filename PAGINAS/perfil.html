@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    
+    <link rel="stylesheet" href="./CSS/perfil.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    
+    <main>
+        <aside class="sidebar">
+            <div>
+                <a><i class="bi bi-person-circle"></i></a>
+                <a href="#sectionFavoritos"><i class="bi bi-bookmark"></i><span id="saves"></span></a>
+                <a href="#editarPerfil"><i class="bi bi-gear"></i><span id="settings"></span></a>
+                <a href="#deleteAccount"><i class="bi bi-person-x"></i><span id="deleteMyAccount"></span></a>
+            </div>
+            <div>
+                <a href="./inicio.html"><i class="bi bi-house-door"></i><span id="home"></span></a>
+                <a href="../landingPage.html"><i class="bi bi-box-arrow-left"></i><span id="logout"></span></a>
+            </div>
+        </aside>
+        <section>
+            <div>
+                <h1>BIENVENIDO/A <span id="username"></span></h1>
+                <p id="textoBienvenida">¡Bienvenido a su centro personal! Aquí puede editar su perfil y explorar las carreras que ha marcado como favoritas. Descubra las posibilidades y personalice su experiencia con nosotros.</p>
+            </div>
+            <div>
+                <a href="./inicio.html"><img src="../IMGS/logoRunTheMountain-removebg-preview.png" alt="RunTheMountain"></a>
+            </div>
+        </section>
+        <section id="sectionFavoritos">
+            <div>
+                <div>
+                    <h2>FAVORITOS</h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="110.5" height="78" viewBox="0 0 221 156" fill="none">
+                        <path d="M122.097 124.597L129.478 114.249L142.213 117.65L124.909 73.2681L104.793 80.2153L122.097 124.597Z" fill="#093F68"/>
+                        <path d="M122.102 125.117H122.036C121.935 125.106 121.839 125.068 121.759 125.008C121.679 124.949 121.618 124.869 121.583 124.779L104.279 80.4024C104.253 80.3379 104.242 80.2693 104.245 80.2005C104.248 80.1317 104.265 80.0642 104.296 80.0018C104.327 79.9394 104.37 79.8834 104.424 79.837C104.478 79.7906 104.542 79.7548 104.61 79.7316L124.721 72.8C124.859 72.7531 125.011 72.7597 125.144 72.8182C125.276 72.8767 125.379 72.9824 125.429 73.112L142.733 117.489C142.768 117.579 142.777 117.676 142.757 117.771C142.737 117.865 142.69 117.952 142.621 118.022C142.551 118.093 142.463 118.144 142.365 118.17C142.266 118.196 142.162 118.196 142.064 118.17L129.71 114.873L122.528 124.909C122.478 124.972 122.414 125.023 122.34 125.059C122.267 125.095 122.185 125.115 122.102 125.117ZM105.527 80.5272L122.263 123.458L129.042 113.958C129.107 113.868 129.201 113.799 129.31 113.762C129.419 113.724 129.538 113.72 129.65 113.75L141.346 116.87L124.605 73.9336L105.527 80.5272Z" fill="#093F68"/>
+                        <path d="M98.903 124.597L91.5216 114.249L78.7865 117.65L96.0908 73.2681L116.207 80.2153L98.903 124.597Z" fill="#283618"/>
+                        <path d="M98.8975 125.117C98.807 125.117 98.7178 125.097 98.6379 125.057C98.5579 125.017 98.4896 124.959 98.4389 124.888L91.2564 114.852L78.9025 118.149C78.8043 118.175 78.7004 118.175 78.6022 118.149C78.504 118.123 78.4154 118.072 78.3461 118.002C78.2769 117.931 78.2298 117.844 78.21 117.75C78.1902 117.656 78.1985 117.558 78.234 117.468L95.5825 73.0912C95.6324 72.9616 95.7349 72.856 95.8675 72.7975C96.0001 72.7389 96.1519 72.7324 96.2897 72.7792L116.406 79.7264C116.475 79.7496 116.538 79.7855 116.592 79.8319C116.646 79.8782 116.69 79.9343 116.721 79.9967C116.752 80.0591 116.769 80.1266 116.772 80.1953C116.775 80.2641 116.763 80.3327 116.738 80.3972L99.45 124.8C99.415 124.89 99.3542 124.97 99.2742 125.029C99.1942 125.089 99.0983 125.127 98.9969 125.138L98.8975 125.117ZM91.5161 113.729C91.6066 113.729 91.6957 113.75 91.7757 113.79C91.8557 113.83 91.924 113.887 91.9747 113.958L98.7538 123.458L115.472 80.5272L96.3947 73.9336L79.6539 116.87L91.3503 113.75C91.4055 113.733 91.4636 113.726 91.5216 113.729H91.5161Z" fill="#093F68"/>
+                        <path d="M144.451 61.9424C144.451 65.1456 139.186 67.5272 138.191 70.4132C137.158 73.4084 139.893 78.2392 137.965 80.73C136.037 83.2208 130.279 82.29 127.611 84.11C124.942 85.93 124.174 91.39 120.981 92.3416C117.915 93.2776 113.892 89.3412 110.483 89.3412C107.074 89.3412 103.058 93.2776 99.9859 92.3416C96.8035 91.3692 96.019 85.9248 93.3559 84.11C90.6929 82.2952 84.9469 83.2468 83.0021 80.73C81.0573 78.2132 83.8087 73.4084 82.7755 70.4132C81.781 67.5272 76.5157 65.1456 76.5157 61.9424C76.5157 58.7392 81.781 56.3628 82.7755 53.4768C83.8087 50.4816 81.0738 45.6768 83.0021 43.16C84.9303 40.6432 90.7205 41.6 93.3725 39.78C96.0245 37.96 96.809 32.5 100.002 31.5484C103.069 30.6124 107.091 34.5488 110.5 34.5488C113.909 34.5488 117.926 30.6124 120.997 31.5484C124.18 32.5208 124.964 37.9652 127.627 39.78C130.291 41.5948 136.037 40.6432 137.981 43.16C139.926 45.6768 137.175 50.4816 138.208 53.4768C139.186 56.3628 144.451 58.76 144.451 61.9424Z" fill="#283618"/>
+                        <path d="M119.986 93.0072C118.412 93.0072 116.727 92.1908 115.091 91.4004C113.456 90.61 111.903 89.8404 110.5 89.8404C109.097 89.8404 107.478 90.6204 105.909 91.4004C103.859 92.3936 101.737 93.418 99.8312 92.8356C97.8367 92.2272 96.7427 90.1732 95.6819 88.1868C94.9195 86.7464 94.1239 85.2592 93.0631 84.5468C92.0023 83.8344 90.2122 83.5484 88.5105 83.304C86.19 82.966 83.7921 82.6176 82.5822 81.0524C81.3722 79.4872 81.7645 77.2616 82.1346 75.0932C82.4109 73.4812 82.6871 71.812 82.2783 70.59C81.8694 69.368 80.6981 68.3384 79.4384 67.1736C77.7478 65.6136 75.9908 63.9756 75.9908 61.9736C75.9908 59.9716 77.7478 58.3336 79.4384 56.7736C80.6981 55.6036 81.8805 54.5064 82.2783 53.3572C82.6761 52.208 82.4109 50.466 82.1346 48.8488C81.7645 46.6856 81.3832 44.4496 82.5822 42.8948C83.7811 41.34 86.19 40.9812 88.5105 40.6432C90.2122 40.3988 91.9802 40.1232 93.0631 39.4004C94.146 38.6776 94.9195 37.1852 95.6819 35.7604C96.7427 33.774 97.8367 31.72 99.8312 31.1116C101.732 30.5292 103.853 31.5536 105.909 32.5468C107.478 33.3008 109.097 34.1068 110.5 34.1068C111.903 34.1068 113.522 33.3216 115.091 32.5468C117.141 31.5536 119.263 30.5292 121.169 31.1116C123.163 31.72 124.257 33.774 125.318 35.7604C126.08 37.2008 126.876 38.688 127.937 39.4004C128.998 40.1128 130.788 40.3988 132.489 40.6432C134.81 40.9812 137.208 41.3244 138.418 42.8948C139.628 44.4652 139.236 46.6856 138.865 48.8488C138.589 50.466 138.313 52.1352 138.722 53.3572C139.131 54.5792 140.302 55.6036 141.562 56.7736C143.252 58.3336 145.009 59.9716 145.009 61.9736C145.009 63.9756 143.252 65.6136 141.562 67.1736C140.302 68.3436 139.119 69.4408 138.722 70.59C138.324 71.7392 138.589 73.4812 138.865 75.0932C139.236 77.2616 139.617 79.4976 138.418 81.0524C137.219 82.6072 134.81 82.966 132.489 83.304C130.788 83.5484 129.02 83.824 127.937 84.5468C126.854 85.2696 126.08 86.762 125.318 88.1868C124.257 90.1732 123.163 92.2272 121.169 92.8356C120.787 92.953 120.388 93.0109 119.986 93.0072ZM101.025 31.9228C100.738 31.9202 100.453 31.9606 100.179 32.0424C98.6268 32.5156 97.6323 34.372 96.6764 36.1712C95.8532 37.7312 95.0189 39.3224 93.715 40.2012C92.4111 41.08 90.5161 41.366 88.6818 41.6312C86.5878 41.9328 84.422 42.2448 83.4772 43.4668C82.5324 44.6888 82.8805 46.5868 83.2341 48.6668C83.5325 50.4036 83.8363 52.1976 83.3336 53.6588C82.8308 55.12 81.5158 56.29 80.223 57.4912C78.687 58.916 77.1014 60.3876 77.1014 61.9632C77.1014 63.5388 78.687 65.0156 80.223 66.4404C81.5158 67.6416 82.8529 68.8844 83.3336 70.2728C83.8142 71.6612 83.5325 73.528 83.2341 75.2648C82.8805 77.3084 82.549 79.2428 83.4772 80.4648C84.4054 81.6868 86.5878 82.0248 88.6818 82.3004C90.5161 82.5656 92.4167 82.8204 93.715 83.7304C95.0134 84.6404 95.8532 86.2108 96.6764 87.7604C97.6323 89.5544 98.6213 91.4004 100.179 91.8892C101.643 92.3364 103.494 91.4524 105.4 90.5164C107.058 89.7052 108.831 88.8628 110.5 88.8628C112.169 88.8628 113.914 89.7052 115.6 90.5164C117.533 91.4524 119.357 92.3364 120.821 91.8892C122.373 91.416 123.368 89.5544 124.324 87.7604C125.147 86.2004 125.981 84.6092 127.285 83.7304C128.589 82.8516 130.484 82.5656 132.318 82.3004C134.412 81.9988 136.578 81.6868 137.523 80.4648C138.468 79.2428 138.119 77.3448 137.766 75.2648C137.468 73.528 137.164 71.734 137.666 70.2728C138.169 68.8116 139.484 67.6416 140.777 66.4404C142.313 65.0156 143.899 63.544 143.899 61.9632C143.899 60.3824 142.313 58.916 140.777 57.4912C139.484 56.29 138.147 55.0472 137.666 53.6588C137.186 52.2704 137.468 50.4036 137.766 48.6668C138.119 46.618 138.451 44.6888 137.523 43.4668C136.595 42.2448 134.412 41.9068 132.318 41.6312C130.484 41.366 128.583 41.1112 127.285 40.2012C125.987 39.2912 125.147 37.7208 124.324 36.1712C123.368 34.372 122.379 32.5312 120.821 32.0424C119.357 31.5952 117.506 32.4792 115.6 33.4152C113.942 34.2264 112.169 35.0688 110.5 35.0688C108.831 35.0688 107.086 34.2264 105.4 33.4152C103.826 32.6508 102.317 31.9228 101.025 31.9228Z" fill="#093F68"/>
+                        <path d="M110.5 84.6715C123.838 84.6715 134.65 74.4953 134.65 61.9423C134.65 49.3893 123.838 39.2131 110.5 39.2131C97.1624 39.2131 86.3502 49.3893 86.3502 61.9423C86.3502 74.4953 97.1624 84.6715 110.5 84.6715Z" fill="white"/>
+                        <path d="M110.5 85.1915C105.614 85.1915 100.838 83.828 96.7761 81.2733C92.7139 78.7187 89.5477 75.0877 87.6781 70.8394C85.8084 66.5912 85.3192 61.9165 86.2724 57.4066C87.2255 52.8967 89.5782 48.7541 93.0328 45.5027C96.4875 42.2512 100.889 40.0369 105.681 39.1399C110.473 38.2428 115.439 38.7032 119.953 40.4629C124.467 42.2225 128.325 45.2025 131.039 49.0258C133.753 52.8491 135.202 57.3441 135.202 61.9423C135.195 68.1063 132.59 74.0158 127.959 78.3744C123.328 82.733 117.049 85.1846 110.5 85.1915ZM110.5 39.7383C105.833 39.7383 101.27 41.041 97.3895 43.4816C93.5088 45.9222 90.4843 49.3911 88.6984 53.4496C86.9126 57.5081 86.4456 61.9739 87.3565 66.2822C88.2675 70.5905 90.5155 74.5478 93.8161 77.6536C97.1168 80.7594 101.322 82.8743 105.9 83.7306C110.478 84.587 115.222 84.1464 119.534 82.4647C123.846 80.7829 127.531 77.9355 130.123 74.2825C132.715 70.6296 134.098 66.3351 134.097 61.9423C134.09 56.0547 131.601 50.4102 127.177 46.2475C122.753 42.0848 116.756 39.7438 110.5 39.7383Z" fill="#093F68"/>
+                        <path d="M113.053 48.0324L115.743 55.8324C115.801 55.985 115.907 56.117 116.047 56.2101C116.188 56.3033 116.356 56.353 116.528 56.3524H125.252C125.818 56.3515 126.371 56.5198 126.83 56.8331C127.288 57.1463 127.63 57.5884 127.805 58.0957C127.98 58.6031 127.979 59.1496 127.804 59.6567C127.628 60.1638 127.286 60.6054 126.826 60.918L119.771 65.7436C119.631 65.8405 119.526 65.9766 119.473 66.1324C119.419 66.2883 119.419 66.4561 119.473 66.612L122.169 74.412C122.342 74.9188 122.341 75.4641 122.165 75.9702C121.99 76.4763 121.649 76.9173 121.192 77.2304C120.734 77.5434 120.183 77.7124 119.617 77.7134C119.052 77.7143 118.5 77.5471 118.042 77.2356L110.986 72.41C110.845 72.3136 110.675 72.2617 110.5 72.2617C110.325 72.2617 110.155 72.3136 110.014 72.41L102.958 77.2356C102.5 77.5471 101.948 77.7143 101.383 77.7134C100.817 77.7124 100.266 77.5434 99.8084 77.2304C99.3509 76.9173 99.0101 76.4763 98.8346 75.9702C98.6591 75.4641 98.6579 74.9188 98.8312 74.412L101.527 66.612C101.581 66.4561 101.581 66.2883 101.527 66.1324C101.474 65.9766 101.369 65.8405 101.229 65.7436L94.1736 60.918C93.7144 60.6054 93.3722 60.1638 93.1964 59.6567C93.0206 59.1496 93.0202 58.6031 93.1952 58.0957C93.3701 57.5884 93.7115 57.1463 94.1703 56.8331C94.629 56.5198 95.1815 56.3515 95.7482 56.3524H104.472C104.644 56.353 104.812 56.3033 104.953 56.2101C105.093 56.117 105.199 55.985 105.257 55.8324L107.947 48.0324C108.123 47.5256 108.465 47.0842 108.923 46.7711C109.382 46.4581 109.934 46.2896 110.5 46.2896C111.066 46.2896 111.618 46.4581 112.077 46.7711C112.535 47.0842 112.877 47.5256 113.053 48.0324Z" fill="#FFBC0E"/>
+                        <path d="M101.384 78.2756C100.873 78.2733 100.37 78.1578 99.9161 77.9385C99.4619 77.7191 99.0689 77.4021 98.7692 77.0131C98.4694 76.6241 98.2713 76.1741 98.1909 75.6996C98.1105 75.2251 98.15 74.7394 98.3063 74.282L101.003 66.482C101.021 66.4298 101.021 66.3735 101.003 66.3211C100.985 66.2688 100.95 66.2232 100.903 66.1908L93.8476 61.36C93.2937 60.9828 92.8811 60.4501 92.6691 59.8383C92.4571 59.2266 92.4567 58.5673 92.6679 57.9553C92.8791 57.3433 93.2911 56.8102 93.8446 56.4324C94.3981 56.0547 95.0646 55.8519 95.7482 55.8532H104.467C104.525 55.8531 104.582 55.836 104.629 55.8044C104.677 55.7727 104.712 55.728 104.732 55.6764L107.423 47.8764C107.635 47.2656 108.047 46.7335 108.599 46.3563C109.152 45.979 109.817 45.7759 110.5 45.7759C111.183 45.7759 111.848 45.979 112.401 46.3563C112.953 46.7335 113.365 47.2656 113.577 47.8764L116.268 55.6764C116.287 55.728 116.323 55.7727 116.371 55.8044C116.418 55.836 116.475 55.8531 116.533 55.8532H125.252C125.935 55.8519 126.602 56.0547 127.155 56.4324C127.709 56.8102 128.121 57.3433 128.332 57.9553C128.543 58.5673 128.543 59.2266 128.331 59.8383C128.119 60.4501 127.706 60.9828 127.152 61.36L120.097 66.1856C120.05 66.2166 120.014 66.2612 119.996 66.3129C119.978 66.3645 119.979 66.4202 119.997 66.4716L122.694 74.2716C122.902 74.8822 122.9 75.5391 122.689 76.1488C122.478 76.7584 122.067 77.2898 121.516 77.6672C120.965 78.0446 120.302 78.2487 119.621 78.2506C118.939 78.2525 118.274 78.0519 117.721 77.6776L110.666 72.852C110.62 72.8191 110.563 72.8012 110.506 72.8012C110.448 72.8012 110.391 72.8191 110.345 72.852L103.29 77.6776C102.738 78.0631 102.071 78.2726 101.384 78.2756ZM95.7482 56.8983C95.2935 56.892 94.8486 57.023 94.4787 57.2721C94.1089 57.5213 93.8337 57.8754 93.6934 58.2826C93.5531 58.6897 93.5551 59.1285 93.6992 59.5345C93.8433 59.9405 94.1219 60.2923 94.4941 60.5384L101.555 65.364C101.79 65.5252 101.965 65.7525 102.055 66.0132C102.144 66.2739 102.143 66.5545 102.052 66.8148L99.3561 74.6148C99.2154 75.0175 99.2142 75.4518 99.3526 75.8551C99.491 76.2585 99.7619 76.6101 100.126 76.8594C100.491 77.1086 100.93 77.2425 101.38 77.2419C101.83 77.2413 102.269 77.1062 102.632 76.856L109.688 72.0304C109.924 71.8681 110.208 71.7806 110.5 71.7806C110.792 71.7806 111.076 71.8681 111.312 72.0304L118.368 76.856C118.731 77.1062 119.17 77.2413 119.62 77.2419C120.07 77.2425 120.509 77.1086 120.874 76.8594C121.238 76.6101 121.509 76.2585 121.647 75.8551C121.786 75.4518 121.785 75.0175 121.644 74.6148L118.948 66.8148C118.857 66.5545 118.856 66.2739 118.945 66.0132C119.035 65.7525 119.21 65.5252 119.445 65.364L126.522 60.5228C126.895 60.2767 127.173 59.9249 127.317 59.5189C127.461 59.1129 127.463 58.6741 127.323 58.267C127.183 57.8598 126.908 57.5057 126.538 57.2565C126.168 57.0074 125.723 56.8764 125.268 56.8828H116.533C116.241 56.8837 115.956 56.7971 115.72 56.6353C115.483 56.4735 115.308 56.2451 115.218 55.9832L112.522 48.1832C112.383 47.7817 112.112 47.4319 111.749 47.1839C111.386 46.9359 110.949 46.8023 110.5 46.8023C110.051 46.8023 109.614 46.9359 109.251 47.1839C108.888 47.4319 108.617 47.7817 108.478 48.1832L105.782 55.9832C105.692 56.2451 105.517 56.4735 105.28 56.6353C105.044 56.7971 104.759 56.8837 104.467 56.8828L95.7482 56.8983Z" fill="#093F68"/>
+                        <path d="M104.793 59.0669H96.5991C96.4526 59.0669 96.312 59.0121 96.2084 58.9146C96.1048 58.817 96.0466 58.6848 96.0466 58.5469C96.0466 58.4089 96.1048 58.2767 96.2084 58.1792C96.312 58.0816 96.4526 58.0269 96.5991 58.0269H104.793C104.939 58.0269 105.08 58.0816 105.183 58.1792C105.287 58.2767 105.345 58.4089 105.345 58.5469C105.345 58.6848 105.287 58.817 105.183 58.9146C105.08 59.0121 104.939 59.0669 104.793 59.0669Z" fill="white"/>
+                      </svg>
+                </div>
+                <p>En esta sección encontrarás tus carreras marcadas como favoritas. ¡Explora y gestiona tus preferencias fácilmente!</p>
+            </div>
+            <div id="carreras">
+
+            </div>
+        </section>
+        <section id="editarPerfil">
+            <div>
+                <h2>EDITAR PERFIL</h2>
+                <p id="textoEditarPerfil">Aquí puedes actualizar tu información personal, cambiar tu foto de perfil y ajustar tus preferencias. Haz que tu perfil refleje quién eres realmente. ¡Es rápido y fácil!</p>
+            </div>
+            <div id="datosUsuario">
+                <div>
+                    <p>Foto de Perfil</p>
+                    <span id="fotoPerfil"></span>
+                    <i class="bi bi-caret-right-fill abrirModal" data-parametro="fotoPerfil"></i>
+                </div>
+                <div>
+                    <p>Nombre de Usuario</p>
+                    <span id="nombreUsuario"></span>
+                    <i class="bi bi-caret-right-fill abrirModal" data-parametro="username"></i>
+                </div>
+                <div>
+                    <p>Contraseña</p>
+                    <span id="password">*********</span>
+                    <i class="bi bi-caret-right-fill abrirModal" data-parametro="password"></i>
+                </div>
+                <div>
+                    <p>Localidad</p>
+                    <span id="localidad"></span>
+                    <i class="bi bi-caret-right-fill abrirModal" data-parametro="poblacion"></i>
+                </div>
+            </div>
+        </section>
+        <section id="racesEditor">
+            <div>
+                <h2>GESTOR DE <span>CARRERAS</span></h2>
+                <p>Bienvenido al Gestor de Carreras, donde puedes editar carreras existentes o crear nuevas a tu gusto. Personaliza cada detalle y da forma a tus eventos ideales con facilidad. ¡Empieza ahora!</p>
+            </div>
+            <div id="selection">
+                <div>
+                    <h2>NUEVA CARRERA</h2>
+                    <p>¿Tienes un evento en mente?
+                        Desde aquí podrás crearlo para
+                        que otros aventureros puedan 
+                        disfrutarlo.</p>
+                    <div class="botonesSelection" id="nuevaCarrera">NUEVA CARRERA</div>
+                </div>
+                <div>
+                    <h2>EDITAR CARRERA</h2>
+                    <p>¿Ideas nuevas? ¿Cambio de planes?
+                        No te preocupes, desde aquí podrás 
+                        editar tus eventos para que todo este
+                        en orden </p>
+                    <div class="botonesSelection">EDITAR CARRERA</div>
+                </div>
+            </div>
+
+        </section>
+        <section id="deleteAccount">
+            <div>
+                <h2>BORRAR CUENTA</h2>
+                <p>¡Oh, no! ¿Realmente quieres dejar atrás la aventura en las montañas? Te vamos a echar de menos :(</p>
+                <p>Si decides regresar, las carreras y nosotros estaremos aquí.</p>
+                <div id="borrarCuenta" data-bs-toggle="modal" data-bs-target="#modalBorrar">BORRAR CUENTA</div>
+            </div>
+        </section>
+    </main>
+    <div id="miModal" class="modal">
+        <span id="alertMessage" class="spanAlert"></span>
+        <div class="modal-contenido">
+          <span class="cerrar"><i class="bi bi-x-circle"></i></span>
+          <h2>TEXTO POR DEFECTO</h2>
+          <div class="modal-cuerpo">
+            <label for="inputModal">Cambiar</label>
+            <input type="text" id="inputModal" name="inputModal" required>
+          </div>
+          <div class="modal-pie">
+            <button id="cancelar">CANCELAR</button>
+            <button id="guardar" disabled>GUARDAR CAMBIOS</button>
+          </div>
+        </div>
+    </div>
+    <div id="miModalBorrarCuenta" class="modal">
+        <div class="modal-contenido">
+          <span id="cerrarCuentaX" class="cerrar"><i class="bi bi-x-circle"></i></span>
+          <h2>BORRAR CUENTA</h2>
+          <div class="modal-cuerpo">
+            <p>¿Estas seguro de que deseas borrar tu cuenta? Perderas todos tus datos para siempre.</p>
+          </div>
+          <div class="modal-pie">
+            <button id="cancelarCuenta">CANCELAR</button>
+            <button id="borrarCuentaModal">BORRAR CUENTA</button>
+          </div>
+        </div>
+    </div>
+    <div id="miModalNuevaCarrera" class="modal">
+        <div class="modal-contenido">
+          <span id="cerrarCarreraX" class="cerrar"><i class="bi bi-x-circle"></i></span>
+          <div class="modal-cuerpo">
+            <div><label for="portada">Portada</label> <input type="file" name="portada" id="portada" title="Foto portada"></div>
+            <div><label for="nombreCarrera">Nombre de la Carrera</label> <input type="text" placeholder="Nombre de la Carrera" name="nombreCarrera" id="nombreCarrera" title="Nombre de la Carrera"></div>
+            <div id="fechaDiv"><label for="fecha">Fecha</label> <input type="date" name="fecha" id="fecha" title="Fecha del Evento"></div>
+            <div><label for="localizacion">Localización</label><input type="text" name="localizacion" id="localizacion" placeholder="Escribe la localización de la carrera" title="Escribe la localización de la carrera"></div>
+            <button id="modalidades">MODALIDADES Y CATEGORÍAS<i class="bi bi-plus-circle"></i></button>
+            <div><label for="track">Archivo .GPX de la carrera</label><input type="file" name="track" id="track" title="Track de la carrera"></div>
+            <div><label for="webOrganizacion">WEB de la Organización</label><input type="text" name="webOrganizacion" id="webOrganizacion" title="Web de la Organización" placeholder="Web de la Organización"></div>
+            <div><label for="distancia">Distancia en KM</label><input type="number" name="distancia" placeholder="KM" id="distancia" title="Distancia en KM"></div>
+            <div><label for="reglamento">Reglamento PDF</label> <input type="file" name="reglamento" id="reglamento" title="Reglamento de la carrera"></div>
+            <div><label for="imagenes">Imagenes de la Carrera</label><input type="file" name="imagenesCarrera" id="imagenesCarrera" title="imagenesCarrera" multiple></div>
+            
+        </div>
+          <div class="modal-pie">
+            <button class="crearCarreraBoton">CREAR CARRERA</button>
+          </div>
+        </div>
+    </div>
+    <div id="miModalNuevaCarreraModalidades" class="modal">
+        <div class="modal-contenido">
+          <span id="cerrarModalidadX" class="cerrar"><i class="bi bi-x-circle"></i></span>
+          <div class="modal-cuerpo">
+            <div id="botonModalidad"><button id="añadirModalidad">AÑADIR MODALIDAD<i class="bi bi-plus-circle"></i></button></div>
+            <div id="selectModalidadCategoria">
+                <div><span>Modalidad : </span><label for="trail">Trail</label><input type="radio" name="tipoModalidad" id="trail" value="trail"><label for="maraton">Maratón</label><input type="radio" name="tipoModalidad" id="maraton" value="maraton"><label for="ultra">Ultra</label><input type="radio" name="tipoModalidad" id="ultra" value="ultra"></div>
+                <div><span>Categorias : </span><label for="adulta">Adulta(+20 años)</label><input type="checkbox" name="tipoCategoria[]" class="categoria" id="adulta" value="adulta"><label for="juvenil">Juvenil (De 14 a 19 años)</label><input type="checkbox" name="tipoCategoria[]" class="categoria" value="juvenil"><label for="infantil">Infantil (-14 años)</label><input type="checkbox" id="infantil" class="categoria" name="tipoCategoria[]" value="infantil"></div>
+                <div>
+                    <label for="sexo">Seleccione las modalidades de la categoría :</label>
+                    <select name="sexo" id="sexo">
+                        <option value="(M)">Masculina</option>
+
+                        <option value="(F)">Femenina</option>
+
+                        <option value="(M/F)">Ambas</option>
+                    </select>
+                </div>
+                <button id="guardarModalidad" class="crearCarreraBoton">GUARDAR</button>
+            </div>
+            <div id="modalidadesSeleccionadas">
+                <p>Seleccione los premios para las modalidades de <span id="modalidadEscogida"></span> :</p>
+                <div id="premios">
+                    <!-- <div class="premioCategoria">
+                        <p id="premiosNombreCategoria">TRAIL</p>
+                        <div><label for="posicion1">1.</label><input type="text" id="posicion1" name="posicion1" title="Premio primera posicion" placeholder="Pj. 300€"></div>
+                        <div><label for="posicion2">2.</label><input type="text" id="posicion2" name="posicion2" title="Premio segunda posicion" placeholder="Pj. 200€"></div>
+                        <div><label for="posicion3">3.</label><input type="text" id="posicion3" name="posicion3" title="Premio tercera posicion" placeholder="Pj. 100€"></div>
+                    </div> -->
+                </div>
+            </div>
+          <div class="modal-pie">
+            <button class="crearCarreraBoton">AÑADIR MODALIDADES</button>
+          </div>
+        </div>
+    </div>
+</body>
+
+<script src="./JS/perfil.js"></script>
+<script src="./JS/togeojson.js"></script>
+</html>
