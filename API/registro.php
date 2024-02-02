@@ -91,6 +91,11 @@
         $stmt->bind_param("sssss", $nombreCompleto, $username, $mail, $pass, $poblacion);
         try{
             $stmt->execute();
+            $userId = mysqli_insert_id($con);
+            $userCarpeta = "./users/user" . $userId;
+            if (!file_exists($userCarpeta)) {
+                mkdir($userCarpeta, 0755, true);
+            }
             header('Content-Type: application/json');
             header("HTTP/1.1 201 Created");
             echo json_encode(["User Created" => "Usuario creado"]);

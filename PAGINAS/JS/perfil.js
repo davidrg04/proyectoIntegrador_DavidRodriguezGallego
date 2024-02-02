@@ -393,7 +393,7 @@ function modalNuevaCarrera(e) {
                     const xmlDoc = parser.parseFromString(textContent, "application/xml");
                     const json = toGeoJSON.gpx(xmlDoc);
                     const coor = json.features[0].geometry.coordinates;
-                    let numeroPorCarrera = 100;
+                    let numeroPorCarrera = 200;
                     let intervalo = Math.ceil(coor.length/numeroPorCarrera);
                     
                     coorReducidas = coor.reduce((coordenadas, coordenada, index) => {
