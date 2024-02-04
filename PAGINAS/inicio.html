@@ -38,17 +38,29 @@
         <div id="menu">
             <input type="text" id="raceName" name="raceName" placeholder="Pj. San Silvestre Zamorana">
             <select name="lugarCarrera" id="lugarCarrera">
-                <option value="">PROVINICIA</option>
+                
             </select>
+            <div id="finalizadas">
+                <label for="finalizadas">Finalizadas</label><input type="checkbox" id="finalizada" value="finalizada" title="Carreras finalizadas">
+            </div>
             <div id="buscar"><button>BUSCAR</button></div>
         </div>
         <section>
             <h1>¡Comienza la aventura 
                 con las siguientes
                 <span>CARRERAS</span>!</h1>
-            <p id="filter">Ordenar<i class="bi bi-funnel-fill"></i></p>
+            
+                <div id="ordenar">
+                    <p id="filter">Ordenar<i class="bi bi-funnel-fill"></i></p>
+                    <div id="desplegableOrdenar">
+                        <span>NOMBRE A-Z</span>
+                        <span>FECHA</span>
+                        <span>DISTANCIA</span>
+                    </div>
+                </div>
             <div id="carreras">
-                <div class="tarjetaCarrera">
+                <div id="rejillaCarreras">
+                    <!-- <div class="tarjetaCarrera">
                     <div class="fotoPortada">
 
                     </div>
@@ -58,55 +70,19 @@
                         <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>89KM</span>
                         <a href="./masInformacion.html"><div class="detallesCarrera">MAS INFORMACIÓN</div></a>
                     </div>
+                </div> -->
                 </div>
-                <div class="tarjetaCarrera">
-                    <div class="fotoPortada">
-
-                    </div>
-                    <div class="datosCarrera">
-                        <span class="fecha"><i class="bi bi-calendar-fill"></i>27/07/2008</span>
-                        <span class="localidad"><i class="bi bi-geo-alt-fill"></i>BENAVENTE</span>
-                        <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>89KM</span>
-                        <div class="detallesCarrera">MAS INFORMACIÓN</div>
-                    </div>
+                <div id="divPaginacion">
+                    <span>Primera</span>
+                    <span>Anterior</span>
+                    <span id="paginaActual"></span>
+                    <span>Siguiente</span>
+                    <span>Ultima</span>
                 </div>
-                <div class="tarjetaCarrera">
-                    <div class="fotoPortada">
-
-                    </div>
-                    <div class="datosCarrera">
-                        <span class="fecha"><i class="bi bi-calendar-fill"></i>27/07/2008</span>
-                        <span class="localidad"><i class="bi bi-geo-alt-fill"></i>BENAVENTE</span>
-                        <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>89KM</span>
-                        <div class="detallesCarrera">MAS INFORMACIÓN</div>
-                    </div>
-                </div>
-                <div class="tarjetaCarrera">
-                    <div class="fotoPortada">
-
-                    </div>
-                    <div class="datosCarrera">
-                        <span class="fecha"><i class="bi bi-calendar-fill"></i>27/07/2008</span>
-                        <span class="localidad"><i class="bi bi-geo-alt-fill"></i>BENAVENTE</span>
-                        <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>89KM</span>
-                        <div class="detallesCarrera">MAS INFORMACIÓN</div>
-                    </div>
-                </div>
-                <div class="tarjetaCarrera">
-                    <div class="fotoPortada">
-
-                    </div>
-                    <div class="datosCarrera">
-                        <span class="fecha"><i class="bi bi-calendar-fill"></i>27/07/2008</span>
-                        <span class="localidad"><i class="bi bi-geo-alt-fill"></i>BENAVENTE</span>
-                        <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>89KM</span>
-                        <div class="detallesCarrera">MAS INFORMACIÓN</div>
-                    </div>
-                </div>
-               
             </div>
         </section>
     </main>
 </body>
+<script src="../JS/provincias.js"></script>
 <script src="./JS/inicio.js"></script>
 </html>

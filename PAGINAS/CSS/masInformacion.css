@@ -90,6 +90,9 @@ header a.aCabecera::after {
 header a.aCabecera:hover:after {
     left: 0;
 }
+#clasificacionesPasadas{
+    display: none;
+}
 #username{
     color: white;
     cursor: pointer;
@@ -98,6 +101,7 @@ header a.aCabecera:hover:after {
     padding: 5px 10px; 
     border-radius: 5px; 
     transition: background-color 0.3s;
+    font-family: Arial, Helvetica, sans-serif;
 }
 #username:hover, #username:focus {
     background-color: #BC6C25; 
@@ -115,6 +119,7 @@ header a.aCabecera:hover:after {
     padding: 10px 15px;
     background-color: white;
     transition: background-color 0.3s;
+    font-size: 1rem;
 }
 #desplegable a:hover, #desplegable a:focus {
     background-color: #BC6C25; 
@@ -141,7 +146,7 @@ main{
 }
 #divPortada{
     min-height: 20vh;
-    width: 100vw;
+    width: 100%;
     max-width: 1800px;
     background-image: url(../IMGS/portadaMasInformacion.jpeg);
     background-size: cover;
@@ -150,6 +155,7 @@ main{
     align-self: center;
 }
 #menu{
+    max-width: 1800px;
     align-self: center;
     width: 40%;
     display: flex;
@@ -167,6 +173,7 @@ main{
     width: 70%;
     background-color: white;
     height: auto;
+    max-width: 700px;
 }
 #menu div:last-child{
     width: 10%;
@@ -178,3 +185,161 @@ main{
 #menu div:last-child:hover{
     cursor: pointer;
 }
+
+#fotosCarrera{
+    border: 4px solid #606C38;
+    width: 20vw;
+    height: 40vh;
+    overflow: hidden;
+    max-height: 400px;
+    max-width: 400px;
+   
+}
+#fotosCarrera img{
+    width: 20vw;
+    height: 40vh;
+    max-height: 400px;
+    max-width: 400px;
+    /* object-fit: cover; */
+}
+#map{
+    height: 40vh;
+    width: 40vw;
+    border: 4px solid #606C38;
+    max-height: 400px;
+    max-width: 400px;
+}
+section{
+    max-width: 1800px;
+    align-self: center;
+    width: 100%;
+    height: 59vh;
+    max-height: 600px;
+}
+section:first-of-type article{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+#infoCarrera span{
+    font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    color: #283618;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+#infoCarrera div{
+    padding-left: 10px;
+    margin: 9px 0px;
+}
+#infoCarrera i{
+    color: #606C38;
+    font-size: 1rem;
+}
+#infoCarrera h2{
+    font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    color: #283618;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 3px solid #BC6C25;
+}
+#infoCarrera div:last-child{
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-top: 40px;
+    color: white;
+    background-color: #BC6C25;
+    width: 14vw;
+    transition: transform 200ms ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    
+}
+#infoCarrera div:last-child:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+}
+#infoCarrera div:last-child:active{
+    background-color: #a05d21;
+    transform: scale(0.95); 
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+#infoCarrera div:last-child a{
+    font-size: 1.1rem;
+    
+    color: white;
+    font-weight: bold;
+    font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+}
+section:nth-of-type(2){
+    height: 100vh;
+}
+section:nth-of-type(2) article{
+    display: flex;
+    flex-direction: column;
+    
+}
+div.titulo{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 1800px;
+    font-size: 2.5rem;
+    color: #283618;
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+}
+.titulo div{
+    text-align: center;
+    border: 4px solid #606C38;
+    padding: 5px 10px;
+    width: 70%;
+    background-color: white;
+    height: auto;
+    max-width: 700px;
+}
+
+#categorias{
+    margin-top: 50px;
+    align-self: center;
+    display: flex;
+    width: 65vw;
+    justify-content: space-around;
+    min-width: 900px;
+    max-width: 1800px;
+}
+
+.categoria{
+    border: 3px solid #283618;
+    border-radius: 10px;
+    width: 15vw;
+    min-width: 220px;   
+    max-width: 380px;
+}
+.categoriaCabecera{
+    padding: 10px 8px;
+    background-color: #283618;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.6rem;
+    color: white;
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    
+}
+#categorias span{
+    text-align: center;
+    width: 100%;
+}
+.categoriaCuerpo{
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px 10px;
+}
+
+

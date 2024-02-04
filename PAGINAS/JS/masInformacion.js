@@ -19,3 +19,29 @@ document.getElementById("username").addEventListener('click', function(){
     `;
     }
 })
+
+
+
+//Obtener datos de la Carrera
+let datosCarreras = [];
+function obtenerDatosCarrera() {
+    let nombre=localStorage.getItem('nombreCarrera');
+    fetch("http://localhost/proyectoIntegrador_DavidRodriguezGallego/API/obtenerDatosCarreras.php", {
+        method: "POST",
+        body: JSON.stringify({'nombre': nombre}),
+    }).then( response => {
+        if (response.status === 200) return response.json() 
+            else alert("NO SE PUEDEN CARGAR LAS CARRERAS");
+    }).then( data => {
+        datosCarreras = data;
+        renderDatos();
+    }).catch ( error => {
+        console.log(error);
+    })
+}
+
+function renderDatos() {
+   console.log(datosCarreras);
+}
+
+obtenerDatosCarrera();

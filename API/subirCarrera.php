@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $distancia = $_POST['distancia'];
     $desnivel = $_POST['desnivel'];
     $coordenadas = $_POST['coordenadas'];
-    $portada = uniqid() . '-' . $_FILES['portada']['name'];
+    $portada = uniqid() . '-' . $_FILES['fotoPortada']['name'];
     $reglamento = uniqid() . '-' . $_FILES['reglamento']['name'];
     
     if (!is_dir("./users/user$id/carreras")) {
@@ -51,13 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
-    move_uploaded_file($_FILES['portada']['tmp_name'], "./users/user$id/carreras/".$portada);
+    move_uploaded_file($_FILES['fotoPortada']['tmp_name'], "./users/user$id/carreras/".$portada);
     move_uploaded_file($_FILES['reglamento']['tmp_name'], "./users/user$id/carreras/".$reglamento);
 
-    foreach ($_FILES['fotos']['tmp_name'] as $key => $tmp_name) {
-        $foto = uniqid() . '-' . $_FILES['fotos']['name'][$key];
-        move_uploaded_file($tmp_name, "./users/user$id/carreras/imagenes/".$foto);
-    }
+    
 
 
     foreach ($_POST['modalidades'] as $key => $jsonModalidad) {
@@ -67,45 +64,66 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sexo = $modalidad['sexo'];
         $categorias = $modalidad['categorias'];
     }
-
+    // var_dump($categorias);
     $query = "INSERT INTO carreras (nombre, fecha, enlaceWeb, reglamento, portada, track, localizacion, distancia, desnivel, modalidad, sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     $stmt = $con->prepare($query);
     $stmt->bind_param('sssssssiiss',$nombreCarrera,$fechaCarrera,$enlaceWeb,$reglamento,$portada,$coordenadas,$localizacion,$distancia,$desnivel,$nombreModalidad,$sexo);
 
     try {
         $stmt->execute();
-
-        $query2 = "INSERT into categoria (id_carrera, nombre) values ((SELECT MAX(id) FROM carreras),?)";
-        $stmt = $con->prepare($query2);
-        $contadorPremios = 0;
-        foreach ($categorias as $categoria) {
-            $contadorPremios++;
-            $stmt->bind_param('s',$categoria['nombre']);
-            try {
-                $stmt->execute();
-                $queryPremios = "INSERT into premios (id_categoria, primero,segundo,tercero) values ((SELECT MAX(id) FROM categoria),?,?,?)";
-                $stmt = $con->prepare($queryPremios);
-                $stmt->bind_param('sss',$categoria['premios'][1],$categoria['premios'][2],$categoria['premios'][3]);
-                
-                try {
-                    $stmt->execute();
-                } catch (mysqli_sql_exception $e){
-                    header("HTTP/1.1 400 Bad Request");
-                }
-
-            } catch (mysqli_sql_exception $e) {
-                header("HTTP/1.1 400 Bad Request");
-            }
-
-        }
-
-        if ($contadorPremios == 3) {
             header('Content-Type: application/json');
             header("HTTP/1.1 201 Created");
-            echo json_encode(["Carrera creada" => "Carrera creada"]);
-        }
+            echo json_encode(['message' => 'Carrera creada con éxito']);
+        // $idCarrera = mysqli_insert_id($con);
+        // $query2 = "INSERT into categoria (id_carrera, nombre) values (?,?)";
+        
+        // $contadorPremios = 0;
+        // foreach ($categorias as $categoria) {
+        //     $contadorPremios++;
+        //     $stmt = $con->prepare($query2);
+        //     // if (!$stmt) {
+        //     //     die("Error al preparar la consulta: " . $con->error);
+        //     // }
+        //     $stmt->bind_param('is',$idCarrera,$categoria['nombre']);
+        //     try {
+        //         $stmt->execute();
+        //         $idCategoria = mysqli_insert_id($con);
+        //         $queryPremios = "INSERT into premios (id_categoria, primero,segundo,tercero) values (?,?,?,?)";
+        //         $stmt = $con->prepare($queryPremios);
+        //         $stmt->bind_param('isss',$idCategoria,$categoria['premios'][0],$categoria['premios'][1],$categoria['premios'][2]);
+                
+        //         try {
+        //             $stmt->execute();
+        //         } catch (mysqli_sql_exception $e){
+        //             header("HTTP/1.1 400 Bad Request");
+        //         }
+
+        //     } catch (mysqli_sql_exception $e) {
+        //         header("HTTP/1.1 400 Bad Request");
+        //     }
+
+        // }
+        // $queryImagenes = "INSERT into fotos (id_carrera, nombre) values ((SELECT MAX(id) FROM carreras),?)";
+        // $stmt = $con->prepare($queryImagenes);
+        // foreach ($_FILES['fotos']['tmp_name'] as $key => $tmp_name) {
+        //     $foto = uniqid() . '-' . $_FILES['fotos']['name'][$key];
+        //     move_uploaded_file($tmp_name, "./users/user$id/carreras/imagenes/".$foto);
+
+        //     $stmt->bind_param('s',$foto);
+        //     try {
+        //         $stmt->execute();
+        //     } catch (mysqli_sql_exception $e){
+        //         header("HTTP/1.1 400 Bad Request");
+        //     }
+        // }
+        
+            // exit;
+        
     } catch (mysqli_sql_exception $e) {
+        header('Content-Type: application/json');
         header("HTTP/1.1 400 Bad Request");
+        echo json_encode(['error' => $e->getMessage()]);
+        exit;
     }
 
 

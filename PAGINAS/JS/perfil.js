@@ -354,8 +354,43 @@ function modalNuevaCarrera(e) {
 
                                         //MANDAR DATOS A LA API
 
-        document.querySelector('#miModalNuevaCarrera .crearCarreraBoton').addEventListener('click', enviarCarrera);
+        document.querySelector('#miModalNuevaCarrera .crearCarreraBoton').addEventListener('click', comprobarDatos);
+        
+        function comprobarDatos(e) {
+            
+            let campos = ['portada', 'nombreCarrera', 'fecha', 'localizacion', 'track', 'webOrganizacion', 'distancia', 'reglamento', 'imagenesCarrera'];
+
+            let todosCompletos = true; 
+
+            campos.forEach( campo => {
+                var campoInput = document.getElementById(campo);
+                if (campoInput.type === 'file') {
+                    if (campoInput.files.length === 0) {
+                        todosCompletos = false;
+                    }
+                    
+                } else {
+                    if (campoInput.value.trim() === '') {
+                        todosCompletos = false;
+                    }
+                }
+            });
+
+            if (!document.querySelector('input[name="tipoModalidad"]:checked')) {
+                todosCompletos = false;
+            }
+        
+            if (!document.querySelector('input.categoria:checked')) {
+                todosCompletos = false;
+            }
+        
+            (todosCompletos) ? enviarCarrera(e) : alert('Debe completar todos los campos.');
+        }
+        
+        
+        
         function enviarCarrera(e){
+            
             let modalidades = [
                 {
                     'modalidad' : modalidadElegida,
@@ -373,7 +408,7 @@ function modalNuevaCarrera(e) {
                 });
                 modalidades[0].categorias.push(categorias);
         });
-        console.log(modalidades);
+        
 
        
 
@@ -385,6 +420,7 @@ function modalNuevaCarrera(e) {
             let desnivel =0;
             const file = document.getElementById('track').files[0];
             if (file) {
+                let carrera = new FormData();
                 const fileReader = new FileReader();
                 const r = fileReader.readAsText(file);
                 fileReader.onload = event => {
@@ -403,7 +439,7 @@ function modalNuevaCarrera(e) {
                         return coordenadas;
                     }, []);
 
-                    console.log(coorReducidas);
+                    // console.log(coorReducidas);
 
                     coor.forEach( (coordenada, index) => {
                         if (index > 0) {
@@ -414,7 +450,7 @@ function modalNuevaCarrera(e) {
                     });
                     desnivel = desnivelPositivo+desnivelNegativo;
 
-                    let carrera = new FormData();
+                    
                     carrera.append('nombre', document.getElementById('nombreCarrera').value);
                     carrera.append('fecha', document.getElementById('fecha').value);
                     carrera.append('localizacion', document.getElementById('localizacion').value);
@@ -441,19 +477,40 @@ function modalNuevaCarrera(e) {
                             carrera.append('fotos[]',foto);
                         });
                     }
-                    modalidades.forEach((modalidad, index) => {
-                        carrera.append(`modalidades[${index}]`, JSON.stringify(modalidad));
-                    });
-                    
-                    for (let [clave, valor] of carrera.entries()) {
-                        console.log(clave, valor);
+                   
+                        carrera.append(`modalidades`, JSON.stringify(modalidades));
+                   
+                    for (let [key, value] of carrera.entries()) {
+                        console.log(key, value);
                     }
-                }
+                    let jwt = localStorage.getItem('jwt');
+                    fetch("http://localhost/proyectoIntegrador_DavidRodriguezGallego/API/registroCarrera.php", {
+                    method: "POST",
+                    headers: {
+                        'Authorization': `Bearer ${jwt}`
+                    },
+                    body: carrera,
+                    }).then( response => {
+                        if (response.status === 201) return response.json();
+                            else if (response.status === 400) console.log("error"); 
+                            else console.log("Todo mal");
+                    })
+                    .then( data => {
+
+                        console.log(data);
+                    })
+                    .catch ( error => {
+                        console.log(error);
+                    })
                 
 
-            }
+                }
+                    
+                    
+                }
 
-            
+
+                
         }
 
 
