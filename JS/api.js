@@ -1,5 +1,8 @@
 document.getElementById('boton').addEventListener('click',registrarUsuario);
 
+let fetchDireccion = "localhost";
+
+
 
 function registrarUsuario(e) {
     e.preventDefault();
@@ -13,7 +16,8 @@ function registrarUsuario(e) {
             "password": document.getElementById('password').value,
             "poblacion": document.getElementById('poblacion').value,
             "telefono": document.getElementById('telefono').value,
-            "nombreOrg": document.getElementById('organizacion').value
+            "nombreOrg": document.getElementById('organizacion').value,
+            "fotoPerfil" : "perfil.png"
         };
     
     }else{
@@ -23,11 +27,12 @@ function registrarUsuario(e) {
             "mail": document.getElementById('mail').value,
             "password": document.getElementById('password').value,
             "poblacion": document.getElementById('poblacion').value,
+            "fotoPerfil" : "perfil.png"
         };
     }
 
 
-    fetch("http://localhost/proyectoIntegrador_DavidRodriguezGallego/API/registro.php", {
+    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/registro.php`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8"

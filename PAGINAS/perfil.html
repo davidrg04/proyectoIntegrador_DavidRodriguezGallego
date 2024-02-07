@@ -54,7 +54,16 @@
                 <p>En esta sección encontrarás tus carreras marcadas como favoritas. ¡Explora y gestiona tus preferencias fácilmente!</p>
             </div>
             <div id="carreras">
+                <div id="rejillaCarreras">
 
+                    
+                </div>
+                <div id="divPaginacion">
+                    <span>Anterior</span>
+                    <span id="paginaActual"></span>
+                    <span>Siguiente</span>
+                   
+                </div>
             </div>
         </section>
         <section id="editarPerfil">
@@ -105,7 +114,7 @@
                         No te preocupes, desde aquí podrás 
                         editar tus eventos para que todo este
                         en orden </p>
-                    <div class="botonesSelection">EDITAR CARRERA</div>
+                    <div class="botonesSelection" id="mostrarCarrerasPropias">EDITAR CARRERA</div>
                 </div>
             </div>
 
@@ -125,12 +134,12 @@
           <span class="cerrar"><i class="bi bi-x-circle"></i></span>
           <h2>TEXTO POR DEFECTO</h2>
           <div class="modal-cuerpo">
-            <label for="inputModal">Cambiar</label>
-            <input type="text" id="inputModal" name="inputModal" required>
+            <label for="inputModalPerfil">Cambiar</label>
+            <input type="text" id="inputModalPerfil" name="inputModal" required>
           </div>
           <div class="modal-pie">
             <button id="cancelar">CANCELAR</button>
-            <button id="guardar" disabled>GUARDAR CAMBIOS</button>
+            <button id="guardarPerfil" disabled>GUARDAR CAMBIOS</button>
           </div>
         </div>
     </div>
@@ -202,6 +211,82 @@
             <button class="crearCarreraBoton">GUARDAR MODALIDADES</button>
           </div>
         </div>
+    </div>
+    </div>
+    <div id="miModalMostrarCarreras" class="modal">
+        <div class="modal-contenido">
+          <span id="cerrarMostrarCarrerasX" class="cerrar"><i class="bi bi-x-circle"></i></span>
+          <h2>EDITE SUS CARRERAS</h2>
+          <div class="modal-cuerpo">
+
+        </div>
+          <div class="modal-pie">
+            <div id="divPaginacionMostrarCarreras">
+                <span>Anterior</span>
+                <span id="paginaActualMostrarCarreras"></span>
+                <span>Siguiente</span>
+               
+            </div>
+            <button id="cancelarMostrarCarreras">CANCELAR</button>
+          </div>
+        </div>
+    </div>
+    <div id="miModalEditarCarrera" class="modal">
+        <div class="modal-contenido">
+          <span id="cerrarEditarCarreraX" class="cerrar"><i class="bi bi-x-circle"></i></span>
+          <div class="modal-cuerpo">
+            <div><label for="editarPortada">Portada</label> <input type="file" name="portada" id="editarPortada" title="Foto portada" accept=".jpg, .jpeg, .png"></div>
+            <div><label for="editarNombreCarrera">Nombre de la Carrera</label> <input type="text" placeholder="Nombre de la Carrera" name="nombreCarrera" id="editarNombreCarrera" title="Nombre de la Carrera"></div>
+            <div id="editarFechaDiv"><label for="fecha">Fecha</label> <input type="date" name="fecha" id="editarFecha" title="Fecha del Evento"></div>
+            <div><label for="editarLocalizacion">Localización</label><input type="text" name="localizacion" id="editarLocalizacion" placeholder="Escribe la localización de la carrera" title="Escribe la localización de la carrera"></div>
+            <button id="editarModalidades">MODALIDADES Y CATEGORÍAS<i class="bi bi-plus-circle"></i></button>
+            <div><label for="editarTrack">Archivo .GPX de la carrera</label><input type="file" name="track" id="editarTrack" title="Track de la carrera" accept=".gpx"></div>
+            <div><label for="editarWebOrganizacion">WEB de la Organización</label><input type="text" name="webOrganizacion" id="editarWebOrganizacion" title="Web de la Organización" placeholder="Web de la Organización"></div>
+            <div><label for="editarDistancia">Distancia en KM</label><input type="number" name="distancia" placeholder="KM" id="editarDistancia" title="Distancia en KM"></div>
+            <div><label for="editarReglamento">Reglamento PDF</label> <input type="file" name="reglamento" id="editarReglamento" title="Reglamento de la carrera" accept=".pdf"></div>
+            <div><label for="editarImagenes">Imagenes de la Carrera</label><input type="file" name="imagenesCarrera" id="editarImagenesCarrera" title="imagenesCarrera" multiple accept=".jpg, .jpeg, .png"></div>
+        </div>
+          <div class="modal-pie">
+            <button class="crearCarreraBoton" type="button">EDITAR CARRERA</button>
+          </div>
+        </div>
+    </div>
+    <div id="miModalEditarCarreraModalidades" class="modal">
+        <div class="modal-contenido">
+          <span id="editarCerrarModalidadX" class="cerrar"><i class="bi bi-x-circle"></i></span>
+          <div class="modal-cuerpo">
+            <div id="editarBotonModalidad"><button type="button" id="editarModalidad">EDITAR MODALIDAD<i class="bi bi-plus-circle"></i></button></div>
+            <div id="editarSelectModalidadCategoria">
+                <div><span>Modalidad : </span><label for="editarTrail">Trail</label><input type="radio" name="tipoModalidad" id="editarTrail" value="trail"><label for="editarMaraton">Maratón</label><input type="radio" name="tipoModalidad" id="editarMaraton" value="maraton"><label for="ultra">Ultra</label><input type="radio" name="tipoModalidad" id="editarUltra" value="ultra"></div>
+                <div><span>Categorias : </span><label for="editarAdulta">Adulta(+20 años)</label><input type="checkbox" name="tipoCategoria[]" class="categoria" id="editarAdulta" value="adulta"><label for="editarJuvenil">Juvenil (De 14 a 19 años)</label><input type="checkbox" name="tipoCategoria[]" class="categoria" value="juvenil" id="editarJuvenil"><label for="editarInfantil">Infantil (-14 años)</label><input type="checkbox" id="editarInfantil" class="categoria" name="tipoCategoria[]" value="infantil"></div>
+                <div>
+                    <label for="sexo">Seleccione las modalidades de la categoría :</label>
+                    <select name="sexo" id="editarSexo">
+                        <option value="(M)">Masculina</option>
+
+                        <option value="(F)">Femenina</option>
+
+                        <option value="(M/F)">Ambas</option>
+                    </select>
+                </div>
+                <button id="editarGuardarModalidad" type="button" class="crearCarreraBoton">GUARDAR</button>
+            </div>
+            <div id="editarModalidadesSeleccionadas">
+                <p>Seleccione los premios para las modalidades de <span id="editarModalidadEscogida"></span> :</p>
+                <div id="editarPremios">
+                    <!-- <div class="premioCategoria">
+                        <p id="premiosNombreCategoria">TRAIL</p>
+                        <div><label for="posicion1">1.</label><input type="text" id="editarPosicion1" name="posicion1" title="Premio primera posicion" placeholder="Pj. 300€"></div>
+                        <div><label for="posicion2">2.</label><input type="text" id="editarPosicion2" name="posicion2" title="Premio segunda posicion" placeholder="Pj. 200€"></div>
+                        <div><label for="posicion3">3.</label><input type="text" id="editarPosicion3" name="posicion3" title="Premio tercera posicion" placeholder="Pj. 100€"></div>
+                    </div> -->
+                </div>
+            </div>
+          <div class="modal-pie">
+            <button class="crearCarreraBoton">GUARDAR MODALIDADES</button>
+          </div>
+        </div>
+    </div>
     </div>
 </body>
 <script src="./JS/togeojson.js"></script>

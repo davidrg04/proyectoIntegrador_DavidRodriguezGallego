@@ -152,10 +152,118 @@ section:nth-of-type(2) > div div:first-of-type svg{
     top: 10vh;
     margin-left: 10vw;
     width: 80%;
-    height: 60vh;
+    height: 50vh;
     border: 2px solid #283618;
     border-radius: 5px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+#rejillaCarreras{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(280px, 1fr));
+  grid-template-rows: minmax(170px, 1fr);
+  gap: 60px;
+  padding: 40px;
+}
+
+#carreras #rejillaCarreras .tarjetaCarrera{
+  display: block;
+  box-shadow: 0px 2px 5px 2px rgba(0,0,0,0.5);
+  transition: transform 0.2s ease;
+}
+#carreras #rejillaCarreras .tarjetaCarrera:hover{
+  transform: scale(1.05);
+}
+#carreras #rejillaCarreras .fotoPortada{
+  display: block;
+  min-height: 70px;
+  height: 72%;
+  overflow: hidden;
+ 
+}
+#carreras #rejillaCarreras .fotoPortada p{
+  text-align: center;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+  color: #283618;
+  font-size: 1.6rem;
+  font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+}
+#carreras #rejillaCarreras .fotoPortada img{
+  
+  width: 100%;
+  height: 100%;
+  
+}
+#carreras #rejillaCarreras .datosCarrera{
+  position: relative;
+  border: 1px solid #606C38;
+}
+#carreras #rejillaCarreras .datosCarrera span{
+  font-size: 1.1rem;
+}
+#carreras #rejillaCarreras span.fecha{
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  color: #283618;
+  
+  font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+}
+#carreras #rejillaCarreras span.localidad{
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  color: #283618;
+  
+  font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+}
+
+#carreras #rejillaCarreras span.distancia{
+  position: absolute;
+  top: 30px;
+  left: 6px;
+  color: #283618;
+  
+  font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+}
+#carreras #rejillaCarreras div.detallesCarrera{
+  position: absolute;
+  top: 30px;
+  right: 6px;
+  color: #BC6C25;
+  
+  font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  border: 2px solid #BC6C25;
+  border-radius: 5px;
+  padding: 2px 7px;
+  border-radius: 20px;
+  transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+#carreras #rejillaCarreras div.detallesCarrera:hover{
+  background-color: #BC6C25;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.5);
+}
+#carreras #rejillaCarreras div.datosCarrera i{
+  margin-right: 5px;
+}
+
+#divPaginacion{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 30px;
+  color: #283618;
+  font-size: 1.3rem;
+  font-weight: bold;
+  /* font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif; */
+  font-family: Arial, Helvetica, sans-serif;
+}
+#divPaginacion span:hover:not(span:nth-child(2)){
+  cursor: pointer;
+  border-bottom: 3px solid #BC6C25;
 }
 
 #textoEditarPerfil{
@@ -190,6 +298,14 @@ section:nth-of-type(2) > div div:first-of-type svg{
 #password{
   position: relative;
   top: 1vh;
+}
+#fotoPerfil img{
+    vertical-align: middle;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-left: 20px;
+    overflow: hidden;
 }
 
 .bi-caret-right-fill{
@@ -377,7 +493,7 @@ section:nth-of-type(2) > div div:first-of-type svg{
     transition: background-color 0.2s; 
   }
   
-  #guardar {
+  #guardarPerfil {
     font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
     font-size: 1.4rem;
     background-color: #606C38; 
@@ -387,16 +503,23 @@ section:nth-of-type(2) > div div:first-of-type svg{
     font-weight: bold;
   }
   
-  #guardar:hover {
+  #guardarPerfil:hover {
     transform: scale(1.05); 
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
   }
-  #guardar:active{
+  #guardarPerfil:active{
     background-color: #566132;
     transform: scale(0.95); 
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
   }
-  
+  #guardarPerfil:disabled {
+    background-color: #ccc; 
+    color: #666; 
+    cursor: not-allowed; 
+    border: 1px solid #999; 
+    transition: none;
+    transform: none;
+  }
   #cancelar {
     font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
     font-size: 1.4rem;
@@ -554,6 +677,7 @@ input.incorrecto{
   border-color: #283618;
   height: auto;
   margin: 10% auto;
+  box-shadow: 0px 0px 10px black;
 }
 #miModalNuevaCarrera .modal-contenido input[type="text"]{
   font-size: 1.3rem;
@@ -588,7 +712,7 @@ input.incorrecto{
   align-items: center;
   padding: 0;
 }
-#imagenesCarrea,#reglamento{
+#imagenesCarrera,#reglamento{
   padding: 5px;
 }
 /* Estilo básico para el input */
@@ -833,7 +957,429 @@ button.crearCarreraBoton:active{
   width: 100%;
 }
 
-/* Animaciones */
+#miModalMostrarCarreras{
+  display: none;
+}
+#miModalMostrarCarreras .modal-contenido{
+  width: 60vw;
+  border-color: #566132;
+  height: auto;
+  height: auto;
+  margin: 10% auto;
+}
+#miModalMostrarCarreras .modal-cuerpo{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+#cancelarMostrarCarreras{
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  background-color: #283618; 
+  color: white; 
+  transition: transform 200ms ease;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+}
+  #cancelarMostrarCarreras:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+  #cancelarMostrarCarreras:active{
+    background-color: #243015;
+    transform: scale(0.95); 
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  #divPaginacionMostrarCarreras{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 30px;
+    color: #283618;
+    font-size: 1.3rem;
+    font-weight: bold;
+    /* font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif; */
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  #divPaginacionMostrarCarreras span:hover:not(span:nth-child(2)){
+    cursor: pointer;
+    color: #BC6C25;
+  }
+
+  #miModalMostrarCarreras .tarjetaCarrera{
+    display: block;
+    box-shadow: 0px 2px 5px 2px rgba(0,0,0,0.5);
+    transition: transform 0.2s ease;
+  }
+  #miModalMostrarCarreras .tarjetaCarrera:hover{
+    transform: scale(1.05);
+  }
+  #miModalMostrarCarreras .fotoPortada{
+    display: block;
+    min-height: 70px;
+    height: 72%;
+    overflow: hidden;
+   
+  }
+  #miModalMostrarCarreras .fotoPortada p{
+    text-align: center;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    color: #283618;
+    font-size: 1.6rem;
+    font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  }
+  #miModalMostrarCarreras .fotoPortada img{
+    
+    width: 100%;
+    height: 100%;
+    
+  }
+  #miModalMostrarCarreras .datosCarrera{
+    position: relative;
+    border: 1px solid #606C38;
+  }
+  #miModalMostrarCarreras .datosCarrera span{
+    font-size: 1.1rem;
+  }
+  #miModalMostrarCarreras span.fecha{
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    color: #283618;
+    
+    font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  }
+  #miModalMostrarCarreras span.localidad{
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    color: #283618;
+    
+    font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  }
+  
+  #miModalMostrarCarreras span.distancia{
+    position: absolute;
+    top: 30px;
+    left: 6px;
+    color: #283618;
+    
+    font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  }
+  #miModalMostrarCarreras div.detallesCarrera{
+    position: absolute;
+    top: 27px;
+    right: 6px;
+    color: #BC6C25;
+    font-size: 1.1rem;
+    font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    border: 2px solid #BC6C25;
+    border-radius: 5px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+  }
+  #miModalMostrarCarreras div.detallesCarrera:hover{
+    background-color: #BC6C25;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.5);
+  }
+  #miModalMostrarCarreras div.datosCarrera i{
+    margin-right: 5px;
+  }
+  
+
+#miModalEditarCarrera{
+  display: none;
+}
+#miModalEditarCarrera .modal-contenido{
+  width: 51vw;
+  border-color: #283618;
+  height: auto;
+  margin: 10% auto;
+}
+#miModalEditarCarrera .modal-contenido input[type="text"]{
+  font-size: 1.3rem;
+  padding: 5px;
+}
+#miModalEditarCarrera .modal-cuerpo{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+#miModalEditarCarrera .modal-contenido label{
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  color: #283618;
+  font-size: 1.5rem;
+}
+#miModalEditarCarrera label, #miModalEditarCarrera input{
+  margin-right: 5px;
+}
+#editarNombreCarrera{
+  width: 20vw;
+  padding-bottom: 6px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid #283618;
+}
+#editarNombreCarrera:focus{
+  border: none;
+  border-bottom: 1px solid #283618;
+}
+#editarFechaDiv{
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+#editarImagenesCarrera,#editarReglamento{
+  padding: 5px;
+}
+#editarModalidades{
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  font-size: 1.4rem; 
+  color: white; 
+  transition: box-shadow 200ms ease;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  border: 2px solid #283618;
+  height: 5vh;
+  padding: 3px 5px;
+  border-radius: 5px;
+  background-color: #283618;
+  font-weight: bolder;
+  position: relative;
+  top: 0.6vh;
+  margin-left: 5px;
+  width: 22vw;
+}
+#editarModalidades i{
+  margin-left: 0.5vw;
+  font-size: 1.7rem;
+}
+#editarModalidades:hover {
+  cursor: pointer;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+}
+button.crearCarreraBoton{
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  background-color: white; 
+  color: #283618; 
+  transition: transform 200ms ease;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  border: 2px solid #283618;
+}
+button.crearCarreraBoton:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+}
+button.crearCarreraBoton:active{
+  transform: scale(0.95); 
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+/* Estilo básico para el input */
+input[type="date"] {
+  background-color: white; /* Color de fondo suave */
+  border: 1px solid #243015; /* Borde sutil */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 2px; /* Padding para texto y espacio para el ícono */
+  font-size: 1.2rem; /* Tamaño de fuente legible */
+  font-weight: 600;
+  color: #243015; /* Color del texto */
+  outline: none; /* Elimina el resalte predeterminado */
+}
+
+/* Estilo para cuando el input está enfocado */
+input[type="date"]:focus {
+  box-shadow: 0 0 5px rgba(160, 160, 160, 0.5); /* Sombra sutil para resaltar */
+}
+
+#editarLocalizacion{
+  width: 15vw;
+}
+#editarWebOrganizacion{
+  width: 20vw;
+}
+#miModalEditarCarreraModalidades{
+ display: none;
+}
+#miModalEditarCarreraModalidades .modal-contenido{
+  width: 52vw;
+  margin: 10% auto;
+  height: auto;
+  border: 4px solid #283618;
+}
+
+#miModalEditarCarreraModalidades .modal-cuerpo{
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+}
+#editarBotonModalidad{
+  width: 100%;
+}
+#editarModalidad{
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  font-size: 1.4rem; 
+  color: white; 
+  transition: box-shadow 200ms ease;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  border: 2px solid #283618;
+  height: 5vh;
+  padding: 3px 5px;
+  border-radius: 5px;
+  background-color: #283618;
+  font-weight: bolder;
+  position: relative;
+  margin-left: 5px;
+  width: 15vw;
+}
+#editarModalidad:hover{
+  cursor: pointer;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+
+}
+#editarModalidad:active{
+  box-shadow: none;
+}
+#editarModalidad i{
+  margin-left: 0.5vw;
+  font-size: 1.7rem;
+}
+
+#editarSelectModalidadCategoria{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1vh;
+  margin-left: 5px;
+  gap: 1vh;
+
+}
+
+#editarSelectModalidadCategoria span{
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  color: #283618;
+  font-size: 1.5rem;
+  font-weight: bold; 
+}
+#editarSelectModalidadCategoria label {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #283618;
+  font-size: 1.5rem;
+  font-weight: lighter; 
+}
+
+#editarSelectModalidadCategoria input[type="radio"]{
+  outline: none;
+  border: 2px solid #283618;
+  height: 2.4vh;
+  width: 2.4vw;
+  vertical-align: middle;
+  
+}
+
+#editarSelectModalidadCategoria input[type="checkbox"]{
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid #283618;
+  height: 2.4vh;
+  width: 2.4vw;
+  vertical-align: middle;
+    background-color: #f3f3f3;
+}
+#editarSelectModalidadCategoria select {
+  /* Estilo general */
+  width: 7vw;
+  /* height: 35px; */
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  appearance: none; /* Elimina el estilo predeterminado */
+  background-color: #f3f3f3;
+  /* Estilo de la fuente */
+  font-size: 1.2rem;
+  color: #333;
+  outline: none;
+  /* border: 2px solid #283618; */
+  /* Estilo del icono de despliegue */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right .7em top 50%, 0 0; /* Posición del icono */
+  background-size: .65em auto, 100%; /* Tamaño del icono */
+}
+#editarSexo{
+  margin-top: 1vh;
+  margin-bottom: 0.5vh;
+}
+#editarGuardarModalidad{
+  width: 10vw;
+  padding: 5px 15px;
+  font-size: 1.4rem;
+  border-radius: 5px;
+  transition: transform 200ms ease;
+}
+#editarGuardarModalidad:hover{
+  transform: scale(1.05); 
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+}
+#editarGuardarModalidad:active{
+  transform: scale(0.95); 
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+#editarSelectModalidadCategoria.desdeArriba{
+  animation: deslizarDesdeArriba 0.2s ease-out forwards;
+}
+#editarModalidadesSeleccionadas{
+ display: none;
+}
+#editarModalidadesSeleccionadas>p{
+  margin-top: 2vh;
+  font-size: 1.5rem;
+  margin-left: 5px;
+}
+
+#editarPremios{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2vh;
+}
+#editarPremios .premioCategoria{
+  display: flex;
+  flex-direction: column;
+  width: 13vw;
+  margin-top: 1vh;
+  justify-content: center;
+  border: 2px solid #283618;
+  border-radius: 5px;
+}
+#editarPremios .premiosNombreCategoria{
+  width: 100%;
+  text-align: center;
+  font-size: 1.3rem;
+}
+#editarPremios .premioCategoria div{
+  display: flex;
+  gap: 4px;
+  border-top: 1px solid #333;
+  padding: 5px;
+}
+#editarPremios input[type="text"]{
+  height: initial;
+  padding: 1px;
+  margin: initial;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  width: 100%;
+}
 
 @keyframes deslizarDesdeArriba {
   0% { transform: translateY(-5%); }

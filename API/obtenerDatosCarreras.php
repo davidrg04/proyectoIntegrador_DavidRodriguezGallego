@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 $data = json_decode(file_get_contents("php://input"), true);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombreCarrera = $data['nombre'];
-    $query = "SELECT id, nombre, enlaceWeb, reglamento, track, portada, localizacion, fecha, distancia, desnivel, modalidad, sexo FROM carreras WHERE nombre = ?";
+    $query = "SELECT id, id_usuario, nombre, enlaceWeb, reglamento, track, portada, localizacion, fecha, distancia, desnivel, modalidad, sexo FROM carreras WHERE nombre = ?";
     $stmt = $con->prepare($query);
     $stmt->bind_param("s", $nombreCarrera);
     try {

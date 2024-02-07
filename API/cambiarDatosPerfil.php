@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     $tipo = $data["tipo"];
     $nuevoParametro = $data["parametro"];
 
-
+    echo($tipo);
 
     switch ($tipo) {
         case 'username':
@@ -84,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
             }
             break;
         case 'poblacion':
+            echo("ENTRE");
             $query = "UPDATE usuarios SET poblacion = ? where id = ?";
             $stmt = $con->prepare($query);
             $stmt->bind_param("si", $nuevoParametro,$id);

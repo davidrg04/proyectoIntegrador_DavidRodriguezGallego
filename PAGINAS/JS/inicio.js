@@ -1,3 +1,4 @@
+let fetchDireccion = "localhost";
 //Mostrar username
 localStorage.removeItem('nombreCarrera');
 
@@ -71,7 +72,7 @@ for (let provincia of provincias) {
 let carreras = [];
 
 function generarCarreras() {
-    fetch("http://localhost/proyectoIntegrador_DavidRodriguezGallego/API/obtenerCarreras.php", {
+    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/obtenerCarreras.php`, {
         method: "GET",
     }).then( response => {
         if (response.status === 200) return response.json() 

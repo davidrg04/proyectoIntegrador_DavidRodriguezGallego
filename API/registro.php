@@ -30,7 +30,7 @@
         $mail = $data['mail'];
         $pass = $data['password'];
         $poblacion = $data['poblacion'];
-
+        $fotoPerfil = $data['fotoPerfil'];
         $organizador = false;
 
         if (isset($data['telefono']) && isset($data['nombreOrg'])) {
@@ -86,15 +86,19 @@
     
 
         
-        $sql = "INSERT INTO usuarios (nombreCompleto, username, mail, pass, poblacion) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO usuarios (fotoPerfil, nombreCompleto, username, mail, pass, poblacion) VALUES (?, ?, ?, ?, ?)";
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("sssss", $nombreCompleto, $username, $mail, $pass, $poblacion);
+        $stmt->bind_param("ssssss", $fotoPerfil, $nombreCompleto, $username, $mail, $pass, $poblacion);
         try{
             $stmt->execute();
             $userId = mysqli_insert_id($con);
             $userCarpeta = "./users/user" . $userId;
             if (!file_exists($userCarpeta)) {
                 mkdir($userCarpeta, 0755, true);
+                mkdir($userCarpeta . "/fotos", 0755, true);
+                $fotoPredeterminada = "./users/perfil.png";
+                $fotoDestino = $userCarpeta . "/fotos/perfil.png";
+                copy($fotoPredeterminada, $fotoDestino);
             }
             header('Content-Type: application/json');
             header("HTTP/1.1 201 Created");

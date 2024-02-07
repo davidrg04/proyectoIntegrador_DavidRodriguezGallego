@@ -1,4 +1,6 @@
+localStorage.removeItem('nombreCarrera');
 
+let fetchDireccion = "localhost";
 
 function generarHtml() {
     document.getElementById("username").innerHTML = `${localStorage.username.toUpperCase()}`;
@@ -21,37 +23,135 @@ function generarHtml() {
         btn.addEventListener('click', abrirModal);
      });
 
+     mostrarFavoritos();
     
 }
 
 
 generarHtml();
+let carreras = [];
+function mostrarFavoritos() {
+    let favoritos = document.getElementById('rejillaCarreras')
+    favoritos.innerHTML = "";
+    
+
+    let jwt = localStorage.getItem('jwt');
+    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/obtenerFavoritos.php`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "Authorization": `Bearer ${jwt}`
+        }
+    }).then( response => {
+        if (response.status === 200) return response.json() 
+            else alert("NO SE PUEDEN CARGAR LAS CARRERAS");
+    }).then( data => {
+        carreras = data;
+        renderCarreras();
+    }).catch ( error => {
+        console.log(error);
+    })
+
+    function renderCarreras() {
+        console.log(carreras);
+        let currentPage = 0;
+        let elementsPerPage = 8;
+        let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
+        carreras
+                .filter((item,index) =>{
+                    return Math.trunc(index/elementsPerPage) == currentPage;
+                })
+                .forEach( ({nombre, id_usuario,portada, fecha, localizacion, distancia}) => {
+                    favoritos.innerHTML += `
+                    <div class="tarjetaCarrera">
+                            <div class="fotoPortada">
+                                <p>${nombre}</p>
+                                <img src="../../API/users/user${id_usuario}/carreras/imagenes/${portada}" alt="Foto de la carrera">
+                            </div>
+                            <div class="datosCarrera">
+                                <span class="fecha"><i class="bi bi-calendar-fill"></i>${fecha}</span>
+                                <span class="localidad"><i class="bi bi-geo-alt-fill"></i>${localizacion}</span>
+                                <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>${distancia}KM</span>
+                                <a href="./masInformacion.html" class="enlaceCarrera"><div class="detallesCarrera" data-nombrecarrera="${nombre}">MAS INFORMACIÓN</div></a>
+                            </div>
+                        </div>
+                    `;
+        });
+        paginasTotales = Math.ceil((carreras.length / elementsPerPage));
+        document.getElementById("paginaActual").textContent = `${currentPage + 1} / ${paginasTotales}`;
+        Array.from(document.getElementsByClassName("detallesCarrera")).forEach( (element) => {
+            element.addEventListener('click', guardarNombreCarrera);
+        });
+    }
+
+
+    function guardarNombreCarrera(e) {
+        localStorage.setItem('nombreCarrera', e.target.dataset.nombrecarrera);
+        
+    }
+}
+
 let modal = document.getElementById('miModal');
 function abrirModal(e){
     document.getElementById('miModal').style.display='block';
 
     if (e.target.dataset.parametro == 'username') {
         document.querySelector('#miModal h2').innerHTML = "CAMBIO DE USERNAME";
+        if (document.getElementById("foto")) {
+            document.getElementById("foto").setAttribute('id','inputModalPerfil');
+            document.getElementById("inputModalPerfil").setAttribute('type','text');
+        }
+        
+
         document.querySelector('#miModal label').innerHTML = "Escriba su nuevo nombre de usuario. Deberá volver a iniciar sesión";
-        document.getElementById("guardar").dataset.parametro = "username";
+        document.getElementById("guardarPerfil").dataset.parametro = "username";
     }else if (e.target.dataset.parametro == 'password') {
         document.querySelector('#miModal h2').innerHTML = "CAMBIO DE CONTRASEÑA";
+        if (document.getElementById("foto")) {
+            document.getElementById("foto").setAttribute('id','inputModalPerfil');
+            document.getElementById("inputModalPerfil").setAttribute('type','text');
+        }
+
         document.querySelector('#miModal label').innerHTML = "Escriba su nueva contraseña. Deberá volver a iniciar sesión";
-        document.getElementById("guardar").dataset.parametro = "password";
+        document.getElementById("guardarPerfil").dataset.parametro = "password";
     }else if (e.target.dataset.parametro == 'poblacion') {
         document.querySelector('#miModal h2').innerHTML = "CAMBIO DE LOCALIDAD";
+        if (document.getElementById("foto")) {
+            document.getElementById("foto").setAttribute('id','inputModalPerfil');
+            document.getElementById("inputModalPerfil").setAttribute('type','text');
+        }
+
         document.querySelector('#miModal label').innerHTML = "Escriba su nueva localidad. Deberá volver a iniciar sesión";
-        document.getElementById("guardar").dataset.parametro = "poblacion";
+        document.getElementById("guardarPerfil").dataset.parametro = "poblacion";
     }else if (e.target.dataset.parametro == 'telefono') {
         document.querySelector('#miModal h2').innerHTML = "CAMBIO DE TELÉFONO";
+        if (document.getElementById("foto")) {
+            document.getElementById("foto").setAttribute('id','inputModalPerfil');
+            document.getElementById("inputModalPerfil").setAttribute('type','text');
+        }
+
         document.querySelector('#miModal label').innerHTML = "Escriba su nuevo número de teléfono. Deberá volver a iniciar sesión";
-        document.getElementById("guardar").dataset.parametro = "telefono";
+        document.getElementById("guardarPerfil").dataset.parametro = "telefono";
     }else if (e.target.dataset.parametro == 'nombreOrg'){
         document.querySelector('#miModal h2').innerHTML = "CAMBIO DE ORGANIZACIÓN";
+        if (document.getElementById("foto")) {
+            document.getElementById("foto").setAttribute('id','inputModalPerfil');
+            document.getElementById("inputModalPerfil").setAttribute('type','text');
+        }
+
         document.querySelector('#miModal label').innerHTML = "Escriba su nueva organización. Deberá volver a iniciar sesión";
-        document.getElementById("guardar").dataset.parametro = "nombreOrg";
+        document.getElementById("guardarPerfil").dataset.parametro = "nombreOrg";
     }else{
         document.querySelector('#miModal h2').innerHTML = "CAMBIO DE FOTO DE PERFIL";
+        document.querySelector('#miModal label').innerHTML = "Seleccione una foto de perfil nueva";
+        if (document.getElementById("inputModalPerfil")) {
+            document.getElementById("inputModalPerfil").setAttribute('type','file');
+            document.getElementById("inputModalPerfil").setAttribute('accept','.png, .jpg');
+            document.getElementById("inputModalPerfil").setAttribute('id','foto');
+            document.getElementById('foto').addEventListener('change',comprobarDatos);
+        }
+        
+        document.getElementById("guardarPerfil").dataset.parametro = "fotoPerfil";
     }
 
 }
@@ -84,12 +184,18 @@ document.getElementById("cancelarCuenta").addEventListener('click', cerrarModalC
 document.querySelector("#cerrarCuentaX").addEventListener('click', cerrarModalCuenta);
 function cerrarModal() {
     modal.style.display = "none";
-    document.getElementById('inputModal').value = "";
-    document.getElementById('inputModal').classList.remove("incorrecto");
-    document.getElementById('inputModal').classList.remove("correcto");
+    if (document.getElementById('inputModalPerfil')) {
+        document.getElementById('inputModalPerfil').value = "";
+        document.getElementById('inputModalPerfil').classList.remove("incorrecto");
+        document.getElementById('inputModalPerfil').classList.remove("correcto");
+    }else{
+        document.getElementById('foto').value = "";
+    }
+    
+    
     document.getElementById('alertMessage').style.display = "none";
     document.getElementById('alertMessage').innerHTML = "";
-    document.getElementById('guardar').setAttribute('disabled','');
+    document.getElementById('guardarPerfil').setAttribute('disabled','');
 
 }
 function cerrarModalCuenta() {
@@ -121,9 +227,11 @@ function mouseleave(e) {
 //VERIFICAR CAMPOS DE EDITAR PERFIL
 let spanAlerta = document.getElementById("alertMessage");
 
-document.getElementById('inputModal').addEventListener('blur',comprobarDatos);
+document.getElementById('inputModalPerfil').addEventListener('blur',comprobarDatos);
+
 function comprobarDatos(e) {
-    let boton = document.getElementById('guardar');
+    
+    let boton = document.getElementById('guardarPerfil');
 
     if (boton.dataset.parametro == "username") {
         if (/^[a-zA-Z0-9]{4,16}$/.test(e.target.value)) {
@@ -181,7 +289,13 @@ function comprobarDatos(e) {
             boton.setAttribute('disabled','');
         }
     }else{
-        console.log("CONFIGURAR FOTO DE PERFIL");
+        console.log("hola");
+        const file = document.getElementById('foto').files[0];
+        if (file) {
+            boton.removeAttribute('disabled');
+        }else{
+            boton.setAttribute('disabled','');
+        }
     }
 }
 
@@ -190,7 +304,7 @@ function comprobarDatos(e) {
 
 function obtenerDatosPerfil() {
     let jwt = localStorage.getItem('jwt')
-    fetch("http://localhost/proyectoIntegrador_DavidRodriguezGallego/API/getDatosPerfil.php", {
+    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/getDatosPerfil.php`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -202,6 +316,7 @@ function obtenerDatosPerfil() {
             else console.log("Todo mal");
     }).then( data => {
         if (localStorage.getItem('rol') == "organizer") {
+            document.getElementById("fotoPerfil").innerHTML = `<img src="../../API/users/user${data.id}/fotos/${data.fotoPerfil}" alt="Foto de perfil">`;
             document.getElementById("nombreUsuario").innerHTML = `${data.username}`;
             document.getElementById("localidad").innerHTML = `${data.poblacion}`;
             document.getElementById("phone").innerHTML = `${data.telefono}`;
@@ -224,7 +339,7 @@ obtenerDatosPerfil();
 document.getElementById('borrarCuentaModal').addEventListener('click', eliminarCuenta);
 function eliminarCuenta(e) {
     let jwt = localStorage.getItem('jwt');
-    fetch("http://localhost/proyectoIntegrador_DavidRodriguezGallego/API/borrarCuenta.php", {
+    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/borrarCuenta.php`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -244,41 +359,65 @@ function eliminarCuenta(e) {
 }
 
 //LLAMADA API CAMBIAR DATOS USUARIO
-document.getElementById('guardar').addEventListener('click', cambiarDatos);
+document.getElementById('guardarPerfil').addEventListener('click', cambiarDatos);
 function cambiarDatos(e) {
-    let spanAlert = document.getElementById("alertMessage");
-    let datos = {
-        "tipo" : e.target.dataset.parametro,
-        "parametro" : document.getElementById('inputModal').value,
-    };
-
-    let jwt = localStorage.getItem('jwt');
-    fetch("http://localhost/proyectoIntegrador_DavidRodriguezGallego/API/cambiarDatosPerfil.php", {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json;charset=utf-8",
-            'Authorization': `Bearer ${jwt}` 
-        },
-        body: JSON.stringify(datos)
-    }).then(response => {
-        if (response.status === 204) {
-            location.href = "../../landingPage.html";
-        } else if (response.status === 409) {
-            return response.json();
-        } else {
-            console.log("Error en la solicitud");
-        }
-    }).then( data => {
-        if (data.error == "username") {
-            spanAlert.innerHTML = "El username introducido ya existe.";
-            spanAlert.style.display = "block";
-        }else{
-            spanAlert.innerHTML = "El teléfono introducido ya existe.";
-            spanAlert.style.display = "block";
-        }
-    }).catch ( error => {
-        console.log(error);
-    })
+    if (e.target.dataset.parametro == "fotoPerfil") {
+        let fotoPerfil = document.getElementById('foto').files[0];
+        let foto = new FormData();
+        foto.append('fotoPerfil', fotoPerfil);
+        let jwt = localStorage.getItem('jwt');
+        fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/cambiarFotoPerfil.php`, {
+            method: "POST",
+            headers: {
+                'Authorization': `Bearer ${jwt}` 
+            },
+            body: foto
+        }).then(response => {
+            if (response.status === 204) {
+                window.location.reload();
+            } else if (response.status === 404) {
+                alert("Error en la solicitud");
+            } else {
+                console.log("Error en la solicitud");
+            }
+        })
+    }else{
+        let spanAlert = document.getElementById("alertMessage");
+        let datos = {
+            "tipo" : e.target.dataset.parametro,
+            "parametro" : document.getElementById('inputModalPerfil').value,
+        };
+        console.log(datos);
+        let jwt = localStorage.getItem('jwt');
+        fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/cambiarDatosPerfil.php`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                'Authorization': `Bearer ${jwt}` 
+            },
+            body: JSON.stringify(datos)
+        }).then(response => {
+            if (response.status === 204) {
+                location.href = "../../landingPage.html";
+            } else if (response.status === 409) {
+                return response.json();
+            } else {
+                console.log("Error en la solicitud");
+                console.log(response);
+            }
+        }).then( data => {
+            if (data.error == "username") {
+                spanAlert.innerHTML = "El username introducido ya existe.";
+                spanAlert.style.display = "block";
+            }else{
+                spanAlert.innerHTML = "El teléfono introducido ya existe.";
+                spanAlert.style.display = "block";
+            }
+        }).catch ( error => {
+            console.log(error);
+        })
+    }
+    
 }
 
 //LLAMADA API NUEVA CARRERA
@@ -354,9 +493,9 @@ function modalNuevaCarrera(e) {
 
                                         //MANDAR DATOS A LA API
 
-        document.querySelector('#miModalNuevaCarrera .crearCarreraBoton').addEventListener('click', comprobarDatos);
+        document.querySelector('#miModalNuevaCarrera .crearCarreraBoton').addEventListener('click', comprobarDatosCarrera);
         
-        function comprobarDatos(e) {
+        function comprobarDatosCarrera(e) {
             
             let campos = ['portada', 'nombreCarrera', 'fecha', 'localizacion', 'track', 'webOrganizacion', 'distancia', 'reglamento', 'imagenesCarrera'];
 
@@ -407,7 +546,7 @@ function modalNuevaCarrera(e) {
                     categorias.premios.push(premio.value);
                 });
                 modalidades[0].categorias.push(categorias);
-        });
+            });
         
 
        
@@ -484,7 +623,7 @@ function modalNuevaCarrera(e) {
                         console.log(key, value);
                     }
                     let jwt = localStorage.getItem('jwt');
-                    fetch("http://localhost/proyectoIntegrador_DavidRodriguezGallego/API/registroCarrera.php", {
+                    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/registroCarrera.php`, {
                     method: "POST",
                     headers: {
                         'Authorization': `Bearer ${jwt}`
@@ -508,10 +647,147 @@ function modalNuevaCarrera(e) {
                     
                     
                 }
-
-
                 
         }
+
+
+        document.getElementById('mostrarCarrerasPropias').addEventListener('click', mostrarCarrerasPropias);
+
+        function mostrarCarrerasPropias(e) {
+            document.getElementById('miModalMostrarCarreras').style.display = 'block';
+
+            document.querySelector('#cerrarMostrarCarrerasX i').addEventListener('click', cerrarModalCarreras);
+            document.getElementById('cancelarMostrarCarreras').addEventListener('click', cerrarModalCarreras);
+            function cerrarModalCarreras(e) {
+                document.getElementById('miModalMostrarCarreras').style.display = 'none';
+            }
+
+            document.querySelector('#miModalMostrarCarreras .modal-cuerpo').innerHTML = "";
+
+            let jwt = localStorage.getItem('jwt');
+            let carreras = [];
+            fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/obtenerCarrerasOrganizador.php`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                    "Authorization": `Bearer ${jwt}`
+                }
+            }).then( response => {
+                if (response.status === 200) return response.json() 
+                    else alert("NO SE PUEDEN CARGAR LAS CARRERAS");
+            }).then( data => {
+                carreras = data;
+                renderCarrerasOrganizador();
+            }).catch ( error => {
+                console.log(error);
+            })
+
+            
+            function renderCarrerasOrganizador() {
+                let divCarreras = document.querySelector('#miModalMostrarCarreras .modal-cuerpo');
+                console.log(carreras);
+                let currentPage = 0;
+                let elementsPerPage = 8;
+                let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
+                carreras
+                        .filter((item,index) =>{
+                            return Math.trunc(index/elementsPerPage) == currentPage;
+                        })
+                        .forEach( ({nombre, id_usuario,portada, fecha, localizacion, distancia}) => {
+                            divCarreras.innerHTML += `
+                            <div class="tarjetaCarrera">
+                                    <div class="fotoPortada">
+                                        <p>${nombre}</p>
+                                        <img src="../../API/users/user${id_usuario}/carreras/imagenes/${portada}" alt="Foto de la carrera">
+                                    </div>
+                                    <div class="datosCarrera">
+                                        <span class="fecha"><i class="bi bi-calendar-fill"></i>${fecha}</span>
+                                        <span class="localidad"><i class="bi bi-geo-alt-fill"></i>${localizacion}</span>
+                                        <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>${distancia}KM</span>
+                                        <div class="detallesCarrera editarCarrera" data-nombrecarrera="${nombre}">EDITAR</div>
+                                    </div>
+                                </div>
+                            `;
+                });
+                paginasTotales = Math.ceil((carreras.length / elementsPerPage));
+                document.getElementById("paginaActualMostrarCarreras").textContent = `${currentPage + 1} / ${paginasTotales}`;
+                Array.from(document.getElementsByClassName("editarCarrera")).forEach( (element) => {
+                    element.addEventListener('click', modalEditarCarrera);
+                });
+            }
+
+        }
+
+        function modalEditarCarrera(e) {
+            document.getElementById('miModalEditarCarrera').style.display = 'block';
+            document.querySelector('#cerrarEditarCarreraX i').addEventListener('click', cerrarModalCarrera);
+            function cerrarModalCarrera(e) {
+                document.getElementById('miModalEditarCarrera').style.display = 'none';
+                document.querySelectorAll('#miModalEditarCarrera input').forEach( input => {
+                    input.value = "";
+                });
+                document.querySelectorAll('#miModalEditarCarreraModalidades input').forEach( input => {
+                    input.value = "";
+                    input.checked = false;
+
+                });
+                document.getElementById('editarPremios').innerHTML = "";  
+                document.getElementById('editarModalidadesSeleccionadas').style.display = "none";
+                document.getElementById('editarSelectModalidadCategoria').style.display = "block";
+            }
+
+            document.getElementById('editarModalidades').addEventListener('click', mostrarModalidades);
+            function mostrarModalidades(e) {
+                document.getElementById('miModalEditarCarreraModalidades').style.display = 'block';
+                document.getElementById('editarGuardarModalidad').addEventListener('click', esconderModalidad);
+                function esconderModalidad(e) {
+                    document.getElementById('editarSelectModalidadCategoria').classList.remove('desdeArriba');
+                    document.getElementById('editarSelectModalidadCategoria').style.display = 'none';
+
+                    document.getElementById('editarModalidad').addEventListener('click', abrirModalidad);
+                    function abrirModalidad(e) {
+                        document.getElementById('editarSelectModalidadCategoria').style.display = 'block';
+                        document.getElementById('editarSelectModalidadCategoria').classList.add('desdeArriba');
+                    }
+                }
+                document.querySelector('#editarCerrarModalidadX i').addEventListener('click', cerrarModalidad);
+                function cerrarModalidad(e) {
+                    document.getElementById('miModalEditarCarreraModalidades').style.display = 'none';
+                }
+            }
+        }
+
+        let editarModalidadElegida = "";
+        document.querySelectorAll('input[name="tipoModalidad"]').forEach( modalidad => {
+            modalidad.addEventListener('click', editarSeleccionarModalidad);
+        });
+        
+         
+        function editarSeleccionarModalidad(e) {
+            editarModalidadElegida = e.target.value;
+        }
+        
+        document.getElementById('editarGuardarModalidad').addEventListener('click', generacionEditarModalidad);
+        function generacionEditarModalidad(e){
+            document.getElementById("editarModalidadesSeleccionadas").style.display = "block";
+            document.getElementById("editarModalidadEscogida").textContent = editarModalidadElegida.toUpperCase();
+            document.getElementById('editarPremios').innerHTML ="";
+            document.querySelectorAll('input[name="tipoCategoria[]"]:checked').forEach( categoria => {
+                // console.log("hola");
+                document.getElementById('editarPremios').innerHTML +=
+                `<div class="premioCategoria" data-categoria="${categoria.value}">
+                    <p class="premiosNombreCategoria">${categoria.value.toUpperCase()} ${document.getElementById('sexo').value}</p>
+                    <div><label for="posicion1">1.</label><input type="text" class="posicion1" name="posicion1" title="Premio primera posicion" placeholder="Pj. 300€"></div>
+                    <div><label for="posicion2">2.</label><input type="text" class="posicion2" name="posicion2" title="Premio segunda posicion" placeholder="Pj. 200€"></div>
+                    <div><label for="posicion3">3.</label><input type="text" class="posicion3" name="posicion3" title="Premio tercera posicion" placeholder="Pj. 100€"></div>
+                </div>`;
+            });
+        }
+
+
+
+        
+
 
 
 

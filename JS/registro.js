@@ -53,7 +53,7 @@ function checkCompleteName(e) {
         e.target.classList.remove("incorrecto");
         e.target.classList.add("correcto");
         spanAlerta.style.display = 'none';
-        spanAlerta = "";
+        spanAlerta.innerHTML = "";
         validCompleteName= true;
         formComplete();
     } else {
@@ -77,7 +77,7 @@ function checkUsername(e) {
         e.target.classList.remove("incorrecto");
         e.target.classList.add("correcto");
         spanAlerta.style.display='none';
-        spanAlerta="";
+        spanAlerta.innerHTML="";
         validUserName = true;
         formComplete();
     } else {
@@ -99,7 +99,7 @@ function checkMail(e) {
         e.target.classList.remove("incorrecto");
         e.target.classList.add("correcto");
         spanAlerta.style.display='none';
-        spanAlerta="";
+        spanAlerta.innerHTML="";
         validMail = true;
         formComplete();
     } else {
@@ -125,7 +125,7 @@ function checkPassword(e) {
         e.target.classList.remove("incorrecto");
         e.target.classList.add("correcto");
         spanAlerta.style.display = 'none';
-        spanAlerta = "";
+        spanAlerta.innerHTML = "";
         validPass = true;
         formComplete();
     } else {
@@ -146,7 +146,7 @@ function checkSamePassword(e) {
         e.target.classList.remove("incorrecto");
         e.target.classList.add("correcto");
         spanAlerta.style.display='none';
-        spanAlerta="";
+        spanAlerta.innerHTML="";
         validPassComprobation = true;
         formComplete();
     } else {
@@ -167,7 +167,7 @@ function checkPhone(e) {
         e.target.classList.remove("incorrecto");
         e.target.classList.add("correcto");
         spanAlerta.style.display='none';
-        spanAlerta="";
+        spanAlerta.innerHTML="";
         validPhone = true;
         formComplete();
     } else {
@@ -188,7 +188,7 @@ function checkOrganizacion(e) {
         e.target.classList.remove("incorrecto");
         e.target.classList.add("correcto");
         spanAlerta.style.display='none';
-        spanAlerta="";
+        spanAlerta.innerHTML="";
         validOrgName = true;
         formComplete();
     } else {

@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } catch (\Throwable $th) {
                         header('Content-Type: application/json');
                         header('HTTP/1.1 400 Bad Request'); 
-                        echo json_encode(['error' => $e->getMessage()]);
+                        echo json_encode(['error' => $th->getMessage()]);
                         exit;
                     }
         

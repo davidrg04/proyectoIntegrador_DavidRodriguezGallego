@@ -13,6 +13,7 @@
 }
 html{
     font-size: 12px;
+    scroll-behavior: smooth;
 }
 body{
     font-size: 1rem;
@@ -185,11 +186,13 @@ main{
 #menu div:last-child:hover{
     cursor: pointer;
 }
-
+.marcadoFavorito{
+    background-color: #BC6C25;
+}
 #fotosCarrera{
     border: 4px solid #606C38;
     width: 20vw;
-    height: 40vh;
+    height: 50vh;
     overflow: hidden;
     max-height: 400px;
     max-width: 400px;
@@ -197,23 +200,24 @@ main{
 }
 #fotosCarrera img{
     width: 20vw;
-    height: 40vh;
+    height: 50vh;
     max-height: 400px;
     max-width: 400px;
     /* object-fit: cover; */
 }
 #map{
-    height: 40vh;
-    width: 40vw;
+    height: 50vh;
+    width: 30vw;
     border: 4px solid #606C38;
     max-height: 400px;
-    max-width: 400px;
+    overflow: hidden;
+    max-width: 800px;
 }
 section{
     max-width: 1800px;
     align-self: center;
     width: 100%;
-    height: 59vh;
+    height: 65vh;
     max-height: 600px;
 }
 section:first-of-type article{
@@ -226,8 +230,16 @@ section:first-of-type article{
 #infoCarrera span{
     font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
     color: #283618;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
+}
+
+#infoCarrera div span:last-child, #web{
+    margin-left: 1vw; 
+}
+#web{
+    color: #BC6C25;
+    font-size: 1.3rem;
 }
 #infoCarrera div{
     padding-left: 10px;
@@ -274,7 +286,7 @@ section:first-of-type article{
     font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
 }
 section:nth-of-type(2){
-    height: 100vh;
+    height: 80vh;
 }
 section:nth-of-type(2) article{
     display: flex;
@@ -286,25 +298,31 @@ div.titulo{
     justify-content: center;
     width: 100%;
     max-width: 1800px;
-    font-size: 2.5rem;
     color: #283618;
     font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
 }
 .titulo div{
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 4px solid #606C38;
     padding: 5px 10px;
-    width: 70%;
+    width: 50%;
     background-color: white;
     height: auto;
     max-width: 700px;
+}
+.titulo div h2{
+    margin: 0px;
+    font-size: 2.5rem;
 }
 
 #categorias{
     margin-top: 50px;
     align-self: center;
+    /* border: 1px solid #606C38; */
     display: flex;
-    width: 65vw;
+    width: 70vw;
     justify-content: space-around;
     min-width: 900px;
     max-width: 1800px;
@@ -313,7 +331,7 @@ div.titulo{
 .categoria{
     border: 3px solid #283618;
     border-radius: 10px;
-    width: 15vw;
+    width: 19vw;
     min-width: 220px;   
     max-width: 380px;
 }
@@ -322,7 +340,7 @@ div.titulo{
     background-color: #283618;
     display: flex;
     flex-wrap: wrap;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: white;
     font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -335,11 +353,121 @@ div.titulo{
 .categoriaCuerpo{
     font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 2.4rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px 10px;
 }
 
+.categoriaCuerpo span{
+    margin-bottom: 5px;
+}
 
+#clasificaciones{
+    height: 100vh;
+    display: none;
+}
+#clasificaiones article{
+    display: flex;
+    flex-direction: column;
+}
+#contenedorClasificaciones{
+    padding: 100px 300px;
+    display: flex;
+    justify-content: center;
+}
+
+
+#tablaCabecera{
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    display: flex;
+}
+#tablaCabecera div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #283618;
+}
+#tablaCabecera div:first-of-type{
+    width: 200px;
+    padding: 10px 20px;
+    border-top-left-radius: 20px;
+    border-right: 3px solid white;
+}
+#tablaCabecera div:last-of-type{
+    width: 405px;
+    padding: 10px 50px;
+    border-top-right-radius: 20px;
+}
+#tablaBody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* width: 100%;
+    max-height: 600px;
+    overflow: auto; */
+}
+#tablaBody .fila{
+    display: flex;
+    width: 100%;
+    border: 3px solid #283618;
+    border-top: none;
+}
+#tablaBody .fila div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #283618;
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 2.2rem;
+}
+#tablaBody .fila div:first-of-type{
+    width: 200px;
+    padding: 10px 20px;
+    /* border-right: 3px solid #606C38; */
+}
+#tablaBody .fila div:last-of-type{
+    width: 400px;
+    padding: 10px 50px;
+}
+
+.contenedor-select {
+    width: 200px;
+    margin: 0 auto;
+  }
+  
+  /* Estilo del elemento select con una apariencia moderna */
+  .contenedor-select select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    border: 2px solid #dddddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    outline: none;
+    display: block;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  /* Cambiar el color del borde al enfocar */
+  .contenedor-select select:focus {
+    border-color: #3f4b6b;
+  }
+  
+  /* Estilo para los elementos option con efecto al pasar el mouse */
+  .contenedor-select select:hover {
+    border-color: #a8b1c2;
+  }
+  
+  /* Estilos para los elementos option */
+  .contenedor-select option {
+    padding: 10px;
+    background: #ffffff;
+    border-bottom: 1px solid #eeeeee;
+  }

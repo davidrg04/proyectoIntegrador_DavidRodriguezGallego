@@ -1,5 +1,8 @@
 localStorage.clear();
 document.getElementById('entrar').addEventListener('click',iniciarSesion);
+let fetchDireccion = "localhost";
+
+
 
 
 function iniciarSesion(e) {
@@ -9,7 +12,7 @@ function iniciarSesion(e) {
         "password" : document.getElementById('pass').value
     };
 
-    fetch("http://localhost/proyectoIntegrador_DavidRodriguezGallego/API/iniciarSesion.php", {
+    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/iniciarSesion.php`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8"

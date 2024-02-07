@@ -41,7 +41,7 @@
     $rol = $jwtDecoded->rol;
 
     if ($rol == "organizer") {
-        $query = "SELECT u.username, u.poblacion, o.telefono, o.nombreOrg FROM usuarios u LEFT JOIN organizador o ON u.id = o.id_usuario WHERE u.id = ?";
+        $query = "SELECT u.id, u.fotoPerfil, u.username, u.poblacion, o.telefono, o.nombreOrg FROM usuarios u LEFT JOIN organizador o ON u.id = o.id_usuario WHERE u.id = ?";
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $id);
         try {
@@ -57,7 +57,7 @@
             header("HTTP/1.1 400 Bad Request");
         }
     }else{
-        $query = "SELECT username, poblacion FROM usuarios WHERE id = ?";
+        $query = "SELECT id, fotoPerfil, username, poblacion FROM usuarios WHERE id = ?";
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $id);
         try {
