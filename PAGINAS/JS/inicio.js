@@ -2,33 +2,126 @@ let fetchDireccion = "localhost";
 //Mostrar username
 localStorage.removeItem('nombreCarrera');
 
-let username = localStorage.getItem('username');
-function mostrarUsername() {
-    
-    document.getElementById("username").innerHTML = `${username}
-    <i class="bi bi-caret-down-fill"></i>
-    `;
+
+if(!localStorage.getItem('jwt')) {
+    localStorage.setItem('rol', 'invitado');
 }
 
-mostrarUsername()
-
-
-
-document.getElementById("username").addEventListener('click', function(){
-    document.getElementById("desplegable").classList.toggle('mostrarDesplegable');
-    if (document.getElementById("desplegable").classList.contains("mostrarDesplegable")) {
-        document.getElementById("username").innerHTML = `${username}
-        <i class="bi bi-caret-up-fill"></i>
-    `;
-    }else{
+if (localStorage.getItem('jwt')) {
+    let username = localStorage.getItem('username');
+    function mostrarUsername() {
+        
         document.getElementById("username").innerHTML = `${username}
         <i class="bi bi-caret-down-fill"></i>
-    `;
+        `;
     }
-})
+
+    mostrarUsername();
+
+    document.getElementById("username").addEventListener('click', function(){
+        document.getElementById("desplegable").classList.toggle('mostrarDesplegable');
+        if (document.getElementById("desplegable").classList.contains("mostrarDesplegable")) {
+            document.getElementById("username").innerHTML = `${username}
+            <i class="bi bi-caret-up-fill"></i>
+        `;
+        }else{
+            document.getElementById("username").innerHTML = `${username}
+            <i class="bi bi-caret-down-fill"></i>
+        `;
+        }
+    })
+   
+    
+    document.getElementById("cerrarSesionDesplegable").addEventListener('click', cerrarSesion);
+
+    function cerrarSesion(e) {
+        localStorage.removeItem('jwt');
+        localStorage.removeItem('username');
+        localStorage.removeItem('rol');
+        window.location.reload();
+    }
+}
 document.getElementById("filter").addEventListener('click', function(){
     document.getElementById("desplegableOrdenar").classList.toggle('mostrarDesplegable');
 });
+
+if (localStorage.getItem('rol') === 'invitado') {
+    document.getElementById('username').style.display = 'none';
+    document.getElementById('desplegable').style.display = 'none';
+
+    document.getElementById('datosUsuario').innerHTML = 
+    `
+        <div id="divIniciarSesion">INICIAR SESIÓN</div>
+    `;
+
+   
+
+    document.getElementById('divIniciarSesion').addEventListener('click', abrirInicioSesion);
+    function abrirInicioSesion(e) {
+        e.preventDefault();
+        document.getElementById('miModal').style.display = 'block';
+    }
+
+    document.querySelector('.cerrar').addEventListener('click', cerrarModal);
+    function cerrarModal(e) {
+        document.getElementById('miModal').style.display = 'none';
+    }
+
+    let inicioCompletado = false;
+
+    document.getElementById('inputModalUsuario').addEventListener('blur', validarCampos);
+    document.getElementById('inputModalContraseña').addEventListener('blur', validarCampos);
+    
+    function validarCampos() {
+        const usuario = document.getElementById('inputModalUsuario').value.trim();
+        const contraseña = document.getElementById('inputModalContraseña').value.trim();
+    
+        inicioCompletado = usuario !== "" && contraseña !== "";
+
+        if (inicioCompletado) {
+            document.getElementById('guardarPerfil').removeAttribute('disabled','');
+        }else{
+            document.getElementById('guardarPerfil').setAttribute('disabled','');
+        }
+    }
+    
+
+    document.getElementById('guardarPerfil').addEventListener('click', iniciarSesionInvitado);
+    
+    function iniciarSesionInvitado(e) {
+        let user={
+            "username" : document.getElementById('inputModalUsuario').value.trim(),
+            "password" : document.getElementById('inputModalContraseña').value.trim()
+        };
+    
+        fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/iniciarSesion.php`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8"
+            },
+            body: JSON.stringify(user)
+        }).then( response => {
+            console.log(response);
+            if (response.status === 200) return response.json()
+                else if (response.status === 404) console.log(response.text); 
+                else console.log("Todo mal");
+        }).then( data => {
+            if (data && data.token) {
+                localStorage.setItem('jwt', data.token);
+                localStorage.setItem('username', data.username);
+                localStorage.setItem('rol', data.rol)
+                window.location.reload();
+            }
+        }).catch ( error => {
+            console.log(error);
+        })
+    }
+
+
+    
+}
+
+
 
 
 //Mostrar menu fijado
@@ -127,6 +220,13 @@ function renderCarreras() {
     Array.from(document.getElementsByClassName("detallesCarrera")).forEach( (element) => {
         element.addEventListener('click', guardarNombreCarrera);
     });
+    document.querySelectorAll('.enlaceCarrera').forEach( (element) => {
+        element.addEventListener('click', abrirInicioSesion);
+    });
+    function abrirInicioSesion(e) {
+        e.preventDefault();
+        document.getElementById('miModal').style.display = 'block';
+    }
 }
 
 function clickBuscar(e) {
@@ -144,4 +244,55 @@ function clickBuscar(e) {
 function guardarNombreCarrera(e) {
     let nombreCarrera = e.target.closest('.detallesCarrera').dataset.nombrecarrera;
     localStorage.setItem('nombreCarrera', nombreCarrera);
+}
+
+document.getElementById("mapaCarreras").addEventListener('click', mapaCarreras);
+
+function mapaCarreras(e) {
+   document.getElementById('miModalMapa').style.display = 'block';
+
+   document.getElementById('cerrarMapa').addEventListener('click', cerrarModalMapa);
+    function cerrarModalMapa(e) {
+         document.getElementById('miModalMapa').style.display = 'none';
+    }
+    let coordenadas = [];
+    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/devolverCoordenadas.php`, {
+        method: "GET",
+    }).then( response => {
+        if (response.status === 200) return response.json() 
+            else alert("NO SE PUEDEN CARGAR LAS CARRERAS");
+    }).then( data => {
+        coordenadas = data;
+        renderMapa();
+    }).catch ( error => {
+        console.log(error);
+    })
+    
+    function renderMapa() {
+        
+
+       
+
+          let mapa = L.map('map').setView([40.46, -3.74], 6);
+
+          L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', 
+            {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+            }).addTo(mapa); 
+
+            
+            
+            coordenadas.forEach( carrera => {
+                let coordenadasMapa = JSON.parse(carrera.track);
+                console.log(coordenadasMapa);
+                const marker = L.marker([coordenadasMapa[0][1], coordenadasMapa[0][0]], {title: `${carrera.nombre}`}).addTo(mapa);
+            });
+
+
+
+
+    }
+
+
 }

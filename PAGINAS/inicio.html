@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="stylesheet" href="./CSS/inicio.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
@@ -17,13 +18,13 @@
         <nav>
             <a href="" class="aCabecera">¿Carreras?</a>
             <a href="" class="aCabecera">¿Consultas?</a>
-            <div>
+            <div id="datosUsuario">
                 <span id="username"></span>
                 <div id="desplegable">
                     <a href="./perfil.html">PERFIL</a>
                     <a href="">FAVORITOS</a>
                     <a href="">INSCRITOS</a>
-                    <a href="">CERRAR SESION</a>
+                    <a href="" id="cerrarSesionDesplegable">CERRAR SESION</a>
                 </div>
             </div>
         </nav>
@@ -49,7 +50,7 @@
             <h1>¡Comienza la aventura 
                 con las siguientes
                 <span>CARRERAS</span>!</h1>
-            
+                <span id="mapaCarreras"><i class="bi bi-map-fill"></i>Mapa</span>
                 <div id="ordenar">
                     <p id="filter">Ordenar<i class="bi bi-funnel-fill"></i></p>
                     <div id="desplegableOrdenar">
@@ -82,7 +83,33 @@
             </div>
         </section>
     </main>
+    <div id="miModal" class="modal">
+        <span id="alertMessage" class="spanAlert"></span>
+        <div class="modal-contenido">
+          <span class="cerrar"><i class="bi bi-x-circle"></i></span>
+          <h2>INICIA SESIÓN</h2>
+          <div class="modal-cuerpo">
+            <label for="inputModalPerfil">Usuario</label>
+            <input type="text" id="inputModalUsuario" name="inputModalUsuario">
+            <label for="inputModalPerfil">Contraseña</label>
+            <input type="password" id="inputModalContraseña" name="inputModalContraseña">
+            <span>¿No tienes cuenta? <a href="../register.html">Créala aquí</a></span>
+          </div>
+          <div class="modal-pie">
+            <button id="guardarPerfil" disabled >INICIAR SESIÓN</button>
+          </div>
+        </div>
+    </div>
+    <div id="miModalMapa" class="modal">
+        <div class="modal-contenido">
+          <span class="cerrar" id="cerrarMapa"><i class="bi bi-x-circle"></i></span>
+          <div class="modal-cuerpo">
+            <div id="map"></div>
+          </div>
+        </div>
+    </div>
 </body>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="../JS/provincias.js"></script>
 <script src="./JS/inicio.js"></script>
 </html>

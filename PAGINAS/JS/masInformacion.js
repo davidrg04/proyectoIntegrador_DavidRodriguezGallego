@@ -1,4 +1,21 @@
 let fetchDireccion = "localhost";
+
+if (localStorage.getItem('rol') === 'invitado') {
+    location.href = "../landingPage.html";
+}
+
+
+document.getElementById("cerrarSesionDesplegable").addEventListener('click', cerrarSesion);
+
+function cerrarSesion(e) {
+    e.preventDefault();
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('username');
+    localStorage.removeItem('rol');
+    location.href = "./inicio.html";
+}
+
+
 let username = localStorage.getItem('username');
 function mostrarUsername() {
     
@@ -6,6 +23,8 @@ function mostrarUsername() {
     <i class="bi bi-caret-down-fill"></i>
     `;
 }
+
+
 
 mostrarUsername();
 document.getElementById("username").addEventListener('click', function(){
@@ -20,6 +39,36 @@ document.getElementById("username").addEventListener('click', function(){
     `;
     }
 })
+
+function verificarYRenovarToken() {
+    let token = localStorage.getItem('jwt');
+    if (token) {
+        let payload = JSON.parse(atob(token.split('.')[1]));
+        let tiempoRestante = payload.exp - Math.floor(Date.now() / 1000);
+        let expirado = payload.exp < Math.floor(Date.now() / 1000);
+        if (expirado) {
+            alert("Tu sesión ha caducado. Por favor, inicia sesión de nuevo.");
+            location.href = "../landingPage.html";
+        }
+
+        if (tiempoRestante < 300) {
+            fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/renovarToken.php`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }).then(response => {
+                response.json()
+            }).then(data => {
+                if (data && data.token) {
+                    localStorage.setItem('jwt', data.token);
+                }
+            }).catch(error => console.error("Error al renovar el token", error));
+        }
+    }
+}
+
+setInterval(verificarYRenovarToken, 300000);
 
 
 
@@ -95,7 +144,7 @@ function renderDatos() {
     //Cargar mapa
     let coordenadas = JSON.parse(datosCarreras[0].track);
     let coordenadasInvertidas = coordenadas.map(function(coord) {
-        return [coord[1], coord[0]]; // Invierte los elementos
+        return [coord[1], coord[0]]; 
       });
     let mapa = L.map('map').setView([coordenadasInvertidas[0][0], coordenadasInvertidas[0][1]], 10);
 

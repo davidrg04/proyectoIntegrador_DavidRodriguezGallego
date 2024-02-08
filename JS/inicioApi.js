@@ -2,9 +2,6 @@ localStorage.clear();
 document.getElementById('entrar').addEventListener('click',iniciarSesion);
 let fetchDireccion = "localhost";
 
-
-
-
 function iniciarSesion(e) {
     e.preventDefault();
     let user={
@@ -34,4 +31,12 @@ function iniciarSesion(e) {
         console.log(error);
     })
 
+}
+
+
+document.getElementById('invitado').addEventListener('click',entrarInvitado);
+
+function entrarInvitado(e) {
+    localStorage.setItem('rol', 'invitado');
+    location.href = "./PAGINAS/inicio.html";
 }
