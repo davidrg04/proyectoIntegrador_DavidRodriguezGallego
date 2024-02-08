@@ -315,6 +315,7 @@ function obtenerDatosPerfil() {
             else if (response.status === 404) console.log(response.text); 
             else console.log("Todo mal");
     }).then( data => {
+        console.log(data);
         if (localStorage.getItem('rol') == "organizer") {
             document.getElementById("fotoPerfil").innerHTML = `<img src="../../API/users/user${data.id}/fotos/${data.fotoPerfil}" alt="Foto de perfil">`;
             document.getElementById("nombreUsuario").innerHTML = `${data.username}`;
@@ -650,7 +651,7 @@ function modalNuevaCarrera(e) {
                 
         }
 
-
+        //EDITAR CARRERAS
         document.getElementById('mostrarCarrerasPropias').addEventListener('click', mostrarCarrerasPropias);
 
         function mostrarCarrerasPropias(e) {
@@ -717,8 +718,45 @@ function modalNuevaCarrera(e) {
             }
 
         }
-
+        let datosCarrera = [];
         function modalEditarCarrera(e) {
+            provincias.sort((a, b) => {
+                return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' });
+              });
+            
+            let selectProvincias=document.getElementById('editarLocalizacion');
+            
+            selectProvincias.options[selectProvincias.options.length] = new Option('PROVINCIA', '');
+            for (let provincia of provincias) {
+                selectProvincias.options[selectProvincias.options.length] = new Option(provincia.label, provincia.label);
+            }
+
+            //RELLENAR DATOS DE LA CARRERA
+            
+            let nombreCarrera = e.target.dataset.nombrecarrera;
+            fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/obtenerDatosCarreras.php`, {
+            method: "POST",
+            body: JSON.stringify({'nombre': nombreCarrera}),
+            }).then( response => {
+                if (response.status === 200) return response.json() 
+                    else alert("NO SE PUEDEN CARGAR LAS CARRERAS");
+            }).then( data => {
+                datosCarrera = data;
+                rellenarDatos();
+            }).catch ( error => {
+                console.log(error);
+            })
+
+            function rellenarDatos() {
+                console.log(datosCarrera);
+                document.getElementById('editarNombreCarrera').value = datosCarrera[0].nombre;
+                document.getElementById('editarFecha').value = datosCarrera[0].fecha;
+                document.getElementById('editarLocalizacion').value = datosCarrera[0].localizacion;
+                document.getElementById('editarWebOrganizacion').value = datosCarrera[0].enlaceWeb;
+                document.getElementById('editarDistancia').value = datosCarrera[0].distancia;
+
+            }
+
             document.getElementById('miModalEditarCarrera').style.display = 'block';
             document.querySelector('#cerrarEditarCarreraX i').addEventListener('click', cerrarModalCarrera);
             function cerrarModalCarrera(e) {
@@ -727,8 +765,8 @@ function modalNuevaCarrera(e) {
                     input.value = "";
                 });
                 document.querySelectorAll('#miModalEditarCarreraModalidades input').forEach( input => {
-                    input.value = "";
-                    input.checked = false;
+    
+                    (input.type === "text") ? input.value = "" : input.checked = false;
 
                 });
                 document.getElementById('editarPremios').innerHTML = "";  
@@ -738,6 +776,13 @@ function modalNuevaCarrera(e) {
 
             document.getElementById('editarModalidades').addEventListener('click', mostrarModalidades);
             function mostrarModalidades(e) {
+                document.getElementById('editarSexo').value = datosCarrera[0].sexo;
+                document.querySelector("#editarSelectModalidadCategoria input[value='"+datosCarrera[0].modalidad+"']").checked = true;
+                datosCarrera[2].forEach(categoria => {
+                    document.querySelector("#editarSelectModalidadCategoria input[value='"+categoria.nombre+"']").checked = true;
+                });
+                document.getElementById("editarModalidadEscogida").textContent = datosCarrera[0].modalidad.toUpperCase();
+
                 document.getElementById('miModalEditarCarreraModalidades').style.display = 'block';
                 document.getElementById('editarGuardarModalidad').addEventListener('click', esconderModalidad);
                 function esconderModalidad(e) {
@@ -770,7 +815,9 @@ function modalNuevaCarrera(e) {
         document.getElementById('editarGuardarModalidad').addEventListener('click', generacionEditarModalidad);
         function generacionEditarModalidad(e){
             document.getElementById("editarModalidadesSeleccionadas").style.display = "block";
-            document.getElementById("editarModalidadEscogida").textContent = editarModalidadElegida.toUpperCase();
+            // if (editarModalidadElegida != "") {
+            //     document.getElementById("editarModalidadEscogida").textContent = editarModalidadElegida.toUpperCase();
+            // }
             document.getElementById('editarPremios').innerHTML ="";
             document.querySelectorAll('input[name="tipoCategoria[]"]:checked').forEach( categoria => {
                 // console.log("hola");
@@ -781,7 +828,183 @@ function modalNuevaCarrera(e) {
                     <div><label for="posicion2">2.</label><input type="text" class="posicion2" name="posicion2" title="Premio segunda posicion" placeholder="Pj. 200€"></div>
                     <div><label for="posicion3">3.</label><input type="text" class="posicion3" name="posicion3" title="Premio tercera posicion" placeholder="Pj. 100€"></div>
                 </div>`;
+
             });
+            
+            datosCarrera[2].forEach(categoria => {
+                let premioCategoriaDiv = document.querySelector(`#editarPremios .premioCategoria[data-categoria='${categoria.nombre}']`);
+                if (premioCategoriaDiv) {
+                    premioCategoriaDiv.querySelector("input[name='posicion1']").value = categoria.primero;
+                    premioCategoriaDiv.querySelector("input[name='posicion2']").value = categoria.segundo;
+                    premioCategoriaDiv.querySelector("input[name='posicion3']").value = categoria.tercero;
+                }
+            });
+        }
+
+
+        
+
+
+
+
+
+
+
+
+
+        //LLAMADA API EDITAR CARRERA
+        document.querySelector('#miModalEditarCarrera .crearCarreraBoton').addEventListener('click', comprobarDatosEditarCarrera);
+        
+        function comprobarDatosEditarCarrera(e) {
+            
+            let campos = ['editarNombreCarrera', 'editarFecha', 'editarLocalizacion', 'editarWebOrganizacion', 'editarDistancia'];
+
+            let todosCompletos = true; 
+
+            campos.forEach( campo => {
+                let campoInput = document.getElementById(campo);
+                    if (campoInput.value.trim() === '') {
+                        todosCompletos = false;
+                    }  
+            });
+
+            
+
+            if (!document.querySelector('input[data-editarCarreraModalidad="modalidad"]:checked')) {
+                console.log("error en input tipomodalidad");
+                todosCompletos = false;
+            }
+        
+            if (!document.querySelector('input[data-editarCarrera="categoria"]:checked')) {
+                console.log("error en input categoria");
+                todosCompletos = false;
+            }
+            
+            (todosCompletos) ? enviarEditarCarrera(e) : alert('Complete los campos necesarios.');
+        }
+        
+        
+        
+        function enviarEditarCarrera(e){
+            
+            let modalidades = [
+                {
+                    'modalidad' : (editarModalidadElegida == "") ? datosCarrera[0].modalidad : editarModalidadElegida,
+                    'sexo' : document.getElementById('editarSexo').value,
+                    'categorias' : []
+                }
+            ];
+
+            document.querySelectorAll('#miModalEditarCarrera .premioCategoria').forEach( categoria => {
+                let categorias = {};
+                categorias.nombre = categoria.dataset.categoria;
+                categorias.premios = [];
+                categoria.querySelectorAll('input[type="text"]').forEach( premio => {
+                    categorias.premios.push(premio.value);
+                });
+                modalidades[0].categorias.push(categorias);
+            });
+        
+
+            let carreraEditar = new FormData();
+            carreraEditar.append('nombre', document.getElementById('editarNombreCarrera').value);
+            carreraEditar.append('fecha', document.getElementById('editarFecha').value);
+            carreraEditar.append('localizacion', document.getElementById('editarLocalizacion').value);
+            carreraEditar.append('web', document.getElementById('editarWebOrganizacion').value);
+            carreraEditar.append('distancia', document.getElementById('editarDistancia').value);
+            carreraEditar.append(`modalidades`, JSON.stringify(modalidades));
+
+            if (document.getElementById('editarPortada').files[0]) {
+                carreraEditar.append('fotoPortada', document.getElementById('editarPortada').files[0]);
+            }
+            if (document.getElementById('editarReglamento').files[0]) {
+                carreraEditar.append('reglamento', document.getElementById('editarReglamento').files[0]);
+            }
+            if (document.getElementById('editarImagenesCarrera').files) {
+                Array.from(document.getElementById('editarImagenesCarrera').files).forEach((foto)=>{
+                    carreraEditar.append('fotos[]',foto);
+                });
+            }
+            carreraEditar.append(`modalidades`, JSON.stringify(modalidades));
+
+            (document.getElementById('editarTrack').files[0]) ? añadirTrack : fetchActualizarCarrera();
+                
+            
+            function añadirTrack() {
+            let coorReducidas = [];
+            let desnivelPositivo = 0;
+            let desnivelNegativo = 0;
+            let desnivel =0;
+            const file = document.getElementById('editarTrack').files[0];
+            if (file) {
+                
+                const fileReader = new FileReader();
+                const r = fileReader.readAsText(file);
+                fileReader.onload = event => {
+                    const textContent = event.target.result;
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(textContent, "application/xml");
+                    const json = toGeoJSON.gpx(xmlDoc);
+                    const coor = json.features[0].geometry.coordinates;
+                    let numeroPorCarrera = 200;
+                    let intervalo = Math.ceil(coor.length/numeroPorCarrera);
+                    
+                    coorReducidas = coor.reduce((coordenadas, coordenada, index) => {
+                        if (index % intervalo === 0 || index === coor.length - 1) {
+                            coordenadas.push(coordenada);
+                        }
+                        return coordenadas;
+                    }, []);
+
+                    // console.log(coorReducidas);
+
+                    coor.forEach( (coordenada, index) => {
+                        if (index > 0) {
+                            let diferencia = coordenada[2] - coor[index-1][2];
+                            (diferencia>0) ? desnivelPositivo +=diferencia : desnivelNegativo += diferencia;
+                        }
+            
+                    });
+                    desnivel = desnivelPositivo+desnivelNegativo;
+
+                    
+                    
+                    carreraEditar.append('desnivel',desnivel);
+                    carreraEditar.append('coordenadas',JSON.stringify(coorReducidas));
+
+                    fetchActualizarCarrera();
+                
+
+                 }
+                    
+                    
+                }
+
+            }
+
+            function fetchActualizarCarrera() {
+                    let jwt = localStorage.getItem('jwt');
+                    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/actualizarCarreras.php`, {
+                    method: "POST",
+                    headers: {
+                        'Authorization': `Bearer ${jwt}`
+                    },
+                    body: carreraEditar,
+                    }).then( response => {
+                        if (response.status === 200){
+                            // window.location.reload();
+                            return response.json();
+                        }else{
+                            return response.json();
+                        };
+                    })
+                    .then( data => {
+                        console.log(data);
+                    })
+                    .catch ( error => {
+                        console.log(error);
+                    })
+            }
         }
 
 

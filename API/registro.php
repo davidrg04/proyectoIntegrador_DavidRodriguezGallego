@@ -85,8 +85,8 @@
 
     
 
-        
-        $sql = "INSERT INTO usuarios (fotoPerfil, nombreCompleto, username, mail, pass, poblacion) VALUES (?, ?, ?, ?, ?)";
+        $fotoPerfil = "perfil.png";
+        $sql = "INSERT INTO usuarios (fotoPerfil, nombreCompleto, username, mail, pass, poblacion) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $con->prepare($sql);
         $stmt->bind_param("ssssss", $fotoPerfil, $nombreCompleto, $username, $mail, $pass, $poblacion);
         try{

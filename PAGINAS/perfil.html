@@ -238,7 +238,7 @@
             <div><label for="editarPortada">Portada</label> <input type="file" name="portada" id="editarPortada" title="Foto portada" accept=".jpg, .jpeg, .png"></div>
             <div><label for="editarNombreCarrera">Nombre de la Carrera</label> <input type="text" placeholder="Nombre de la Carrera" name="nombreCarrera" id="editarNombreCarrera" title="Nombre de la Carrera"></div>
             <div id="editarFechaDiv"><label for="fecha">Fecha</label> <input type="date" name="fecha" id="editarFecha" title="Fecha del Evento"></div>
-            <div><label for="editarLocalizacion">Localización</label><input type="text" name="localizacion" id="editarLocalizacion" placeholder="Escribe la localización de la carrera" title="Escribe la localización de la carrera"></div>
+            <div><label for="editarLocalizacion">Localización</label><select name="editarLocalizacion" id="editarLocalizacion"></select></div>
             <button id="editarModalidades">MODALIDADES Y CATEGORÍAS<i class="bi bi-plus-circle"></i></button>
             <div><label for="editarTrack">Archivo .GPX de la carrera</label><input type="file" name="track" id="editarTrack" title="Track de la carrera" accept=".gpx"></div>
             <div><label for="editarWebOrganizacion">WEB de la Organización</label><input type="text" name="webOrganizacion" id="editarWebOrganizacion" title="Web de la Organización" placeholder="Web de la Organización"></div>
@@ -257,8 +257,8 @@
           <div class="modal-cuerpo">
             <div id="editarBotonModalidad"><button type="button" id="editarModalidad">EDITAR MODALIDAD<i class="bi bi-plus-circle"></i></button></div>
             <div id="editarSelectModalidadCategoria">
-                <div><span>Modalidad : </span><label for="editarTrail">Trail</label><input type="radio" name="tipoModalidad" id="editarTrail" value="trail"><label for="editarMaraton">Maratón</label><input type="radio" name="tipoModalidad" id="editarMaraton" value="maraton"><label for="ultra">Ultra</label><input type="radio" name="tipoModalidad" id="editarUltra" value="ultra"></div>
-                <div><span>Categorias : </span><label for="editarAdulta">Adulta(+20 años)</label><input type="checkbox" name="tipoCategoria[]" class="categoria" id="editarAdulta" value="adulta"><label for="editarJuvenil">Juvenil (De 14 a 19 años)</label><input type="checkbox" name="tipoCategoria[]" class="categoria" value="juvenil" id="editarJuvenil"><label for="editarInfantil">Infantil (-14 años)</label><input type="checkbox" id="editarInfantil" class="categoria" name="tipoCategoria[]" value="infantil"></div>
+                <div><span>Modalidad : </span><label for="editarTrail">Trail</label><input type="radio" name="tipoModalidad" id="editarTrail" value="trail" data-editarCarreraModalidad="modalidad"><label for="editarMaraton">Maratón</label><input type="radio" name="tipoModalidad" id="editarMaraton" value="maraton" data-editarCarreraModalidad="modalidad"><label for="ultra">Ultra</label><input type="radio" name="tipoModalidad" id="editarUltra" value="ultra" data-editarCarreraModalidad="modalidad"></div>
+                <div><span>Categorias : </span><label for="editarAdulta">Adulta(+20 años)</label><input type="checkbox" name="tipoCategoria[]" class="categoria" id="editarAdulta" value="adulta" data-editarCarrera="categoria"><label for="editarJuvenil">Juvenil (De 14 a 19 años)</label><input type="checkbox" name="tipoCategoria[]" class="categoria" value="juvenil" id="editarJuvenil" data-editarCarrera="categoria"><label for="editarInfantil">Infantil (-14 años)</label><input type="checkbox" id="editarInfantil" class="categoria" name="tipoCategoria[]" value="infantil" data-editarCarrera="categoria"></div>
                 <div>
                     <label for="sexo">Seleccione las modalidades de la categoría :</label>
                     <select name="sexo" id="editarSexo">
@@ -289,6 +289,7 @@
     </div>
     </div>
 </body>
+<script src="../JS/provincias.js"></script>
 <script src="./JS/togeojson.js"></script>
 <script src="./JS/perfil.js"></script>
 </html>

@@ -99,11 +99,13 @@ function renderDatos() {
       });
     let mapa = L.map('map').setView([coordenadasInvertidas[0][0], coordenadasInvertidas[0][1]], 10);
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', 
+    L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', 
     {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
     }).addTo(mapa); 
+
+    L.control.scale().addTo(mapa)
 
     
     L.polyline(coordenadasInvertidas,{color: '#283618', weight:5} ).addTo(mapa);

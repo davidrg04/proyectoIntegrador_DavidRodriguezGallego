@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     mkdir("./users/user$id/carreras", 0755, true);
                     mkdir("./users/user$id/carreras/imagenes", 0755, true);
                 }
-                move_uploaded_file($_FILES["portada"]["tmp_name"], "./users/user$id/carreras/imagenes/" . $portada);
+                move_uploaded_file($_FILES["fotoPortada"]["tmp_name"], "./users/user$id/carreras/imagenes/" . $portada);
                 move_uploaded_file($_FILES["reglamento"]["tmp_name"], "./users/user$id/carreras/" . $reglamento);
                 
                 for ($i = 0; $i < $numArchivos; $i++) {

@@ -1153,7 +1153,6 @@ button.crearCarreraBoton:active{
   background-color: #283618;
   font-weight: bolder;
   position: relative;
-  top: 0.6vh;
   margin-left: 5px;
   width: 22vw;
 }
@@ -1202,6 +1201,18 @@ input[type="date"]:focus {
 
 #editarLocalizacion{
   width: 15vw;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  appearance: none;
+  background-color: #f3f3f3;
+  font-size: 1.2rem;
+  outline: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right .7em top 50%, 0 0;
+  background-size: .65em auto, 100%;
+
 }
 #editarWebOrganizacion{
   width: 20vw;
