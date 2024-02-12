@@ -5,7 +5,7 @@ let validPass= false;
 let validPassComprobation = false;
 let validPhone = false;
 let validOrgName= false;
-
+// let fetchDireccion = "localhost";
 document.getElementById('nombreCompleto').addEventListener('blur',checkCompleteName);
 document.getElementById('username').addEventListener('blur',checkUsername);
 document.getElementById('mail').addEventListener('blur', checkMail)
@@ -48,14 +48,13 @@ function cargarLocalidades(e) {
 
 function checkCompleteName(e) {
     let spanAlerta = document.getElementById('alertForm');
-    
     if (/^\s*[A-Za-zÁÉÍÓÚÑÜáéíóúñü]+(?:\s[A-Za-zÁÉÍÓÚÑÜáéíóúñü]+)*\s*$/.test(e.target.value)) {
-        e.target.classList.remove("incorrecto");
-        e.target.classList.add("correcto");
-        spanAlerta.style.display = 'none';
-        spanAlerta.innerHTML = "";
-        validCompleteName= true;
-        formComplete();
+            e.target.classList.remove("incorrecto");
+            e.target.classList.add("correcto");
+            spanAlerta.style.display = 'none';
+            spanAlerta.innerHTML = "";
+            validCompleteName= true;
+            formComplete();      
     } else {
         e.target.classList.remove("correcto");
         e.target.classList.add("incorrecto");
@@ -74,12 +73,34 @@ function checkUsername(e) {
     let spanAlerta = document.getElementById('alertForm');
     
     if (/^[a-zA-Z0-9]{4,16}$/.test(e.target.value)) {
-        e.target.classList.remove("incorrecto");
-        e.target.classList.add("correcto");
-        spanAlerta.style.display='none';
-        spanAlerta.innerHTML="";
-        validUserName = true;
-        formComplete();
+        fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/comprobarUsernameExiste.php`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8"
+        },
+        body: JSON.stringify({'username': e.target.value})
+        }).then( response => {
+            if (response.status === 200) return response.json() 
+            else alert("NO SE PUEDE COMPROBAR EL USERNAME");
+        }).then( data => {
+            if (data.existe) {
+                e.target.classList.remove("correcto");
+                e.target.classList.add("incorrecto");
+                spanAlerta.innerHTML = "El nombre ya ha sido registrado. Por favor, elija otro.";
+                spanAlerta.style.display = 'block';
+                validCompleteName= false;
+                
+            }else{
+                e.target.classList.remove("incorrecto");
+                e.target.classList.add("correcto");
+                spanAlerta.style.display = 'none';
+                spanAlerta.innerHTML = "";
+                validCompleteName= true;
+            }
+            formComplete();
+        }).catch ( error => {
+            console.log(error);
+        })
     } else {
         e.target.classList.remove("correcto");
         e.target.classList.add("incorrecto");

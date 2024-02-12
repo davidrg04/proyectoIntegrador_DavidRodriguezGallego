@@ -17,13 +17,13 @@
         </div>
         <nav>
             <a href="#sectionCategorias" class="aCabecera">Categorías y Premios</a>
-            <a href="" class="aCabecera" id="clasificacionesPasadas"></a>
-            <div>
+            <a href="#clasificaciones" class="aCabecera" id="clasificacionesPasadas">Clasificaciones</a>
+            <div id="datosUsuario">
+                <img src="" alt="fotoPerfil" id="cabeceraFotoPerfil">
                 <span id="username"></span>
                 <div id="desplegable">
                     <a href="./perfil.html">PERFIL</a>
-                    <a href="">FAVORITOS</a>
-                    <a href="">INSCRITOS</a>
+                    <a href="./perfil.html#sectionFavoritos">FAVORITOS</a>
                     <a href="" id="cerrarSesionDesplegable">CERRAR SESION</a>
                 </div>
             </div>
@@ -135,8 +135,13 @@
                 <div class="titulo">
                     <div><h2 class="h2Titulo">CLASIFICACIONES ANTERIORES</h2></div>
                 </div>
+                <div class="contenedor-select">
+                    <select name="categorias" id="selectCategoria">
+                    </select>
+                  </div>
                 <div id="contenedorClasificaciones">
-                    <div id="tablaClasificacion">
+                    <!-- <p>NO HAY CLASIFICACIONES PARA ESTA CARRERA</p> -->
+                    <!-- <div id="tablaClasificacion">
                         <div id="tablaCabecera">
                             <div>
                                 <span>PUESTO</span>
@@ -167,17 +172,36 @@
                                 <div><span id="quinto">Juan Ramon Jimenez</span></div>
                             </div> 
                         </div>
-                    </div>
-                    <div class="contenedor-select">
+                    </div> -->
+                    <!-- <div class="contenedor-select">
                         <select name="categorias" id="selectCategoria">
-                          <option value="0">CATEGORÍA ADULTA</option>
-                          <option value="1">CATEGORÍA JUVENIL</option>
-                          <option value="2">CATEGORÍA INFANTIL</option>
                         </select>
-                      </div>
+                      </div> -->
             </article>
         </section>
     </main>
+    <div id="miModal" class="modal">
+        <span id="alertMessage" class="spanAlert"></span>
+        <div class="modal-contenido">
+          <span class="cerrar"><i class="bi bi-x-circle"></i></span>
+          <h2>AÑADIR CLASIFICACIÓN</h2>
+          <div class="modal-cuerpo">
+            <div><label for="inputModalPerfil">1.</label>
+            <input type="text" id="inputModalPrimero" name="inputModalPrimero"></div>
+            <div><label for="inputModalPerfil">2.</label>
+            <input type="text" id="inputModalSegundo" name="inputModalSegundo"></div>
+            <div><label for="inputModalPerfil">3.</label>
+            <input type="text" id="inputModalTercero" name="inputModalTercero"></div>
+            <div><label for="inputModalPerfil">4.</label>
+            <input type="text" id="inputModalCuarto" name="inputModalCuarto"></div>
+            <div><label for="inputModalPerfil">5.</label>
+            <input type="text" id="inputModalQuinto" name="inputModalQuinto"></div>
+          </div>
+          <div class="modal-pie">
+            <button id="guardarPerfil" disabled >AÑADIR</button>
+          </div>
+        </div>
+    </div>
 </body>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="../bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>

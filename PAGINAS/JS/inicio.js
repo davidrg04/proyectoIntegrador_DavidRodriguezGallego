@@ -1,12 +1,44 @@
 let fetchDireccion = "localhost";
 //Mostrar username
 localStorage.removeItem('nombreCarrera');
+function verificarYRenovarToken() {
+    let token = localStorage.getItem('jwt');
+    if (token) {
+        let payload = JSON.parse(atob(token.split('.')[1]));
+        let tiempoRestante = payload.exp - Math.floor(Date.now() / 1000);
+        let expirado = payload.exp < Math.floor(Date.now() / 1000);
+        if (expirado) {
+            alert("Tu sesión ha caducado. Por favor, inicia sesión de nuevo.");
+            location.href = "../landingPage.html";
+        }
 
+        if (tiempoRestante < 300) {
+            fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/renovarToken.php`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }).then(response => {
+                response.json()
+            }).then(data => {
+                if (data && data.token) {
+                    localStorage.setItem('jwt', data.token);
+                }
+            }).catch(error => console.error("Error al renovar el token", error));
+        }
+    }
+}
+
+setInterval(verificarYRenovarToken, 300000);
 
 if(!localStorage.getItem('jwt')) {
     localStorage.setItem('rol', 'invitado');
 }
+if (localStorage.getItem('rol') === 'organizer'){
+    let enlaceFavoritos = document.querySelector('#desplegable a[href="./perfil.html#sectionFavoritos"]');
+    enlaceFavoritos.insertAdjacentHTML('afterend', '<a href="./perfil.html#racesEditor">EDITAR CARRERAS</a>');
 
+}
 if (localStorage.getItem('jwt')) {
     let username = localStorage.getItem('username');
     function mostrarUsername() {
@@ -40,6 +72,26 @@ if (localStorage.getItem('jwt')) {
         localStorage.removeItem('rol');
         window.location.reload();
     }
+    let jwt = localStorage.getItem('jwt');
+    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/obtenerFotoPerfil.php`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${jwt}`
+        }
+        }).then( response => {
+            if (response.status === 200){
+                return response.json();
+            }else{
+                alert("NO SE PUEDE MOSTRAR LA FOTO DE PERFIL");
+            }
+        }).then( data => {
+            document.getElementById("cabeceraFotoPerfil").src = `../API/users/user${data.id}/fotos/${data.fotoPerfil}`;
+
+        }).catch ( error => {
+            console.log(error);
+        })
+
+
 }
 document.getElementById("filter").addEventListener('click', function(){
     document.getElementById("desplegableOrdenar").classList.toggle('mostrarDesplegable');
@@ -101,7 +153,7 @@ if (localStorage.getItem('rol') === 'invitado') {
             },
             body: JSON.stringify(user)
         }).then( response => {
-            console.log(response);
+            
             if (response.status === 200) return response.json()
                 else if (response.status === 404) console.log(response.text); 
                 else console.log("Todo mal");
@@ -220,14 +272,35 @@ function renderCarreras() {
     Array.from(document.getElementsByClassName("detallesCarrera")).forEach( (element) => {
         element.addEventListener('click', guardarNombreCarrera);
     });
-    document.querySelectorAll('.enlaceCarrera').forEach( (element) => {
-        element.addEventListener('click', abrirInicioSesion);
-    });
-    function abrirInicioSesion(e) {
-        e.preventDefault();
-        document.getElementById('miModal').style.display = 'block';
+
+    if (localStorage.getItem('rol') === 'invitado') {
+        document.querySelectorAll('.enlaceCarrera').forEach( (element) => {
+            element.addEventListener('click', abrirInicioSesion);
+        });
+        function abrirInicioSesion(e) {
+            e.preventDefault();
+            document.getElementById('miModal').style.display = 'block';
+        }
     }
+  
+   
 }
+document.querySelector("#divPaginacion .first").addEventListener('click', ()=>{
+    currentPage = 0;
+    renderCarreras();
+});
+document.querySelector("#divPaginacion .next").addEventListener('click', ()=>{
+    currentPage = (currentPage < paginasTotales - 1) ? currentPage+1 : currentPage;
+    renderCarreras();
+});
+document.querySelector("#divPaginacion .prev").addEventListener('click', ()=>{
+    currentPage = (currentPage > 0) ? currentPage-1 : currentPage;
+    renderCarreras();
+})
+document.querySelector("#divPaginacion .last").addEventListener('click',() =>{
+    currentPage = paginasTotales - 1;
+    renderCarreras();
+});
 
 function clickBuscar(e) {
     let fechaActual = new Date();
@@ -285,7 +358,7 @@ function mapaCarreras(e) {
             
             coordenadas.forEach( carrera => {
                 let coordenadasMapa = JSON.parse(carrera.track);
-                console.log(coordenadasMapa);
+                
                 const marker = L.marker([coordenadasMapa[0][1], coordenadasMapa[0][0]], {title: `${carrera.nombre}`}).addTo(mapa);
             });
 

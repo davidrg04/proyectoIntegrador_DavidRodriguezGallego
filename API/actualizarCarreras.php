@@ -303,9 +303,9 @@
                 ];
                 
                 $stmt->execute();
-                header('Content-Type: application/json');
+                
                 header("HTTP/1.1 200 OK");
-                echo json_encode($updatedCarrera);
+                // echo json_encode($updatedCarrera);
 
             } catch (\Throwable $th) {
                 header('Content-Type: application/json');

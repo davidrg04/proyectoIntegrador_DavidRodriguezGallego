@@ -20,7 +20,15 @@ main{
     flex-direction: column;
     justify-content: center;
 }
-
+html{
+    scroll-behavior: smooth;
+}
+#tituloRunTheMountain{
+    display: none;
+    color: white;
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+}
 header{
     padding: 3vh 0px;
     background-color: #606C38;
@@ -65,6 +73,7 @@ header nav a{
     display: inline-block;
     text-decoration: none;
     padding: 5px;
+    margin-top: 2px;
 }
 
 a:link,
@@ -88,7 +97,15 @@ header a.aCabecera::after {
 header a.aCabecera:hover:after {
     left: 0;
 }
-
+#datosUsuario{
+    margin-left: 1vw;
+}
+#datosUsuario img{
+    height: 40px;
+    width: 40px;
+    vertical-align: middle;
+    border-radius: 50%;
+}
 #divIniciarSesion{
     user-select: none;
     margin-left: 1vw;
@@ -106,6 +123,9 @@ header a.aCabecera:hover:after {
 #divIniciarSesion:active{
     cursor: pointer;
     transform: scale(1);
+}
+#enlaceEditorCarreras{
+    display: none;
 }
 #miModal{
     display: none;
@@ -591,3 +611,18 @@ div.datosCarrera i{
 }
 
 
+
+@media screen and (max-width : 530px) {
+   #formaCabecera{
+    display: none;
+   }
+   #logo{
+    display: none;
+   }
+   #tituloRunTheMountain{
+    display: block;
+   }
+   a[href="#rejillaCarreras"]{
+    display: none;
+   }
+}

@@ -13,6 +13,7 @@
     }
     html{
         font-size: 12px;
+        scroll-behavior: smooth;
     }
     header{
         padding: 3vh 0px;
@@ -141,6 +142,13 @@
         padding: 35px;
         align-items: center;
         
+    }
+    #inicioIncorrecto{
+        padding: 10px 20px;
+        border: 2px solid #a94442;
+        border-radius: 6px;
+        background-color: #f2dede;
+        display: none;
     }
     main section:first-of-type article:last-of-type form{
         display: flex;

@@ -14,9 +14,10 @@
     <main>
         <aside class="sidebar">
             <div>
-                <a><i class="bi bi-person-circle"></i></a>
+                <a><img src="" alt="fotoPerfil" id="cabeceraFotoPerfil"></a>
                 <a href="#sectionFavoritos"><i class="bi bi-bookmark"></i><span id="saves"></span></a>
                 <a href="#editarPerfil"><i class="bi bi-gear"></i><span id="settings"></span></a>
+                <a href="#racesEditor" id="enlaceEditarCarreras"><i class="bi bi-pencil-square"></i><span id="textoEditarCarreras"></span></a>
                 <a href="#deleteAccount"><i class="bi bi-person-x"></i><span id="deleteMyAccount"></span></a>
             </div>
             <div>
@@ -59,10 +60,9 @@
                     
                 </div>
                 <div id="divPaginacion">
-                    <span>Anterior</span>
+                    <span class="prev">Anterior</span>
                     <span id="paginaActual"></span>
-                    <span>Siguiente</span>
-                   
+                    <span class="next">Siguiente</span>
                 </div>
             </div>
         </section>
@@ -163,7 +163,8 @@
             <div><label for="portada">Portada</label> <input type="file" name="portada" id="portada" title="Foto portada" accept=".jpg, .jpeg, .png"></div>
             <div><label for="nombreCarrera">Nombre de la Carrera</label> <input type="text" placeholder="Nombre de la Carrera" name="nombreCarrera" id="nombreCarrera" title="Nombre de la Carrera"></div>
             <div id="fechaDiv"><label for="fecha">Fecha</label> <input type="date" name="fecha" id="fecha" title="Fecha del Evento"></div>
-            <div><label for="localizacion">Localización</label><input type="text" name="localizacion" id="localizacion" placeholder="Escribe la localización de la carrera" title="Escribe la localización de la carrera"></div>
+            <!-- <div><label for="localizacion">Localización</label><input type="text" name="localizacion" id="localizacion" placeholder="Escribe la localización de la carrera" title="Escribe la localización de la carrera"></div> -->
+            <div><label for="localizacion">Localización</label><select name="localizacion" id="localizacion"></select></div>
             <button id="modalidades">MODALIDADES Y CATEGORÍAS<i class="bi bi-plus-circle"></i></button>
             <div><label for="track">Archivo .GPX de la carrera</label><input type="file" name="track" id="track" title="Track de la carrera" accept=".gpx"></div>
             <div><label for="webOrganizacion">WEB de la Organización</label><input type="text" name="webOrganizacion" id="webOrganizacion" title="Web de la Organización" placeholder="Web de la Organización"></div>

@@ -48,6 +48,7 @@ function generarHtml() {
                                     <i class="bi bi-caret-right-fill abrirModal" data-parametro="nombreOrg"></i>`;
         document.getElementById('datosUsuario').append(divPhone);
         document.getElementById('datosUsuario').append(divNombreOrg);
+        document.getElementById('enlaceEditarCarreras').style.display = "block";
     }
 
      document.querySelectorAll(".abrirModal").forEach(btn =>{
@@ -55,17 +56,36 @@ function generarHtml() {
      });
 
      mostrarFavoritos();
+     let jwt = localStorage.getItem('jwt');
+    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/obtenerFotoPerfil.php`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${jwt}`
+        }
+        }).then( response => {
+            if (response.status === 200){
+                return response.json();
+            }else{
+                alert("NO SE PUEDE MOSTRAR LA FOTO DE PERFIL");
+            }
+        }).then( data => {
+            console.log(data);
+            document.getElementById("cabeceraFotoPerfil").src = `../API/users/user${data.id}/fotos/${data.fotoPerfil}`;
+            
+        }).catch ( error => {
+            console.log(error);
+        })
     
 }
 
 
 generarHtml();
-let carreras = [];
+
 function mostrarFavoritos() {
     let favoritos = document.getElementById('rejillaCarreras')
     favoritos.innerHTML = "";
     
-
+    let carreras = [];
     let jwt = localStorage.getItem('jwt');
     fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/obtenerFavoritos.php`, {
         method: "GET",
@@ -83,37 +103,64 @@ function mostrarFavoritos() {
         console.log(error);
     })
 
+    let currentPage = 0;
+    let elementsPerPage = 4;
+    let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
     function renderCarreras() {
-        console.log(carreras);
-        let currentPage = 0;
-        let elementsPerPage = 8;
-        let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
-        carreras
-                .filter((item,index) =>{
-                    return Math.trunc(index/elementsPerPage) == currentPage;
-                })
-                .forEach( ({nombre, id_usuario,portada, fecha, localizacion, distancia}) => {
-                    favoritos.innerHTML += `
-                    <div class="tarjetaCarrera">
-                            <div class="fotoPortada">
-                                <p>${nombre}</p>
-                                <img src="../../API/users/user${id_usuario}/carreras/imagenes/${portada}" alt="Foto de la carrera">
+        if (carreras.length > 0) {
+            
+            // let currentPage = 0;
+            // let elementsPerPage = 4;
+            // let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
+            carreras
+                    .filter((item,index) =>{
+                        return Math.trunc(index/elementsPerPage) == currentPage;
+                    })
+                    .forEach( ({nombre, id_usuario,portada, fecha, localizacion, distancia}) => {
+                        favoritos.innerHTML = `
+                        <div class="tarjetaCarrera">
+                                <div class="fotoPortada">
+                                    <p>${nombre}</p>
+                                    <img src="../../API/users/user${id_usuario}/carreras/imagenes/${portada}" alt="Foto de la carrera">
+                                </div>
+                                <div class="datosCarrera">
+                                    <span class="fecha"><i class="bi bi-calendar-fill"></i>${fecha}</span>
+                                    <span class="localidad"><i class="bi bi-geo-alt-fill"></i>${localizacion}</span>
+                                    <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>${distancia}KM</span>
+                                    <a href="./masInformacion.html" class="enlaceCarrera"><div class="detallesCarrera" data-nombrecarrera="${nombre}">MAS INFORMACIÓN</div></a>
+                                </div>
                             </div>
-                            <div class="datosCarrera">
-                                <span class="fecha"><i class="bi bi-calendar-fill"></i>${fecha}</span>
-                                <span class="localidad"><i class="bi bi-geo-alt-fill"></i>${localizacion}</span>
-                                <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>${distancia}KM</span>
-                                <a href="./masInformacion.html" class="enlaceCarrera"><div class="detallesCarrera" data-nombrecarrera="${nombre}">MAS INFORMACIÓN</div></a>
-                            </div>
-                        </div>
-                    `;
-        });
-        paginasTotales = Math.ceil((carreras.length / elementsPerPage));
-        document.getElementById("paginaActual").textContent = `${currentPage + 1} / ${paginasTotales}`;
-        Array.from(document.getElementsByClassName("detallesCarrera")).forEach( (element) => {
-            element.addEventListener('click', guardarNombreCarrera);
-        });
+                        `;
+            });
+            paginasTotales = Math.ceil((carreras.length / elementsPerPage));
+            document.getElementById("paginaActual").textContent = `${currentPage + 1} / ${paginasTotales}`;
+            Array.from(document.getElementsByClassName("detallesCarrera")).forEach( (element) => {
+                element.addEventListener('click', guardarNombreCarrera);
+            });
+        
+            
+        }else{
+            favoritos.innerHTML = "<h2>No tienes carreras favoritas</h2>";
+            document.getElementById('divPaginacion').style.display = "none";
+            favoritos.style.display = "flex";
+            favoritos.style.justifyContent = "center";
+            favoritos.style.alignItems = "center";
+            document.querySelector('#rejillaCarreras h2').style.fontSize = "2rem";
+        }
+        
+        
     }
+    document.querySelector("#divPaginacion .next").addEventListener('click', ()=>{
+        currentPage = (currentPage < paginasTotales - 1) ? currentPage+1 : currentPage;
+        renderCarreras();
+    });
+    document.querySelector("#divPaginacion .prev").addEventListener('click', ()=>{
+        currentPage = (currentPage > 0) ? currentPage-1 : currentPage;
+        renderCarreras();
+    })
+  
+   
+  
 
 
     function guardarNombreCarrera(e) {
@@ -239,7 +286,11 @@ function cerrarModalCuenta() {
 // }
 function mousenter(e) {
     document.getElementById('saves').innerHTML="GUARDADOS";
+    if (localStorage.getItem('rol')== 'organizer') {
+        document.getElementById('textoEditarCarreras').textContent="EDITAR CARRERAS";
+    }
     document.getElementById('settings').innerHTML="PERFIL";
+    
     document.getElementById('saves').textContent="GUARDADOS";
     document.getElementById('deleteMyAccount').textContent="BORRAR CUENTA";
     document.getElementById('home').textContent="INICIO";
@@ -249,6 +300,10 @@ function mousenter(e) {
 function mouseleave(e) {
     document.getElementById('saves').innerHTML="";
     document.getElementById('settings').innerHTML="";
+    if (localStorage.getItem('rol')== 'organizer') {
+        document.getElementById('textoEditarCarreras').textContent="";
+        
+    }
     document.getElementById('saves').textContent="";
     document.getElementById('deleteMyAccount').textContent="";
     document.getElementById('home').textContent="";
@@ -457,12 +512,23 @@ document.getElementById('nuevaCarrera').addEventListener('click', modalNuevaCarr
 
 function modalNuevaCarrera(e) {
     document.getElementById('miModalNuevaCarrera').style.display = 'block';
+    provincias.sort((a, b) => {
+        return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' });
+      });
+    
+    let selectProvincias=document.getElementById('localizacion');
+    
+    selectProvincias.options[selectProvincias.options.length] = new Option('PROVINCIA', '');
+    for (let provincia of provincias) {
+        selectProvincias.options[selectProvincias.options.length] = new Option(provincia.label, provincia.label);
+    }
     document.querySelector('#cerrarCarreraX i').addEventListener('click', cerrarModalCarrera);
     function cerrarModalCarrera(e) {
         document.getElementById('miModalNuevaCarrera').style.display = 'none';
         document.querySelectorAll('#miModalNuevaCarrera input').forEach( input => {
             input.value = "";
         });
+        document.getElementById('localizacion').options[0].selected = true;
         document.querySelectorAll('#miModalNuevaCarreraModalidades input').forEach( input => {
             input.value = "";
             input.checked = false;
@@ -503,6 +569,7 @@ function modalNuevaCarrera(e) {
          
         function seleccionarModalidad(e) {
             modalidadElegida = e.target.value;
+            console.log(modalidadElegida);
         }
         
         document.getElementById('guardarModalidad').addEventListener('click', generacionModalidad);
@@ -958,10 +1025,11 @@ function modalNuevaCarrera(e) {
             }
             carreraEditar.append(`modalidades`, JSON.stringify(modalidades));
 
-            (document.getElementById('editarTrack').files[0]) ? añadirTrack : fetchActualizarCarrera();
+            (document.getElementById('editarTrack').files[0]) ? añadirTrack() : fetchActualizarCarrera();
                 
             
             function añadirTrack() {
+            console.log("antes de llamar a la api");
             let coorReducidas = [];
             let desnivelPositivo = 0;
             let desnivelNegativo = 0;
@@ -1002,7 +1070,7 @@ function modalNuevaCarrera(e) {
                     
                     carreraEditar.append('desnivel',desnivel);
                     carreraEditar.append('coordenadas',JSON.stringify(coorReducidas));
-
+                    
                     fetchActualizarCarrera();
                 
 
@@ -1014,6 +1082,7 @@ function modalNuevaCarrera(e) {
             }
 
             function fetchActualizarCarrera() {
+                console.log("HOLAAAA");
                     let jwt = localStorage.getItem('jwt');
                     fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/actualizarCarreras.php`, {
                     method: "POST",
@@ -1023,8 +1092,8 @@ function modalNuevaCarrera(e) {
                     body: carreraEditar,
                     }).then( response => {
                         if (response.status === 200){
-                            // window.location.reload();
-                            return response.json();
+                            window.location.reload();
+                           
                         }else{
                             return response.json();
                         };

@@ -3,7 +3,39 @@ let fetchDireccion = "localhost";
 if (localStorage.getItem('rol') === 'invitado') {
     location.href = "../landingPage.html";
 }
+if (localStorage.getItem('rol') === 'organizer') {
+    let enlaceFavoritos = document.querySelector('#desplegable a[href="./perfil.html#sectionFavoritos"]');
+    enlaceFavoritos.insertAdjacentHTML('afterend', '<a href="./perfil.html#racesEditor">EDITAR CARRERAS</a>');
+}
+function verificarYRenovarToken() {
+    let token = localStorage.getItem('jwt');
+    if (token) {
+        let payload = JSON.parse(atob(token.split('.')[1]));
+        let tiempoRestante = payload.exp - Math.floor(Date.now() / 1000);
+        let expirado = payload.exp < Math.floor(Date.now() / 1000);
+        if (expirado) {
+            alert("Tu sesión ha caducado. Por favor, inicia sesión de nuevo.");
+            location.href = "../landingPage.html";
+        }
 
+        if (tiempoRestante < 300) {
+            fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/renovarToken.php`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }).then(response => {
+                response.json()
+            }).then(data => {
+                if (data && data.token) {
+                    localStorage.setItem('jwt', data.token);
+                }
+            }).catch(error => console.error("Error al renovar el token", error));
+        }
+    }
+}
+
+setInterval(verificarYRenovarToken, 300000);
 
 document.getElementById("cerrarSesionDesplegable").addEventListener('click', cerrarSesion);
 
@@ -40,37 +72,25 @@ document.getElementById("username").addEventListener('click', function(){
     }
 })
 
-function verificarYRenovarToken() {
-    let token = localStorage.getItem('jwt');
-    if (token) {
-        let payload = JSON.parse(atob(token.split('.')[1]));
-        let tiempoRestante = payload.exp - Math.floor(Date.now() / 1000);
-        let expirado = payload.exp < Math.floor(Date.now() / 1000);
-        if (expirado) {
-            alert("Tu sesión ha caducado. Por favor, inicia sesión de nuevo.");
-            location.href = "../landingPage.html";
+let jwt = localStorage.getItem('jwt');
+    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/obtenerFotoPerfil.php`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${jwt}`
         }
-
-        if (tiempoRestante < 300) {
-            fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/renovarToken.php`, {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            }).then(response => {
-                response.json()
-            }).then(data => {
-                if (data && data.token) {
-                    localStorage.setItem('jwt', data.token);
-                }
-            }).catch(error => console.error("Error al renovar el token", error));
-        }
-    }
-}
-
-setInterval(verificarYRenovarToken, 300000);
-
-
+        }).then( response => {
+            if (response.status === 200){
+                return response.json();
+            }else{
+                alert("NO SE PUEDE MOSTRAR LA FOTO DE PERFIL");
+            }
+        }).then( data => {
+            console.log(data);
+            document.getElementById("cabeceraFotoPerfil").src = `../API/users/user${data.id}/fotos/${data.fotoPerfil}`;
+            
+        }).catch ( error => {
+            console.log(error);
+        })
 
 //Obtener datos de la Carrera
 let datosCarreras = [];
@@ -161,35 +181,140 @@ function renderDatos() {
 
 
     if (datosCarreras[0].fecha < new Date().toISOString().split('T')[0]) {
+        document.getElementById('clasificacionesPasadas').style.display = "block";
+        document.getElementById('clasificaciones').style.display = "block";
         let puestos = [];
         let selectCategoria=document.getElementById('selectCategoria');
         
-        selectCategoria.options[selectCategoria.options.length] = new Option('CATEGORÍAS', '');
+    
         let idCategorias = [];
         for (let categoria of datosCarreras[2]) {
             idCategorias.push(categoria.id);
-            selectCategoria.options[selectCategoria.options.length] = new Option(categoria.nombre, categoria.nombre);
+            selectCategoria.options[selectCategoria.options.length] = new Option(categoria.nombre.toUpperCase(), categoria.nombre);
         }
+        cargarClasficaciones();
+        if (document.getElementById('selectCategoria')) {
+            document.getElementById('selectCategoria').addEventListener('change', cargarClasficaciones);
+        }
+        function cargarClasficaciones(e) {
+            let categoria = document.getElementById('selectCategoria').value;
+            let carrera = datosCarreras[2].find(carrera => carrera.nombre == categoria);
+            let clasificacion = carrera.clasificacion;
 
-        fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/obtenerClasificacionCarreras.php`, {
-        method: "POST",
-        body: JSON.stringify(idCategorias),
-        }).then( response => {
-            if (response.status === 200) return response.json() 
-                else alert("NO SE PUEDEN CARGAR LAS CARRERAS");
-        }).then( data => {
-            puestos = data;
-            mostrarClasificaion();
-        }).catch ( error => {
-            console.log(error);
-        })
-
-
-        function mostrarClasificaion() {
+            if (clasificacion.length > 0) {
+                document.getElementById('contenedorClasificaciones').innerHTML = 
+                `
+            <div id="tablaClasificacion">
+                <div id="tablaCabecera">
+                    <div>
+                        <span>PUESTO</span>
+                    </div>
+                    <div>
+                        <span>NOMBRE</span>
+                    </div>
+                </div>
+                <div id="tablaBody">
+                    <div class="fila">
+                        <div><span>1.</span></div>
+                        <div><span id="primero">${clasificacion[0].primero}</span></div>
+                    </div>
+                    <div class="fila">
+                        <div><span>2.</span></div>
+                        <div><span id="segundo">${clasificacion[0].segundo}</span></div>
+                    </div>
+                    <div class="fila">
+                        <div><span>3.</span></div>
+                        <div><span id="tercero">${clasificacion[0].tercero}</span></div>
+                    </div>
+                    <div class="fila">
+                        <div><span>4.</span></div>
+                        <div><span id="cuarto">${clasificacion[0].cuarto}</span></div>
+                    </div>
+                    <div class="fila">
+                        <div><span>5.</span></div>
+                        <div><span id="quinto">${clasificacion[0].quinto}</span></div>
+                    </div> 
+                </div>
+            </div>
+                
+                `;
+                // let selectCategoria=document.getElementById('selectCategoria');
+                // for (let categoria of datosCarreras[2]) {
+                //     idCategorias.push(categoria.id);
+                //     selectCategoria.options[selectCategoria.options.length] = new Option(categoria.nombre.toUpperCase(), categoria.nombre);
+                // }
             
+                
+            }else{
+                if (localStorage.getItem('username') === datosCarreras[3].username){
+                    document.getElementById('contenedorClasificaciones').style.flexDirection = "column";
+                    document.getElementById('contenedorClasificaciones').style.alignItems = "center";
+                    document.getElementById('contenedorClasificaciones').innerHTML = 
+                    `
+                        <p id="mensajeCrearClasificacion">Ya puedes registrar la clasificación de tu carrera</p>
+                        
+                        <div id="divCrearClasificacion">AÑADIR CLASIFICACIÓN</div>
+                    `;
+                    
+                   
+                    document.getElementById('divCrearClasificacion').addEventListener('click', function(){
+                        document.getElementById('miModal').style.display = "block";
+                        document.querySelector('.cerrar').addEventListener('click', function(){
+                            document.getElementById('miModal').style.display = "none";
+                        });
+                    });
+
+                    document.querySelectorAll('#miModal input').forEach(input => {
+                        input.addEventListener('blur', function(){
+                            if (document.getElementById('inputModalPrimero').value.trim() != "" && document.getElementById('inputModalSegundo').value.trim() != "" && document.getElementById('inputModalTercero').value.trim() != "" && document.getElementById('inputModalCuarto').value.trim() != "" && document.getElementById('inputModalQuinto').value.trim() != "") {
+                                document.getElementById('guardarPerfil').removeAttribute('disabled');
+                            }else{
+                                document.getElementById('guardarPerfil').setAttribute('disabled', 'true');
+                            }
+                        });
+                    });
+
+                    document.getElementById('guardarPerfil').addEventListener('click', insertarClasificacion);
+
+                    function insertarClasificacion() {
+                        let tabla = {
+                            'idCategoria' : carrera.id,
+                            'primero' : document.getElementById('inputModalPrimero').value,
+                            'segundo' : document.getElementById('inputModalSegundo').value,
+                            'tercero' : document.getElementById('inputModalTercero').value,
+                            'cuarto' : document.getElementById('inputModalCuarto').value,
+                            'quinto' : document.getElementById('inputModalQuinto').value
+                        }
+
+                        fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/insertarClasificacion.php`, {
+                        method: "POST",
+                        body: JSON.stringify(tabla),
+                        }).then( response => {
+                            if (response.status === 204) window.location.reload();
+                                else alert("NO SE PUEDEN AÑADIR LAS CARRERAS");
+                        }).catch ( error => {
+                            console.log(error);
+                        })
+                    }
+
+
+                }else{  
+                    document.getElementById('contenedorClasificaciones').innerHTML = 
+                    `
+                        <h2>Clasificaciones no disponibles</h2>
+                    `;
+                }
+              
+            }
         }
+
 
     }
+
+
+
+
+  
 }
 function isFavorite() {
     let nombreCarrera = localStorage.getItem('nombreCarrera');

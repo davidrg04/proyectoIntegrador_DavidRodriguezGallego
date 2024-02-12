@@ -13,17 +13,19 @@
     <main>
     <header>
         <div>
-            <img id="logo" src="../IMGS/logoRunTheMountain-removebg-preview.png" alt="RunTheMountain">
+            <span id="tituloRunTheMountain">RunTheMountain</span>
+            <a href="../landingPage.html"><img id="logo" src="../IMGS/logoRunTheMountain-removebg-preview.png" alt="RunTheMountain"></a>
         </div>
         <nav>
-            <a href="" class="aCabecera">¿Carreras?</a>
-            <a href="" class="aCabecera">¿Consultas?</a>
+            <a href="#rejillaCarreras" class="aCabecera">Carreras</a>
+            
             <div id="datosUsuario">
+                <img src="" alt="fotoPerfil" id="cabeceraFotoPerfil">
                 <span id="username"></span>
                 <div id="desplegable">
                     <a href="./perfil.html">PERFIL</a>
-                    <a href="">FAVORITOS</a>
-                    <a href="">INSCRITOS</a>
+                    <a href="./perfil.html#sectionFavoritos">FAVORITOS</a>
+                    <!-- <a href="" id="enlaceEditorCarreras">EDITAR CARRERAS</a> -->
                     <a href="" id="cerrarSesionDesplegable">CERRAR SESION</a>
                 </div>
             </div>
@@ -74,11 +76,11 @@
                 </div> -->
                 </div>
                 <div id="divPaginacion">
-                    <span>Primera</span>
-                    <span>Anterior</span>
+                    <span class="first">Primera</span>
+                    <span class="prev">Anterior</span>
                     <span id="paginaActual"></span>
-                    <span>Siguiente</span>
-                    <span>Ultima</span>
+                    <span class="next">Siguiente</span>
+                    <span class="last">Ultima</span>
                 </div>
             </div>
         </section>

@@ -3,6 +3,8 @@ document.getElementById('entrar').addEventListener('click',iniciarSesion);
 let fetchDireccion = "localhost";
 
 function iniciarSesion(e) {
+    document.getElementById('inicioIncorrecto').style.display = "none";
+    document.getElementById('inicioIncorrecto').innerHTML = "";
     e.preventDefault();
     let user={
         "username" : document.getElementById('user').value,
@@ -16,10 +18,13 @@ function iniciarSesion(e) {
         },
         body: JSON.stringify(user)
     }).then( response => {
-        console.log(response);
-        if (response.status === 200) return response.json()
-            else if (response.status === 404) console.log(response.text); 
-            else console.log("Todo mal");
+        if (response.status === 200){
+            return response.json()
+        }else{
+            document.getElementById('inicioIncorrecto').textContent = "Usuario o contraseña incorrectos";
+            document.getElementById('inicioIncorrecto').style.display = "block";
+        } 
+            
     }).then( data => {
         if (data && data.token) {
             localStorage.setItem('jwt', data.token);

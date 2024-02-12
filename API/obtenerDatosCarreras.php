@@ -26,6 +26,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombreCarrera = $data['nombre'];
     $query = "SELECT id, id_usuario, nombre, enlaceWeb, reglamento, track, portada, localizacion, fecha, distancia, desnivel, modalidad, sexo FROM carreras WHERE nombre = ?";
+    // $query = "SELECT c.id, u.username, c.nombre, c.enlaceWeb, c.reglamento, c.track, c.portada, c.localizacion, c.fecha, c.distancia, c.desnivel, c.modalidad, c.sexo FROM carreras c INNER JOIN usuarios u ON c.id_usuario = u.id WHERE c.nombre = ?";
     $stmt = $con->prepare($query);
     $stmt->bind_param("s", $nombreCarrera);
     try {
@@ -74,12 +75,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 $row['clasificacion'] = $clasificacion;
                 $categorias[] = $row;
+            }else{
+                $categorias[] = $row;
             }
-
-            $categorias[] = $row;
         }
         $carrera[] = $categorias;
 
+        $queryNombreUsuario = "SELECT username FROM usuarios WHERE id = ?";
+        $stmtNombreUsuario = $con->prepare($queryNombreUsuario);
+        $stmtNombreUsuario->bind_param("i", $carrera[0]['id_usuario']);
+        $stmtNombreUsuario->execute();
+        $resultNombreUsuario = $stmtNombreUsuario->get_result();
+        $nombreUsuario = $resultNombreUsuario->fetch_assoc();
+        $carrera[] = $nombreUsuario;
        
 
         header('Content-Type: application/json');

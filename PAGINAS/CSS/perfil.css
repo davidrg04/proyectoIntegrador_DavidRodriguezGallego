@@ -60,7 +60,7 @@ p{
     display: flex;
     transition: background-color 200ms ease;
   }
-  .sidebar a:hover{
+  .sidebar a:hover:not(a:first-of-type){
     background-color: white;
   }
   
@@ -90,7 +90,21 @@ p{
     color: #283618;
   }
   
-  
+  .sidebar img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+    right: 0.3vw;
+  }
+
+  #enlaceEditarCarreras{
+    display: none;
+  }
+  #textoEditarCarreras{
+    position: relative;
+    top: -3px;
+  }
 section{
     width: calc(100% - 4vw);
     height: 100vh;
@@ -696,6 +710,7 @@ input.incorrecto{
 #miModalNuevaCarrera label, #miModalNuevaCarrera input{
   margin-right: 5px;
 }
+
 #nombreCarrera{
   width: 20vw;
   padding-bottom: 6px;
@@ -734,6 +749,17 @@ input[type="date"]:focus {
 
 #localizacion{
   width: 15vw;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  appearance: none;
+  background-color: #f3f3f3;
+  font-size: 1.2rem;
+  outline: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right .7em top 50%, 0 0;
+  background-size: .65em auto, 100%;
 }
 #webOrganizacion{
   width: 20vw;

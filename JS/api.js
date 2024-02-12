@@ -23,7 +23,7 @@ function registrarUsuario(e) {
     }else{
         user = {
             "nombreCompleto": document.getElementById('nombreCompleto').value,
-            "username": document.getElementById('username').value,
+            "username": document.getElementById('username').value.toLowerCase(),
             "mail": document.getElementById('mail').value,
             "password": document.getElementById('password').value,
             "poblacion": document.getElementById('poblacion').value,

@@ -91,6 +91,15 @@ header a.aCabecera::after {
 header a.aCabecera:hover:after {
     left: 0;
 }
+#datosUsuario{
+    margin-left: 1vw;
+}
+#datosUsuario img{
+    height: 40px;
+    width: 40px;
+    vertical-align: middle;
+    border-radius: 50%;
+}
 #clasificacionesPasadas{
     display: none;
 }
@@ -373,7 +382,7 @@ div.titulo{
     flex-direction: column;
 }
 #contenedorClasificaciones{
-    padding: 100px 300px;
+    padding: 30px 300px;
     display: flex;
     justify-content: center;
 }
@@ -432,8 +441,33 @@ div.titulo{
 }
 #tablaBody .fila div:last-of-type{
     width: 400px;
-    padding: 10px 50px;
+    padding: 10px 30px;
 }
+
+#mensajeCrearClasificacion{
+    font-size: 1.5rem;
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    color: #283618;
+}
+
+#divCrearClasificacion{
+    padding: 10px 20px;
+    background-color: #283618;
+    color: white;
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: transform 200ms ease;
+}
+#divCrearClasificacion:hover {
+    cursor: pointer;
+    transform: scale(1.05); 
+}
+#divCrearClasificacion:active{
+    transform: scale(0.95); 
+}
+
 
 .contenedor-select {
     width: 200px;
@@ -470,4 +504,124 @@ div.titulo{
     padding: 10px;
     background: #ffffff;
     border-bottom: 1px solid #eeeeee;
+  }
+
+  #miModal{
+    display: none;
+}
+  #miModal label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.4rem; 
+    color: #283618;
+  }
+  #miModal input{
+    width: 80%; 
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;      
+  }
+  #guardarPerfil {
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    background-color: #606C38; 
+    color: white; 
+    transition: transform 200ms ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+  }
+  
+  #guardarPerfil:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+  #guardarPerfil:active{
+    background-color: #566132;
+    transform: scale(0.95); 
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+  #guardarPerfil:disabled {
+    background-color: #ccc; 
+    color: #666; 
+    cursor: not-allowed; 
+    border: 1px solid #999; 
+    transition: none;
+    transform: none;
+  }
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden; 
+    background-color: rgba(0,0,0,0.5); 
+    align-items: center; 
+    justify-content: center; 
+    display: flex;
+  }
+  .modal-contenido {
+    background-color: #ffffff;
+    margin: 10% auto; 
+    padding: 20px;
+    border-radius: 30px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    width: 23%; 
+    min-width: 250px;
+    border: 5px solid #606C38;
+    
+  }
+  .cerrar {
+    color: #000000;
+    float: right;
+    /* margin-right: 0.5vw;
+    margin-top: 0.5vh; */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 200ms ease;
+    
+  }
+  .cerrar:hover {
+    transform: scale(1.05); 
+  }
+  .cerrar:active{
+    transform: scale(0.95); 
+  }
+  
+  .modal-contenido h2 {
+    color: #566132;
+    font-size: 1.3rem; 
+    margin-top: 0;
+    /* text-align: center;  */
+    /* margin-left: 1vw; */
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+  }
+  
+  
+  .modal-cuerpo {
+    margin-top: 20px;
+    color: #333;
+    font-size: 16px; 
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  
+  .modal-pie {
+    margin-top: 20px;
+    text-align: right; 
+  }
+  
+  
+  .modal-pie button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.2s; 
   }
