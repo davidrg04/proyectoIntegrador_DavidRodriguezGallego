@@ -84,11 +84,11 @@
         }
 
     
-
+        $password = password_hash($pass, PASSWORD_BCRYPT);
         $fotoPerfil = "perfil.png";
         $sql = "INSERT INTO usuarios (fotoPerfil, nombreCompleto, username, mail, pass, poblacion) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("ssssss", $fotoPerfil, $nombreCompleto, $username, $mail, $pass, $poblacion);
+        $stmt->bind_param("ssssss", $fotoPerfil, $nombreCompleto, $username, $mail, $password, $poblacion);
         try{
             $stmt->execute();
             $userId = mysqli_insert_id($con);

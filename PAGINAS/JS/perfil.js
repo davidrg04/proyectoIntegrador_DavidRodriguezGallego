@@ -804,6 +804,7 @@ function modalNuevaCarrera(e) {
                                         <span class="localidad"><i class="bi bi-geo-alt-fill"></i>${localizacion}</span>
                                         <span class="distancia"><i class="bi bi-info-circle-fill"></i></i>${distancia}KM</span>
                                         <div class="detallesCarrera editarCarrera" data-nombrecarrera="${nombre}">EDITAR</div>
+                                        <div class="detallesCarrera borrarCarrera" data-nombrecarrera="${nombre}">BORRAR</div>
                                     </div>
                                 </div>
                             `;
@@ -813,8 +814,41 @@ function modalNuevaCarrera(e) {
                 Array.from(document.getElementsByClassName("editarCarrera")).forEach( (element) => {
                     element.addEventListener('click', modalEditarCarrera);
                 });
+                Array.from(document.getElementsByClassName("borrarCarrera")).forEach( (element) => {
+                    element.addEventListener('click', modalBorrarCarrera);
+                });
+
             }
 
+        }
+        function modalBorrarCarrera(e) {
+            document.getElementById('miModalBorrarCarrera').style.display = 'block';
+            document.getElementById('cancelarBorrarCarrera').addEventListener('click', cerrarModalBorrarCarrera);
+            document.getElementById('cerrarBorrarCarreraX').addEventListener('click', cerrarModalBorrarCarrera);
+            function cerrarModalBorrarCarrera(e) {
+                document.getElementById('miModalBorrarCarrera').style.display = 'none';
+            }
+            document.getElementById('borrarCarreraModal').dataset.nombrecarrera = e.target.dataset.nombrecarrera;
+            document.getElementById('borrarCarreraModal').addEventListener('click', borrarCarrera);
+            
+            
+            
+            function borrarCarrera(e) {
+                
+                fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/borrarCarrera.php`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8",
+                    },
+                    body: JSON.stringify({'nombreCarrera': e.target.dataset.nombrecarrera}),
+                }).then(response => {
+                    if (response.status === 200) {
+                        window.location.reload();
+                    } 
+                }).catch(error => {
+                    console.log(error);
+                });    
+            }
         }
         let datosCarrera = [];
         function modalEditarCarrera(e) {

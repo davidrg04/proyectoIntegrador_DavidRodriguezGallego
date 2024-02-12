@@ -371,6 +371,46 @@ section:nth-of-type(2) > div div:first-of-type svg{
     background-color: #a05d21; 
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   }
+  #miModalBorrarCarrera{
+    display: none;
+    z-index: 9999999999;
+  }
+  #borrarCarreraModal{
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    background-color: #BC6C25; 
+    color: white; 
+    transition: transform 200ms ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+  }
+  #borrarCarreraModal:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+  #borrarCarreraModal:active{
+    background-color: #a05d21;
+    transform: scale(0.95); 
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+  #cancelarBorrarCarrera{
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    background-color: #283618; 
+    color: white; 
+    transition: transform 200ms ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+  }
+  #cancelarBorrarCarrera:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+  #cancelarBorrarCarrera:active{
+    background-color: #243015;
+    transform: scale(0.95); 
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
 
   #racesEditor{
     display: none;
@@ -577,15 +617,6 @@ section:nth-of-type(2) > div div:first-of-type svg{
 
   #miModalBorrarCuenta{
     display: none;
-  }
-  #cancelarCuenta{
-    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
-    font-size: 1.4rem;
-    background-color: #283618; 
-    color: white; 
-    transition: transform 200ms ease;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-    font-weight: bold;
   }
   #guardar:hover {
     transform: scale(1.05); 
@@ -1100,25 +1131,35 @@ button.crearCarreraBoton:active{
     position: absolute;
     top: 27px;
     right: 6px;
-    color: #BC6C25;
+    color: #283618;
     font-size: 1.1rem;
     font-family:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
-    border: 2px solid #BC6C25;
+    border: 2px solid #283618;
     border-radius: 5px;
     padding: 2px 7px;
     border-radius: 20px;
     transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
   }
+  #miModalMostrarCarreras div.borrarCarrera{
+    right: 80px;
+    color: #BC6C25;
+    border: 2px solid #BC6C25;
+  }
+  
   #miModalMostrarCarreras div.detallesCarrera:hover{
-    background-color: #BC6C25;
+    background-color: #283618;
     color: white;
     cursor: pointer;
     box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.5);
   }
+  #miModalMostrarCarreras div.borrarCarrera:hover{
+    background-color: #BC6C25;
+    color: white;
+  }
   #miModalMostrarCarreras div.datosCarrera i{
     margin-right: 5px;
   }
-  
+    
 
 #miModalEditarCarrera{
   display: none;
