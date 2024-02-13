@@ -446,8 +446,8 @@ function eliminarCuenta(e) {
     }).then(response => {
         if (response.status === 200) {
             location.href = "../../landingPage.html";
-        } else if (response.status === 404) {
-            console.log("No encontrado");
+        } else if (response.status === 500) {
+            console.log("Error al borrar directorios");
         } else {
             console.log("Error en la solicitud");
         }
