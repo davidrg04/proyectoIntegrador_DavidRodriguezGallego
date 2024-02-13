@@ -227,8 +227,8 @@
         -moz-appearance: none; 
         appearance: none; 
         cursor: pointer; 
-        transform: scale(1); /* Escala normal */
-        transition: transform 0.1s ease; /* Transición de 0.5 segundos */
+        transform: scale(1); 
+        transition: transform 0.1s ease; 
    }
 
   
@@ -316,37 +316,7 @@
         font-size: 2rem;
     }
 
-
-    /* @media screen and (max-width:64.8rem) {
-        header a::after {
-        display: none;  
-        }
-    }
-
-    @media screen and (max-width:59rem) {
-        html{
-            font-size: 10px;
-        }
-        
-        header nav, header #formaCabecera {
-            display: none;
-        }
-
-        header{
-            background-color: transparent;
-        }
-        #logo{
-            top: 4vh;
-            left: 1vw;
-            height: 22vh;
-            width: 22vh;
-        }
-        main section:first-of-type{
-            position: relative;
-            top: -15vh;
-            height: 100vh;
-        }
-    } */
+  
 
     /* ANIMACIONES CLASES */
     .hidden {
@@ -369,7 +339,6 @@
     
 
 
-    /* Pequeño (smartphones): 480px o menos */
     @media screen and (max-width: 530px) {
         main section:first-of-type article:first-child{
             left: 0;
@@ -458,7 +427,6 @@
         }
     }
 
-    /* Medio (tabletas): 481px a 768px */
     @media screen and (min-width: 531px) and (max-width: 730px) {
         main section:first-of-type article:first-child{
             left: 0;
@@ -588,7 +556,6 @@
 
     }
 
-    /* Extra grande (desktops grandes): 1025px y más */
     @media screen and (min-width: 1600px) {
         main section:first-of-type article:first-child{
             top: -20%;

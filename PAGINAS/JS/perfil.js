@@ -71,7 +71,6 @@ function generarHtml() {
                 alert("NO SE PUEDE MOSTRAR LA FOTO DE PERFIL");
             }
         }).then( data => {
-            console.log(data);
             document.getElementById("cabeceraFotoPerfil").src = `../API/users/user${data.id}/fotos/${data.fotoPerfil}`;
             
         }).catch ( error => {
@@ -109,12 +108,8 @@ function mostrarFavoritos() {
     let elementsPerPage = 3;
     let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
     function renderCarreras() {
-        console.log(carreras);
         if (carreras.length > 0) {
             favoritos.innerHTML = "";
-            // let currentPage = 0;
-            // let elementsPerPage = 4;
-            // let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
             carreras
                     .filter((item,index) =>{
                         return Math.trunc(index/elementsPerPage) == currentPage;
@@ -255,7 +250,6 @@ let modalCuenta = document.getElementById('miModalBorrarCuenta');
 document.getElementById('borrarCuenta').addEventListener('click', abrirModalCuenta);
 
 function abrirModalCuenta(e) {
-    console.log('hola');
     modalCuenta.style.display = 'block';
 }
 
@@ -293,10 +287,7 @@ function cerrarModalCuenta() {
     modalCuenta.style.display = "none";
     
 }
-// document.getElementById('borrarCuenta').addEventListener('click',abrirModalBorrarCuenta)
-// function abrirModalBorrarCuenta() {
-    
-// }
+
 function mousenter(e) {
     document.getElementById('saves').innerHTML="GUARDADOS";
     if (localStorage.getItem('rol')== 'organizer') {
@@ -388,7 +379,6 @@ function comprobarDatos(e) {
             boton.setAttribute('disabled','');
         }
     }else{
-        console.log("hola");
         const file = document.getElementById('foto').files[0];
         if (file) {
             boton.removeAttribute('disabled');
@@ -414,7 +404,6 @@ function obtenerDatosPerfil() {
             else if (response.status === 404) console.log(response.text); 
             else console.log("Todo mal");
     }).then( data => {
-        console.log(data);
         if (localStorage.getItem('rol') == "organizer") {
             document.getElementById("fotoPerfil").innerHTML = `<img src="../../API/users/user${data.id}/fotos/${data.fotoPerfil}" alt="Foto de perfil">`;
             document.getElementById("nombreUsuario").innerHTML = `${data.username}`;
@@ -507,7 +496,6 @@ function cambiarDatos(e) {
                 console.log("Error en la solicitud");
             }
         }).then( data => {
-            console.log(data.error);
             if (data.error == "username") {
                 spanAlert.innerHTML = "El username introducido ya existe.";
                 spanAlert.style.display = "block";
@@ -587,7 +575,6 @@ function modalNuevaCarrera(e) {
          
         function seleccionarModalidad(e) {
             modalidadElegida = e.target.value;
-            console.log(modalidadElegida);
         }
         
         document.getElementById('guardarModalidad').addEventListener('click', generacionModalidad);
@@ -596,7 +583,6 @@ function modalNuevaCarrera(e) {
             document.getElementById("modalidadEscogida").textContent = modalidadElegida.toUpperCase();
             document.getElementById('premios').innerHTML ="";
             document.querySelectorAll('input[name="tipoCategoria[]"]:checked').forEach( categoria => {
-                console.log("hola");
                 document.getElementById('premios').innerHTML +=
                 `<div class="premioCategoria" data-categoria="${categoria.value}">
                     <p class="premiosNombreCategoria">${categoria.value.toUpperCase()} ${document.getElementById('sexo').value}</p>
@@ -736,9 +722,9 @@ function modalNuevaCarrera(e) {
                    
                         carrera.append(`modalidades`, JSON.stringify(modalidades));
                    
-                    for (let [key, value] of carrera.entries()) {
-                        console.log(key, value);
-                    }
+                    // for (let [key, value] of carrera.entries()) {
+                    //     console.log(key, value);
+                    // }
                     let jwt = localStorage.getItem('jwt');
                     fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/registroCarrera.php`, {
                     method: "POST",
@@ -752,8 +738,7 @@ function modalNuevaCarrera(e) {
                             else console.log("Todo mal");
                     })
                     .then( data => {
-
-                        console.log(data);
+                        console.log("created");
                     })
                     .catch ( error => {
                         console.log(error);
@@ -804,7 +789,6 @@ function modalNuevaCarrera(e) {
             let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
             function renderCarrerasOrganizador() {
                 let divCarreras = document.querySelector('#miModalMostrarCarreras .modal-cuerpo');
-                console.log(carreras);
                 divCarreras.innerHTML = "";
                 carreras
                         .filter((item,index) =>{
@@ -906,7 +890,6 @@ function modalNuevaCarrera(e) {
             })
 
             function rellenarDatos() {
-                console.log(datosCarrera);
                 document.getElementById('editarNombreCarrera').value = datosCarrera[0].nombre;
                 document.getElementById('editarFecha').value = datosCarrera[0].fecha;
                 document.getElementById('editarLocalizacion').value = datosCarrera[0].localizacion;
@@ -974,12 +957,9 @@ function modalNuevaCarrera(e) {
         document.getElementById('editarGuardarModalidad').addEventListener('click', generacionEditarModalidad);
         function generacionEditarModalidad(e){
             document.getElementById("editarModalidadesSeleccionadas").style.display = "block";
-            // if (editarModalidadElegida != "") {
-            //     document.getElementById("editarModalidadEscogida").textContent = editarModalidadElegida.toUpperCase();
-            // }
+          
             document.getElementById('editarPremios').innerHTML ="";
             document.querySelectorAll('input[name="tipoCategoria[]"]:checked').forEach( categoria => {
-                // console.log("hola");
                 document.getElementById('editarPremios').innerHTML +=
                 `<div class="premioCategoria" data-categoria="${categoria.value}">
                     <p class="premiosNombreCategoria">${categoria.value.toUpperCase()} ${document.getElementById('sexo').value}</p>
@@ -1030,12 +1010,10 @@ function modalNuevaCarrera(e) {
             
 
             if (!document.querySelector('input[data-editarCarreraModalidad="modalidad"]:checked')) {
-                console.log("error en input tipomodalidad");
                 todosCompletos = false;
             }
         
             if (!document.querySelector('input[data-editarCarrera="categoria"]:checked')) {
-                console.log("error en input categoria");
                 todosCompletos = false;
             }
             
@@ -1091,7 +1069,6 @@ function modalNuevaCarrera(e) {
                 
             
             function añadirTrack() {
-            console.log("antes de llamar a la api");
             let coorReducidas = [];
             let desnivelPositivo = 0;
             let desnivelNegativo = 0;
@@ -1144,7 +1121,6 @@ function modalNuevaCarrera(e) {
             }
 
             function fetchActualizarCarrera() {
-                console.log("HOLAAAA");
                     let jwt = localStorage.getItem('jwt');
                     fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/actualizarCarreras.php`, {
                     method: "POST",
@@ -1161,7 +1137,7 @@ function modalNuevaCarrera(e) {
                         };
                     })
                     .then( data => {
-                        console.log(data);
+                        console.log("created");
                     })
                     .catch ( error => {
                         console.log(error);

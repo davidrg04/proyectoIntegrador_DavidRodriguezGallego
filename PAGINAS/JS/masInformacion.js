@@ -85,7 +85,6 @@ let jwt = localStorage.getItem('jwt');
                 alert("NO SE PUEDE MOSTRAR LA FOTO DE PERFIL");
             }
         }).then( data => {
-            console.log(data);
             document.getElementById("cabeceraFotoPerfil").src = `../API/users/user${data.id}/fotos/${data.fotoPerfil}`;
             
         }).catch ( error => {
@@ -103,7 +102,6 @@ function obtenerDatosCarrera() {
         if (response.status === 200) return response.json() 
             else alert("NO SE PUEDEN CARGAR LAS CARRERAS");
     }).then( data => {
-        console.log(data);
         datosCarreras = data;
         renderDatos();
     }).catch ( error => {
@@ -117,7 +115,6 @@ function renderDatos() {
 
 
 
-    console.log(datosCarreras);
     document.getElementById('favorito').addEventListener('click', añadirFavorito);
     document.querySelector('#menu span').textContent = datosCarreras[0].nombre;
     document.getElementById('fecha').textContent = datosCarreras[0].fecha;
@@ -393,7 +390,6 @@ function isFavorite() {
                 alert("ERROR DE PETICION");
             }
         }).then( data => {
-            console.log(data);
             if (data.favorito == "true") {
                 document.getElementById('favorito').classList.add('favoritoAñadido');
                 document.getElementById('favorito').classList.remove('bi-bookmark');

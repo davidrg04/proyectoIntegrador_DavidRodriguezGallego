@@ -37,13 +37,11 @@ header{
     height: 12vh;
     justify-content: space-between;
     align-items: center;
-    /* position: relative; */
 }
 #logo{
     position: relative;
     top: 4vh;
     left: 2vw;
-    /* height: 30vh; */
     width: 40%;
     z-index: 2;
 }

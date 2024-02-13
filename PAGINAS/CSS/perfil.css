@@ -761,21 +761,21 @@ input.incorrecto{
 #imagenesCarrera,#reglamento{
   padding: 5px;
 }
-/* Estilo básico para el input */
+
 input[type="date"] {
-  background-color: white; /* Color de fondo suave */
-  border: 1px solid #243015; /* Borde sutil */
-  border-radius: 5px; /* Bordes redondeados */
-  padding: 2px; /* Padding para texto y espacio para el ícono */
-  font-size: 1.2rem; /* Tamaño de fuente legible */
+  background-color: white; 
+  border: 1px solid #243015; 
+  border-radius: 5px; 
+  padding: 2px; 
+  font-size: 1.2rem; 
   font-weight: 600;
-  color: #243015; /* Color del texto */
-  outline: none; /* Elimina el resalte predeterminado */
+  color: #243015; 
+  outline: none; 
 }
 
-/* Estilo para cuando el input está enfocado */
+
 input[type="date"]:focus {
-  box-shadow: 0 0 5px rgba(160, 160, 160, 0.5); /* Sombra sutil para resaltar */
+  box-shadow: 0 0 5px rgba(160, 160, 160, 0.5); 
 }
 
 #localizacion{
@@ -928,24 +928,21 @@ button.crearCarreraBoton:active{
     background-color: #f3f3f3;
 }
 #selectModalidadCategoria select {
-  /* Estilo general */
   width: 7vw;
   /* height: 35px; */
   border-radius: 5px;
   border: none;
   padding: 5px 10px;
-  appearance: none; /* Elimina el estilo predeterminado */
+  appearance: none; 
   background-color: #f3f3f3;
-  /* Estilo de la fuente */
   font-size: 1.2rem;
   color: #333;
   outline: none;
   /* border: 2px solid #283618; */
-  /* Estilo del icono de despliegue */
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
   background-repeat: no-repeat;
-  background-position: right .7em top 50%, 0 0; /* Posición del icono */
-  background-size: .65em auto, 100%; /* Tamaño del icono */
+  background-position: right .7em top 50%, 0 0; 
+  background-size: .65em auto, 100%; 
 }
 #sexo{
   margin-top: 1vh;
@@ -1250,21 +1247,21 @@ button.crearCarreraBoton:active{
   transform: scale(0.95); 
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
-/* Estilo básico para el input */
+
 input[type="date"] {
-  background-color: white; /* Color de fondo suave */
-  border: 1px solid #243015; /* Borde sutil */
-  border-radius: 5px; /* Bordes redondeados */
-  padding: 2px; /* Padding para texto y espacio para el ícono */
-  font-size: 1.2rem; /* Tamaño de fuente legible */
+  background-color: white; 
+  border: 1px solid #243015; 
+  border-radius: 5px; 
+  padding: 2px; 
+  font-size: 1.2rem; 
   font-weight: 600;
-  color: #243015; /* Color del texto */
-  outline: none; /* Elimina el resalte predeterminado */
+  color: #243015; 
+  outline: none; 
 }
 
-/* Estilo para cuando el input está enfocado */
+
 input[type="date"]:focus {
-  box-shadow: 0 0 5px rgba(160, 160, 160, 0.5); /* Sombra sutil para resaltar */
+  box-shadow: 0 0 5px rgba(160, 160, 160, 0.5); 
 }
 
 #editarLocalizacion{
@@ -1374,24 +1371,21 @@ input[type="date"]:focus {
     background-color: #f3f3f3;
 }
 #editarSelectModalidadCategoria select {
-  /* Estilo general */
   width: 7vw;
   /* height: 35px; */
   border-radius: 5px;
   border: none;
   padding: 5px 10px;
-  appearance: none; /* Elimina el estilo predeterminado */
+  appearance: none; 
   background-color: #f3f3f3;
-  /* Estilo de la fuente */
   font-size: 1.2rem;
   color: #333;
   outline: none;
   /* border: 2px solid #283618; */
-  /* Estilo del icono de despliegue */
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
   background-repeat: no-repeat;
-  background-position: right .7em top 50%, 0 0; /* Posición del icono */
-  background-size: .65em auto, 100%; /* Tamaño del icono */
+  background-position: right .7em top 50%, 0 0; 
+  background-size: .65em auto, 100%; 
 }
 #editarSexo{
   margin-top: 1vh;

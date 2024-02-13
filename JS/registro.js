@@ -5,7 +5,7 @@ let validPass= false;
 let validPassComprobation = false;
 let validPhone = false;
 let validOrgName= false;
-// let fetchDireccion = "localhost";
+
 document.getElementById('nombreCompleto').addEventListener('blur',checkCompleteName);
 document.getElementById('username').addEventListener('blur',checkUsername);
 document.getElementById('mail').addEventListener('blur', checkMail)

@@ -172,26 +172,7 @@
                 header("HTTP/1.1 400 Bad Request");
             }
 
-            // $query = "DELETE FROM organizador where id_usuario = ?";
-            // $stmt = $con->prepare($query);
-            // $stmt->bind_param("i", $id);
-            // try {
-            //     $stmt->execute();
-            //     $stmt->store_result();
-            //     if ($stmt->affected_rows > 0) {
-            //         $query2 = "DELETE FROM usuarios where id = ?";
-            //         $stmt = $con->prepare($query2);
-            //         $stmt->bind_param("i", $id);
-            //         try {
-            //             $stmt->execute();
-            //             header("HTTP/1.1 200 OK");
-            //         } catch (mysqli_sql_exception $e) {
-            //             header("HTTP/1.1 400 Bad Request");
-            //         }
-            //     }
-            // } catch (mysqli_sql_exception $e) {
-            //     header("HTTP/1.1 400 Bad Request");
-            // }
+            
         }else {
             $queryFavoritos = "DELETE FROM favoritos WHERE id_usuario = ?";
             $stmtFavoritos = $con->prepare($queryFavoritos);
