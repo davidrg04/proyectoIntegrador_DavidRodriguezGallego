@@ -474,7 +474,7 @@ div.titulo{
     margin: 0 auto;
   }
   
-  /* Estilo del elemento select con una apariencia moderna */
+  
   .contenedor-select select {
     width: 100%;
     padding: 10px;
@@ -489,22 +489,41 @@ div.titulo{
     transition: border-color 0.3s;
   }
   
-  /* Cambiar el color del borde al enfocar */
+ 
   .contenedor-select select:focus {
     border-color: #3f4b6b;
   }
   
-  /* Estilo para los elementos option con efecto al pasar el mouse */
+  
   .contenedor-select select:hover {
     border-color: #a8b1c2;
   }
   
-  /* Estilos para los elementos option */
+  
   .contenedor-select option {
     padding: 10px;
     background: #ffffff;
     border-bottom: 1px solid #eeeeee;
   }
+  #editarClasificacion{
+    display: none;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #283618;
+    color: white;
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: transform 200ms ease;
+    }
+#editarClasificacion:hover {
+    cursor: pointer;
+    transform: scale(1.05); 
+}
+#editarClasificacion:active{
+    transform: scale(0.95); 
+}
 
   #miModal{
     display: none;
@@ -591,6 +610,7 @@ div.titulo{
   .cerrar:active{
     transform: scale(0.95); 
   }
+
   
   .modal-contenido h2 {
     color: #566132;
@@ -624,4 +644,48 @@ div.titulo{
     font-size: 16px; 
     cursor: pointer; 
     transition: background-color 0.2s; 
+  }
+
+  #miModalEditar{
+    display: none;
+}
+  #miModalEditar label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.4rem; 
+    color: #283618;
+  }
+  #miModalEditar input{
+    width: 80%; 
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;      
+  }
+  #editarGuardarPerfil {
+    font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    background-color: #606C38; 
+    color: white; 
+    transition: transform 200ms ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+  }
+  
+  #editarGuardarPerfil:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.24);
+  }
+  #editarGuardarPerfil:active{
+    background-color: #566132;
+    transform: scale(0.95); 
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+  #editarGuardarPerfil:disabled {
+    background-color: #ccc; 
+    color: #666; 
+    cursor: not-allowed; 
+    border: 1px solid #999; 
+    transition: none;
+    transform: none;
   }

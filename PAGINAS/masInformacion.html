@@ -138,7 +138,8 @@
                 <div class="contenedor-select">
                     <select name="categorias" id="selectCategoria">
                     </select>
-                  </div>
+                    <div id="editarClasificacion">EDITAR CLASIFICACIÓN</div>
+                </div>
                 <div id="contenedorClasificaciones">
                     <!-- <p>NO HAY CLASIFICACIONES PARA ESTA CARRERA</p> -->
                     <!-- <div id="tablaClasificacion">
@@ -199,6 +200,28 @@
           </div>
           <div class="modal-pie">
             <button id="guardarPerfil" disabled >AÑADIR</button>
+          </div>
+        </div>
+    </div>
+    <div id="miModalEditar" class="modal">
+        <span id="alertMessage" class="spanAlert"></span>
+        <div class="modal-contenido">
+          <span class="cerrarEditar cerrar"><i class="bi bi-x-circle"></i></span>
+          <h2>EDITAR CLASIFICACIÓN</h2>
+          <div class="modal-cuerpo">
+            <div><label for="editarInputModalPrimero">1.</label>
+            <input type="text" id="editarInputModalPrimero" name="inputModalPrimero"></div>
+            <div><label for="editarInputModalSegundo">2.</label>
+            <input type="text" id="editarInputModalSegundo" name="inputModalSegundo"></div>
+            <div><label for="editarInputModalTercero">3.</label>
+            <input type="text" id="editarInputModalTercero" name="inputModalTercero"></div>
+            <div><label for="editarInputModalCuarto">4.</label>
+            <input type="text" id="editarInputModalCuarto" name="inputModalCuarto"></div>
+            <div><label for="editarInputModalQuinto">5.</label>
+            <input type="text" id="editarInputModalQuinto" name="inputModalQuinto"></div>
+          </div>
+          <div class="modal-pie">
+            <button id="editarGuardarPerfil" disabled >EDITAR</button>
           </div>
         </div>
     </div>

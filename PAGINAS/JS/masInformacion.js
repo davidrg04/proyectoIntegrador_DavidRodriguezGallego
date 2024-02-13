@@ -1,6 +1,6 @@
 let fetchDireccion = "localhost";
 
-if (localStorage.getItem('rol') === 'invitado') {
+if (localStorage.getItem('rol') === 'invitado' || !localStorage.getItem('rol')) {
     location.href = "../landingPage.html";
 }
 if (localStorage.getItem('rol') === 'organizer') {
@@ -103,6 +103,7 @@ function obtenerDatosCarrera() {
         if (response.status === 200) return response.json() 
             else alert("NO SE PUEDEN CARGAR LAS CARRERAS");
     }).then( data => {
+        console.log(data);
         datosCarreras = data;
         renderDatos();
     }).catch ( error => {
@@ -238,15 +239,63 @@ function renderDatos() {
             </div>
                 
                 `;
-                // let selectCategoria=document.getElementById('selectCategoria');
-                // for (let categoria of datosCarreras[2]) {
-                //     idCategorias.push(categoria.id);
-                //     selectCategoria.options[selectCategoria.options.length] = new Option(categoria.nombre.toUpperCase(), categoria.nombre);
-                // }
-            
+                
+                if (localStorage.getItem('username') === datosCarreras[3].username){
+                    document.getElementById('editarClasificacion').style.display = "block";
+                }
+                document.getElementById('editarClasificacion').addEventListener('click', function(){
+                    document.getElementById('miModalEditar').style.display = "block";
+                        document.querySelector('.cerrarEditar').addEventListener('click', function(){
+                            document.querySelectorAll('#miModalEditar input').forEach(input => {
+                                input.value = "";
+                            });
+                            document.getElementById('miModalEditar').style.display = "none";
+                        });
+                });
+
+                document.getElementById('editarInputModalPrimero').value = clasificacion[0].primero;
+                document.getElementById('editarInputModalSegundo').value = clasificacion[0].segundo;
+                document.getElementById('editarInputModalTercero').value = clasificacion[0].tercero;
+                document.getElementById('editarInputModalCuarto').value = clasificacion[0].cuarto;
+                document.getElementById('editarInputModalQuinto').value = clasificacion[0].quinto;
+
+
+                document.querySelectorAll('#miModalEditar input').forEach(input => {
+                    input.addEventListener('blur', function(){
+                        if (document.getElementById('editarInputModalPrimero').value.trim() != "" && document.getElementById('editarInputModalSegundo').value.trim() != "" && document.getElementById('editarInputModalTercero').value.trim() != "" && document.getElementById('editarInputModalCuarto').value.trim() != "" && document.getElementById('editarInputModalQuinto').value.trim() != "") {
+                            document.getElementById('editarGuardarPerfil').removeAttribute('disabled');
+                        }else{
+                            document.getElementById('editarGuardarPerfil').setAttribute('disabled', 'true');
+                        }
+                    });
+                });
+
+                document.getElementById('editarGuardarPerfil').addEventListener('click', editarClasificacion);
+
+                function editarClasificacion() {
+                    let tabla = {
+                        'idCategoria' : carrera.id,
+                        'primero' : document.getElementById('editarInputModalPrimero').value,
+                        'segundo' : document.getElementById('editarInputModalSegundo').value,
+                        'tercero' : document.getElementById('editarInputModalTercero').value,
+                        'cuarto' : document.getElementById('editarInputModalCuarto').value,
+                        'quinto' : document.getElementById('editarInputModalQuinto').value
+                    }
+
+                    fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/editarClasificacion.php`, {
+                    method: "PUT",
+                    body: JSON.stringify(tabla),
+                    }).then( response => {
+                        if (response.status === 204) window.location.reload();
+                            else alert("NO SE PUEDEN EDITARLAS CARRERAS");
+                    }).catch ( error => {
+                        console.log(error);
+                    })
+                }
                 
             }else{
                 if (localStorage.getItem('username') === datosCarreras[3].username){
+                    document.getElementById('editarClasificacion').style.display = "none";
                     document.getElementById('contenedorClasificaciones').style.flexDirection = "column";
                     document.getElementById('contenedorClasificaciones').style.alignItems = "center";
                     document.getElementById('contenedorClasificaciones').innerHTML = 
@@ -260,6 +309,9 @@ function renderDatos() {
                     document.getElementById('divCrearClasificacion').addEventListener('click', function(){
                         document.getElementById('miModal').style.display = "block";
                         document.querySelector('.cerrar').addEventListener('click', function(){
+                            document.querySelectorAll('#miModal input').forEach(input => {
+                                input.value = "";
+                            });
                             document.getElementById('miModal').style.display = "none";
                         });
                     });

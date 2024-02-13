@@ -1,7 +1,9 @@
 localStorage.removeItem('nombreCarrera');
 
 let fetchDireccion = "localhost";
-
+if (localStorage.getItem('rol') === 'invitado' || !localStorage.getItem('rol')) {
+    location.href = "../landingPage.html";
+}
 
 function verificarYRenovarToken() {
     let token = localStorage.getItem('jwt');
