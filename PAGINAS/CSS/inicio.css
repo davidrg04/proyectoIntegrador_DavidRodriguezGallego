@@ -480,7 +480,12 @@ h1 span{
     background-color: white;
     transition: background-color 0.3s;
 }
-#desplegableOrdenar span:hover, #desplegable span:focus {
+#desplegableOrdenar span:hover{
+    background-color: #BC6C25; 
+    color: white; 
+    cursor: pointer;
+}
+#desplegableOrdenar span.seleccionado{
     background-color: #BC6C25; 
     color: white; 
 }

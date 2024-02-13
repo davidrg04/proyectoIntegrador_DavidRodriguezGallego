@@ -40,8 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     $tipo = $data["tipo"];
     $nuevoParametro = $data["parametro"];
 
-    echo($tipo);
-
     switch ($tipo) {
         case 'username':
             $query = "SELECT username FROM usuarios WHERE username = ?";

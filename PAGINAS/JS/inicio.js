@@ -19,7 +19,7 @@ function verificarYRenovarToken() {
                     "Authorization": `Bearer ${token}`
                 }
             }).then(response => {
-                response.json()
+                return response.json()
             }).then(data => {
                 if (data && data.token) {
                     localStorage.setItem('jwt', data.token);
@@ -176,7 +176,7 @@ if (localStorage.getItem('rol') === 'invitado') {
 
 
 
-//Mostrar menu fijado
+
 
 let posicionOriginalMenu = document.getElementById('menu').offsetTop;
 window.addEventListener('scroll', function() {
@@ -189,19 +189,6 @@ window.addEventListener('scroll', function() {
     }
 });
 
-//SELECT DE LAS PROVINCIAS
-// provincias.sort((a, b) => {
-//     const labelA = a.label.toLowerCase();
-//     const labelB = b.label.toLowerCase();
-  
-//     if (labelA < labelB) {
-//       return -1;
-//     }
-//     if (labelA > labelB) {
-//       return 1;
-//     }
-//     return 0;
-//   });
 provincias.sort((a, b) => {
     return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' });
   });
@@ -215,7 +202,7 @@ for (let provincia of provincias) {
 
 //MOSTRAR CARRERAS
 let carreras = [];
-
+let carrerasOriginal = [];
 function generarCarreras() {
     fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/obtenerCarreras.php`, {
         method: "GET",
@@ -223,7 +210,8 @@ function generarCarreras() {
         if (response.status === 200) return response.json() 
             else alert("NO SE PUEDEN CARGAR LAS CARRERAS");
     }).then( data => {
-        carreras = data;
+        carreras = [...data];
+        carrerasOriginal = [...data];
         renderCarreras();
     }).catch ( error => {
         console.log(error);
@@ -234,6 +222,7 @@ function generarCarreras() {
 }
 let divCarreras = document.getElementById('rejillaCarreras');
 generarCarreras();
+
 let filter = "";
 let provincia = "";
 let finalizada = "";
@@ -301,6 +290,58 @@ document.querySelector("#divPaginacion .last").addEventListener('click',() =>{
     currentPage = paginasTotales - 1;
     renderCarreras();
 });
+document.getElementById('porNombre').addEventListener('click', (e) => {
+    
+    document.getElementById('porFecha').classList.remove('seleccionado');
+    document.getElementById('porDistancia').classList.remove('seleccionado');
+
+
+    document.getElementById('porNombre').classList.toggle('seleccionado');
+
+    if (e.target.classList.contains('seleccionado')) {
+        carreras.sort((a, b) => {
+            return a.nombre.localeCompare(b.nombre, undefined, { sensitivity: 'base' });
+          });
+          renderCarreras();
+    }else{
+        carreras = [...carrerasOriginal];
+        renderCarreras();
+    }
+    
+});
+document.getElementById('porFecha').addEventListener('click', (e) => {
+    document.getElementById('porNombre').classList.remove('seleccionado');
+    document.getElementById('porDistancia').classList.remove('seleccionado');
+
+    document.getElementById('porFecha').classList.toggle('seleccionado');
+
+    if (e.target.classList.contains('seleccionado')) {
+        carreras.sort((a, b) => {
+            return new Date(a.fecha) - new Date(b.fecha);
+            });
+            renderCarreras();
+    }else{
+        carreras = [...carrerasOriginal];
+        renderCarreras();
+    }
+
+});
+document.getElementById('porDistancia').addEventListener('click', (e) => {
+    document.getElementById('porNombre').classList.remove('seleccionado');
+    document.getElementById('porFecha').classList.remove('seleccionado');
+
+    document.getElementById('porDistancia').classList.toggle('seleccionado');
+
+    if (e.target.classList.contains('seleccionado')) {
+        carreras.sort((a, b) => {
+            return a.distancia - b.distancia;
+            });
+            renderCarreras();
+    }else{
+        carreras = [...carrerasOriginal];
+        renderCarreras();
+    }
+});
 
 function clickBuscar(e) {
     let fechaActual = new Date();
@@ -343,9 +384,6 @@ function mapaCarreras(e) {
     
     function renderMapa() {
         
-
-       
-
           let mapa = L.map('map').setView([40.46, -3.74], 6);
 
           L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', 
@@ -362,10 +400,11 @@ function mapaCarreras(e) {
                 const marker = L.marker([coordenadasMapa[0][1], coordenadasMapa[0][0]], {title: `${carrera.nombre}`}).addTo(mapa);
             });
 
-
-
-
     }
 
 
 }
+
+
+
+

@@ -36,6 +36,7 @@
         
 
         $nombreCarrera = $_POST['nombre'];
+        $carreraAntigua = $_POST['nombreAntiguo'];
         $fechaCarrera = $_POST['fecha'];
         $enlaceWeb = $_POST['web'];
         $localizacion = $_POST['localizacion'];
@@ -50,18 +51,18 @@
             $desnivel = $_POST['desnivel'];
         }else{
             
-            $trackAntiguo = "SELECT track FROM CARRERAS WHERE nombre = ?";
+            $trackAntiguo = "SELECT track FROM carreras WHERE nombre = ?";
             $stmt = $con->prepare($trackAntiguo);
-            $stmt->bind_param("s", $nombreCarrera);
+            $stmt->bind_param("s", $carreraAntigua);
             try{
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $row = $result->fetch_assoc();
                 $track = $row["track"];
 
-                $desnivelAntiguo = "SELECT desnivel FROM CARRERAS WHERE nombre = ?";
+                $desnivelAntiguo = "SELECT desnivel FROM carreras WHERE nombre = ?";
                 $stmtDesnivel = $con->prepare($desnivelAntiguo);
-                $stmtDesnivel->bind_param("s", $nombreCarrera);
+                $stmtDesnivel->bind_param("s", $carreraAntigua);
                 $stmtDesnivel->execute();
                 $resultDesnivel = $stmtDesnivel->get_result();
                 $rowDesnivel = $resultDesnivel->fetch_assoc();
@@ -76,9 +77,9 @@
         }
 
 
-        $portadaAntigua = "SELECT portada FROM CARRERAS WHERE nombre = ?";
+        $portadaAntigua = "SELECT portada FROM carreras WHERE nombre = ?";
         $stmtPortada = $con->prepare($portadaAntigua);
-        $stmtPortada->bind_param("s", $nombreCarrera);
+        $stmtPortada->bind_param("s", $carreraAntigua);
 
         try {
             $stmtPortada->execute();
@@ -103,9 +104,9 @@
             exit;
         }
 
-        $reglamentoAntiguo = "SELECT reglamento FROM CARRERAS WHERE nombre = ?";
+        $reglamentoAntiguo = "SELECT reglamento FROM carreras WHERE nombre = ?";
         $stmtReglamento = $con->prepare($reglamentoAntiguo);
-        $stmtReglamento->bind_param("s", $nombreCarrera);
+        $stmtReglamento->bind_param("s", $carreraAntigua);
 
         try {
             $stmtReglamento->execute();
@@ -132,7 +133,7 @@
 
         $idCarreraQuery = "SELECT id FROM carreras WHERE nombre = ?";
         $stmtIdCarrera = $con->prepare($idCarreraQuery);
-        $stmtIdCarrera->bind_param("s", $nombreCarrera);
+        $stmtIdCarrera->bind_param("s", $carreraAntigua);
         try {
             $stmtIdCarrera->execute();
             $result = $stmtIdCarrera->get_result();
@@ -287,20 +288,6 @@
             $stmt = $con->prepare($actualizarCarrera);
             $stmt->bind_param("sssssssssssi", $nombreCarrera, $fechaCarrera, $enlaceWeb, $localizacion, $distancia, $modalidadNombre, $sexo, $track, $desnivel, $portada, $reglamento, $idCarrera);
             try {
-                $updatedCarrera = [
-                    'nombre' => $nombreCarrera,
-                    'fecha' => $fechaCarrera,
-                    'enlaceWeb' => $enlaceWeb,
-                    'localizacion' => $localizacion,
-                    'distancia' => $distancia,
-                    'modalidad' => $modalidadNombre,
-                    'sexo' => $sexo,
-                    'track' => $track,
-                    'desnivel' => $desnivel,
-                    'portada' => $portada,
-                    'reglamento' => $reglamento,
-                    'id' => $idCarrera
-                ];
                 
                 $stmt->execute();
                 

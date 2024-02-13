@@ -23,7 +23,7 @@ function verificarYRenovarToken() {
                     "Authorization": `Bearer ${token}`
                 }
             }).then(response => {
-                response.json()
+                return response.json()
             }).then(data => {
                 if (data && data.token) {
                     localStorage.setItem('jwt', data.token);
@@ -422,6 +422,7 @@ function obtenerDatosPerfil() {
             document.getElementById("phone").innerHTML = `${data.telefono}`;
             document.getElementById("nombreOrg").innerHTML = `${data.nombreOrg}`;
         } else {
+            document.getElementById("fotoPerfil").innerHTML = `<img src="../../API/users/user${data.id}/fotos/${data.fotoPerfil}" alt="Foto de perfil">`;
             document.getElementById("nombreUsuario").innerHTML = `${data.username}`;
             document.getElementById("localidad").innerHTML = `${data.poblacion}`;
         }
@@ -487,7 +488,6 @@ function cambiarDatos(e) {
             "tipo" : e.target.dataset.parametro,
             "parametro" : document.getElementById('inputModalPerfil').value,
         };
-        console.log(datos);
         let jwt = localStorage.getItem('jwt');
         fetch(`http://${fetchDireccion}/proyectoIntegrador_DavidRodriguezGallego/API/cambiarDatosPerfil.php`, {
             method: "PATCH",
@@ -498,20 +498,24 @@ function cambiarDatos(e) {
             body: JSON.stringify(datos)
         }).then(response => {
             if (response.status === 204) {
+                spanAlert.style.display = "none";
                 location.href = "../../landingPage.html";
             } else if (response.status === 409) {
                 return response.json();
+                
             } else {
                 console.log("Error en la solicitud");
-                console.log(response);
             }
         }).then( data => {
+            console.log(data.error);
             if (data.error == "username") {
                 spanAlert.innerHTML = "El username introducido ya existe.";
                 spanAlert.style.display = "block";
+                document.getElementById('inputModalPerfil').classList.add("incorrecto");
             }else{
                 spanAlert.innerHTML = "El teléfono introducido ya existe.";
                 spanAlert.style.display = "block";
+                document.getElementById('inputModalPerfil').classList.add("incorrecto");
             }
         }).catch ( error => {
             console.log(error);
@@ -567,6 +571,7 @@ function modalNuevaCarrera(e) {
             }
         }
         document.querySelector('#cerrarModalidadX i').addEventListener('click', cerrarModalidad);
+        document.getElementById('crearModalidades').addEventListener('click', cerrarModalidad);
         function cerrarModalidad(e) {
             document.getElementById('miModalNuevaCarreraModalidades').style.display = 'none';
         }
@@ -949,6 +954,7 @@ function modalNuevaCarrera(e) {
                     }
                 }
                 document.querySelector('#editarCerrarModalidadX i').addEventListener('click', cerrarModalidad);
+                document.getElementById('editarCrearModalidades').addEventListener('click', cerrarModalidad);
                 function cerrarModalidad(e) {
                     document.getElementById('miModalEditarCarreraModalidades').style.display = 'none';
                 }
@@ -1060,6 +1066,7 @@ function modalNuevaCarrera(e) {
         
 
             let carreraEditar = new FormData();
+            carreraEditar.append('nombreAntiguo', datosCarrera[0].nombre);
             carreraEditar.append('nombre', document.getElementById('editarNombreCarrera').value);
             carreraEditar.append('fecha', document.getElementById('editarFecha').value);
             carreraEditar.append('localizacion', document.getElementById('editarLocalizacion').value);

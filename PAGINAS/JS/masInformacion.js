@@ -25,7 +25,7 @@ function verificarYRenovarToken() {
                     "Authorization": `Bearer ${token}`
                 }
             }).then(response => {
-                response.json()
+               return response.json()
             }).then(data => {
                 if (data && data.token) {
                     localStorage.setItem('jwt', data.token);
@@ -131,13 +131,21 @@ function renderDatos() {
     document.getElementById('reglamento').setAttribute('download', `Reglamento_${datosCarreras[0].nombre}.pdf`);
 
     
-    document.querySelector('.carousel-inner').innerHTML = "";
-    for (let imagen of datosCarreras[1]) {
-        document.querySelector('.carousel-inner').innerHTML += 
-        `<div class="carousel-item active">
+    document.querySelector('.carousel-inner').innerHTML = "";  
+    datosCarreras[1].forEach((imagen, index) => {
+        if (index == 0){
+            document.querySelector('.carousel-inner').innerHTML +=
+            `<div class="carousel-item active">
             <img src="../API/users/user${datosCarreras[0].id_usuario}/carreras/imagenes/${imagen.nombreFoto}" class="d-block w-100" alt="Imagen de la carrera">
-        </div>`;
-    }
+            </div>`;
+        }else{
+            document.querySelector('.carousel-inner').innerHTML +=
+            `<div class="carousel-item">
+            <img src="../API/users/user${datosCarreras[0].id_usuario}/carreras/imagenes/${imagen.nombreFoto}" class="d-block w-100" alt="Imagen de la carrera">
+            </div>`;
+        }
+        
+    });
 
 
     document.getElementById('categorias').innerHTML = "";
@@ -155,9 +163,9 @@ function renderDatos() {
             </div>
             <div class="categoriaCuerpo">
                 <span>POSICIONES</span>
-                <span id="primero">1. ${categoria.primero}€</span>
-                <span id="segund">2. ${categoria.segundo}€</span>
-                <span id="tercero">3. ${categoria.tercero}€</span>
+                <span id="primero">1. ${(categoria.primero != "") ? categoria.primero : "Sin premio"}</span>
+                <span id="segund">2. ${(categoria.segundo != "") ? categoria.segundo : "Sin premio"}</span>
+                <span id="tercero">3. ${(categoria.tercero != "") ? categoria.tercero : "Sin premio"}</span>
             </div>
         </div>
         `;
