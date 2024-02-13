@@ -74,7 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         case 'password':
             $query = "UPDATE usuarios SET pass = ? where id = ?";
             $stmt = $con->prepare($query);
-            $stmt->bind_param("si", $nuevoParametro,$id);
+            $password = password_hash($nuevoParametro, PASSWORD_BCRYPT);
+            $stmt->bind_param("si", $password,$id);
 
             try {
                 $stmt->execute();

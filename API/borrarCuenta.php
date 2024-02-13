@@ -38,6 +38,37 @@
         $rol = $jwtDecoded->rol;
 
         if ($rol == "organizer") {
+            $idsCarreras = [];
+            $query = "SELECT id FROM carreras WHERE id_usuario = ?";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("i", $id);
+            try {
+                $stmt->execute();
+                $result = $stmt->get_result();
+                while ($row = $result->fetch_assoc()) {
+                    $idsCarreras[] = $row["id"];
+                }
+
+                foreach ($idsCarreras as $idCarrera) {
+                    $query = "SELECT id FROM categoria WHERE id_carrera = ?";
+                    $stmtCategoriaId = $con->prepare($query);
+                    $stmtCategoriaId->bind_param("i", $idCarrera);
+                    
+                    $stmtCategoriaId->execute();
+                    $resultCategoriaId = $stmtCategoriaId->get_result();
+                    $idsCategoria = [];
+                    while ($rowCategoriaId = $resultCategoriaId->fetch_assoc()) {
+                        $idsCategoria[] = $rowCategoriaId["id"];
+                    }
+
+                    
+                }
+
+            } catch (mysqli_sql_exception $e) {
+                header("HTTP/1.1 400 Bad Request");
+            }
+
+
             $query = "DELETE FROM organizador where id_usuario = ?";
             $stmt = $con->prepare($query);
             $stmt->bind_param("i", $id);

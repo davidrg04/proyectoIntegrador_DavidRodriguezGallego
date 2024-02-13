@@ -104,11 +104,12 @@ function mostrarFavoritos() {
     })
 
     let currentPage = 0;
-    let elementsPerPage = 4;
+    let elementsPerPage = 3;
     let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
     function renderCarreras() {
+        console.log(carreras);
         if (carreras.length > 0) {
-            
+            favoritos.innerHTML = "";
             // let currentPage = 0;
             // let elementsPerPage = 4;
             // let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
@@ -117,7 +118,7 @@ function mostrarFavoritos() {
                         return Math.trunc(index/elementsPerPage) == currentPage;
                     })
                     .forEach( ({nombre, id_usuario,portada, fecha, localizacion, distancia}) => {
-                        favoritos.innerHTML = `
+                        favoritos.innerHTML += `
                         <div class="tarjetaCarrera">
                                 <div class="fotoPortada">
                                     <p>${nombre}</p>
@@ -178,6 +179,8 @@ function abrirModal(e){
         if (document.getElementById("foto")) {
             document.getElementById("foto").setAttribute('id','inputModalPerfil');
             document.getElementById("inputModalPerfil").setAttribute('type','text');
+        }else{
+            document.getElementById("inputModalPerfil").setAttribute('type','text');
         }
         
 
@@ -187,7 +190,9 @@ function abrirModal(e){
         document.querySelector('#miModal h2').innerHTML = "CAMBIO DE CONTRASEÑA";
         if (document.getElementById("foto")) {
             document.getElementById("foto").setAttribute('id','inputModalPerfil');
-            document.getElementById("inputModalPerfil").setAttribute('type','text');
+            document.getElementById("inputModalPerfil").setAttribute('type','password');
+        }else{
+            document.getElementById("inputModalPerfil").setAttribute('type','password');
         }
 
         document.querySelector('#miModal label').innerHTML = "Escriba su nueva contraseña. Deberá volver a iniciar sesión";
@@ -196,6 +201,8 @@ function abrirModal(e){
         document.querySelector('#miModal h2').innerHTML = "CAMBIO DE LOCALIDAD";
         if (document.getElementById("foto")) {
             document.getElementById("foto").setAttribute('id','inputModalPerfil');
+            document.getElementById("inputModalPerfil").setAttribute('type','text');
+        }else{
             document.getElementById("inputModalPerfil").setAttribute('type','text');
         }
 
@@ -206,6 +213,8 @@ function abrirModal(e){
         if (document.getElementById("foto")) {
             document.getElementById("foto").setAttribute('id','inputModalPerfil');
             document.getElementById("inputModalPerfil").setAttribute('type','text');
+        }else{
+            document.getElementById("inputModalPerfil").setAttribute('type','text');
         }
 
         document.querySelector('#miModal label').innerHTML = "Escriba su nuevo número de teléfono. Deberá volver a iniciar sesión";
@@ -214,6 +223,8 @@ function abrirModal(e){
         document.querySelector('#miModal h2').innerHTML = "CAMBIO DE ORGANIZACIÓN";
         if (document.getElementById("foto")) {
             document.getElementById("foto").setAttribute('id','inputModalPerfil');
+            document.getElementById("inputModalPerfil").setAttribute('type','text');
+        }else{
             document.getElementById("inputModalPerfil").setAttribute('type','text');
         }
 
@@ -781,13 +792,13 @@ function modalNuevaCarrera(e) {
                 console.log(error);
             })
 
-            
+            let currentPage = 0;
+            let elementsPerPage = 3;
+            let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
             function renderCarrerasOrganizador() {
                 let divCarreras = document.querySelector('#miModalMostrarCarreras .modal-cuerpo');
                 console.log(carreras);
-                let currentPage = 0;
-                let elementsPerPage = 8;
-                let paginasTotales = Math.ceil((carreras.length / elementsPerPage));
+                divCarreras.innerHTML = "";
                 carreras
                         .filter((item,index) =>{
                             return Math.trunc(index/elementsPerPage) == currentPage;
@@ -819,6 +830,14 @@ function modalNuevaCarrera(e) {
                 });
 
             }
+            document.querySelector("#divPaginacionMostrarCarreras .next").addEventListener('click', ()=>{
+                currentPage = (currentPage < paginasTotales - 1) ? currentPage+1 : currentPage;
+                renderCarrerasOrganizador();
+            });
+            document.querySelector("#divPaginacionMostrarCarreras .prev").addEventListener('click', ()=>{
+                currentPage = (currentPage > 0) ? currentPage-1 : currentPage;
+                renderCarrerasOrganizador();
+            })
 
         }
         function modalBorrarCarrera(e) {

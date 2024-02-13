@@ -29,33 +29,41 @@
         $username = $data['username'];
         $pass = $data['password'];
 
-        $query = "SELECT id FROM usuarios WHERE username = ? and pass = ?";
+        $query = "SELECT id, pass FROM usuarios WHERE username = ?";
         $stmt = $con->prepare($query);
-        $stmt->bind_param("ss",  $username, $pass);
+        $stmt->bind_param("s",  $username);
+        
 
         try{
             $stmt->execute();
             $result = $stmt->get_result();
             if($result->num_rows > 0){
                 $row = $result->fetch_assoc();
-                $id = $row['id'];
-                $query2 = "SELECT * FROM organizador WHERE id_usuario = ?";
-                $stmt = $con->prepare($query2);
-                $stmt->bind_param("i", $id);
-                try {
-                    $stmt->execute();
-                    $result2 = $stmt->get_result();
-                    if($result2->num_rows > 0){
-                        $rol = "organizer";
+                if (password_verify($pass, $row['pass'])) {
+                    
+                    $id = $row['id'];
+                    $query2 = "SELECT * FROM organizador WHERE id_usuario = ?";
+                    $stmt = $con->prepare($query2);
+                    $stmt->bind_param("i", $id);
+                    try {
+                        $stmt->execute();
+                        $result2 = $stmt->get_result();
+                        if($result2->num_rows > 0){
+                            $rol = "organizer";
+                        }
+                    } catch (mysqli_sql_exception $e) {
+                        header("HTTP/1.1 400 Bad Request");
                     }
-                } catch (mysqli_sql_exception $e) {
-                    header("HTTP/1.1 400 Bad Request");
+    
+                    $jwt = generateJWT($username,$pass, $rol, $id);
+    
+                    header("HTTP/1.1 200 OK");
+                    echo json_encode(["message" => "Login correcto", "token" => $jwt, "username" => $username, "rol" =>$rol]);
+                }else {
+                    header("HTTP/1.1 401 Unauthorized");
+                    echo json_encode("Login incorrecto");
                 }
-
-                $jwt = generateJWT($username,$pass, $rol, $id);
-
-                header("HTTP/1.1 200 OK");
-                echo json_encode(["message" => "Login correcto", "token" => $jwt, "username" => $username, "rol" =>$rol]);
+                
             } else {
                 header("HTTP/1.1 401 Unauthorized");
                 echo json_encode("Login incorrecto");

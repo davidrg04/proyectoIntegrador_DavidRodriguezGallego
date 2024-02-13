@@ -88,14 +88,14 @@ function checkUsername(e) {
                 e.target.classList.add("incorrecto");
                 spanAlerta.innerHTML = "El nombre ya ha sido registrado. Por favor, elija otro.";
                 spanAlerta.style.display = 'block';
-                validCompleteName= false;
+                validUserName= false;
                 
             }else{
                 e.target.classList.remove("incorrecto");
                 e.target.classList.add("correcto");
                 spanAlerta.style.display = 'none';
                 spanAlerta.innerHTML = "";
-                validCompleteName= true;
+                validUserName= true;
             }
             formComplete();
         }).catch ( error => {
