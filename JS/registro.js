@@ -14,7 +14,9 @@ document.getElementById("password2").addEventListener('blur',checkSamePassword);
 let selectProvincias = document.getElementById('provincia');
 let selectLocalidades = document.getElementById('poblacion');
 
-
+provincias.sort((a, b) => {
+    return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' });
+  });
 
 
 
