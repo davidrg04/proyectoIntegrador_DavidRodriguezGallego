@@ -8,12 +8,11 @@
         $key = "proyectoDavid";
 
         $payload = [
-            'iss' => 'localhost',
-            'aud' => 'localhost',
-            'iat' => $username,
-            'nbf' => $pass,
+            
+            'iat' => time(),
             'rol' => $rol,
             'id' => $id,
+            'username' => $username,
             'exp' => time()+3600
         ];
 
